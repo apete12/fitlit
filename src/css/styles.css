@@ -42,6 +42,25 @@ body, html {
   background-color: aquamarine;
   margin: 0px;
   height: 15%;
+  display: flex;
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 45px;
+  height: 70%;
+  width: 12%;
+  display: flex;
+  justify-content: space-around;
+}
+
+h2 {
+  font-size: 30px;
+  height: 100%;
+  width: 70%;
+  display: flex;
+  align-content: flex-end;
+  flex-wrap: wrap;
 }
 
 main {
@@ -59,8 +78,11 @@ main {
   align-items: center;
 }
 
-h2 {
-  height: 10%;
+.welcome-user {
+  height: 70%;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
 }
 
 .personal-info {
