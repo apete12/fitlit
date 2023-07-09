@@ -1,5 +1,132 @@
+*{
+  border: 1px solid salmon
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
 body, html {
   background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
   background-repeat: no-repeat;
   height: 100%;
+}
+
+.nav-bar {
+  background-color: aquamarine;
+  margin: 0px;
+  height: 15%;
+  display: flex;
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 45px;
+  height: 70%;
+  width: 12%;
+  display: flex;
+  justify-content: space-around;
+}
+
+h2 {
+  font-size: 30px;
+  height: 100%;
+  width: 70%;
+  display: flex;
+  align-content: flex-end;
+  flex-wrap: wrap;
+}
+
+main {
+  display: flex;
+  height: 85%;
+  width: 100%;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+}
+
+.welcome {
+  display: flex;
+  width: 80%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.welcome-user {
+  height: 70%;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+}
+
+.personal-info {
+  height: 75%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.user-info {
+  height: 60%;
+  width: 95%;
+}
+
+.motivation {
+  height: 20%;
+  width: 95%;
+}
+
+.graphics {
+  height: 75%;
+  width: 30%;
+}
+
+.cards {
+  display: flex;
+  width: 80%;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: space-around;
+}
+
+.hydration, .sleep, .activity {
+  height: 90%;
+  width: 30%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+
+section {
+  height: 70%;
+  width: 95%;
 }
