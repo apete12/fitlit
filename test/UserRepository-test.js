@@ -1,14 +1,14 @@
 import { expect } from 'chai';
-import { getAvgSteps } from '../src/scripts'
+import { getUserData, getAvgSteps } from '../src/scripts'
 
-// describe('User Repository', () => {
-//   it('should run tests', function () {
-//     expect(true).to.be(true);
-//   });
-// });
 
-describe('User Data Step Goals', function() {
-  var sampleData = [
+describe('User Repository', () => {
+  // it('should run tests', function () {
+    // expect(true).to.be(true);
+  // });
+
+  it('should return user object by id', function () {
+    const sampleData = [
   {
     "id": 1,
     "name": "Trystan Gorczany",
@@ -49,8 +49,14 @@ describe('User Data Step Goals', function() {
       15,
       7
     ]
-  }]
-  it('Should be a function', function() {
+  }];
+
+    const userOne = getUserData(1, sampleData)
+    const userTwo = getUserData(2, sampleData)
+    expect(userOne[0].name).to.equal("Trystan Gorczany");
+    expect(userTwo[0].name).to.equal("Tyreek VonRueden");
+    
+      it('Should be a function', function() {
     expect(getAvgSteps).to.be.a('function')
   })
 
@@ -58,4 +64,7 @@ describe('User Data Step Goals', function() {
     const avgSteps = getAvgSteps(sampleData) 
     expect(avgSteps).to.equal(6333.333333333333)
   })
-})
+  });
+
+});
+
