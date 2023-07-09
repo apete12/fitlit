@@ -43,3 +43,4 @@ export const getAvgSteps = (allUsers) => {
 }
 // console.log(getAvgSteps(sampleData))
 
+// test
