@@ -15,7 +15,8 @@ import userData from './data/users';
 // console.log("User Data:", userData);
 
 // Example of one way to import functions from the domUpdates file.  You will delete these examples.
-// import { exampleFunction1, exampleFunction2 } from './domUpdates';
+import { displayRandomUser } from './domUpdates';
+
 
 // return user data based on id
 // need parameter to pass through 
@@ -23,15 +24,16 @@ import userData from './data/users';
 // search through array for user id
 // return user data / object
 
-export const getUserData = ((userId, userArray) => {
-    const filteredById = userArray.filter(user => user.id === userId);
-    return filteredById
-    // returns array with user object in it
+export const getUserData = ((userId) => {
+  const filteredById = userData.filter(user => user.id === userId);
+  return filteredById
+  // returns array with user object in it
 }); 
 
 // exampleFunction1('Travis');
 // exampleFunction2('Travis')
 
+// displayRandomUser()
 
 
 export const getAvgSteps = (allUsers) => {
@@ -43,3 +45,5 @@ export const getAvgSteps = (allUsers) => {
 }
 // console.log(getAvgSteps(sampleData))
 
+
+// displayRandomUser()
