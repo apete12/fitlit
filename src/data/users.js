@@ -1,3 +1,9 @@
+// export default is used to export an object as the default export.
+// the object being exported is the data structure containing an array of user objects
+
+// const userData stores the object of export default, which is an object that contains the users array 
+// then, userData has a key of users, and the value is an array of objects (with each element being a user)
+
 export default { users: [
   {
     "id": 1,
