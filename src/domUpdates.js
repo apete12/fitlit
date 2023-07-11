@@ -8,7 +8,7 @@ import {
   welcomeHeading,
   // functions
   getUserData, 
-  getAvgSteps
+  getAvgSteps,
 } from './scripts';
 
 
@@ -24,8 +24,10 @@ const displayRandomUser = (array) => {
 
   const randomUserIndex = getRandomUser(array)
   const randomUser = getUserData(randomUserIndex)
+  let wholeName = randomUser.name
+  let firstNameOnly = wholeName.split(' ')
 
-  welcomeHeading.innerText = `Welcome ${randomUser.name}!`
+  welcomeHeading.innerText = `Welcome ${firstNameOnly[0]}!`
 
   userInfoContainer.innerHTML = ` 
 
