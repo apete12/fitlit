@@ -38,25 +38,21 @@ const getAvgSteps = () => {
 }
 
 const getAvgDailyOunces = (id) => {
-  const userHydrationStats = userHydrationData.hydrationData.filter((userEntry) => {
-    userEntry.userID === id
-  })
-
+  const usersDailyHydrationLog = userHydrationData.hydrationData
+  const userHydrationStats = usersDailyHydrationLog.reduce((sum, accum) => {
+    if (accum.userID === id) {
+      sum += accum.numOunces
+    }
+    return sum
+  }, 0)
+  return userHydrationStats
 }
-//   const avgFluidOunces = userHydrationData.hydrationData.reduce((sum, ounces) => {
-//     if (userHydrationData.hydrationData.id === id) {
-//       sum += userHydrationData.hydrationData.numOunces
-//     }
-//     return acc
-//   },0)
-//   return avgFluidOunces
-// }
-
 
 // event listener:
 window.addEventListener('load', () => {
   displayRandomUser()
   displayAverageSteps()
+  getAvgDailyOunces(4)
 });
 
 export {
@@ -66,5 +62,6 @@ export {
   welcomeHeading,
   // functions
   getUserData,
-  getAvgSteps
+  getAvgSteps,
+  getAvgDailyOunces
 }
