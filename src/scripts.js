@@ -5,6 +5,8 @@
 import userData from './data/users';
 // importing the object that has 1 key-value pair of users: []
 
+import userHydrationData from './data/hydration'
+
 import './css/styles.css'
 import './images/turing-logo.png';
 
@@ -34,6 +36,21 @@ const getAvgSteps = () => {
   }, 0)
   return sumOfSteps / userData.users.length
 }
+
+const getAvgDailyOunces = (id) => {
+  const userHydrationStats = userHydrationData.hydrationData.filter((userEntry) => {
+    userEntry.userID === id
+  })
+
+}
+//   const avgFluidOunces = userHydrationData.hydrationData.reduce((sum, ounces) => {
+//     if (userHydrationData.hydrationData.id === id) {
+//       sum += userHydrationData.hydrationData.numOunces
+//     }
+//     return acc
+//   },0)
+//   return avgFluidOunces
+// }
 
 
 // event listener:
