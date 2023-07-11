@@ -27,6 +27,11 @@ const displayRandomUser = (array) => {
 
   welcomeHeading.innerText = `Welcome ${randomUser.name}!`
 
+  const friendsNames = randomUser.friends.map((id) => {
+    const userFriendDetails = getUserData(id)
+    return userFriendDetails.name
+  }).join(', ') 
+
   userInfoContainer.innerHTML = ` 
 
     <div>User ID: ${randomUser.id}</div>
@@ -35,7 +40,7 @@ const displayRandomUser = (array) => {
     <div>Email: ${randomUser.email}</div>
     <div>Stride Length: ${randomUser.strideLength}</div>
     <div>Daily Step Goal: ${randomUser.dailyStepGoal}</div>
-    <div>Friend List: ${randomUser.friends}</div>
+    <div>Friend List: ${friendsNames}</div>
   `
 }
 
