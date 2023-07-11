@@ -52,7 +52,7 @@ const getAvgDailyOunces = (id) => {
 window.addEventListener('load', () => {
   displayRandomUser()
   displayAverageSteps()
-  getAvgDailyOunces(4)
+  getAvgDailyOunces()
 });
 
 export {
