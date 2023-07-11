@@ -39,20 +39,32 @@ const getAvgSteps = () => {
 
 const getAvgDailyOunces = (id) => {
   const usersDailyHydrationLog = userHydrationData.hydrationData
-  const userHydrationStats = usersDailyHydrationLog.reduce((sum, accum) => {
-    if (accum.userID === id) {
-      sum += accum.numOunces
+  let numOfEntries = []
+  const userHydrationStats = usersDailyHydrationLog.reduce((accum, userObj) => {
+    if (userObj.userID === id) {
+      numOfEntries.push(userObj.userID)
+      accum += userObj.numOunces
     }
-    return sum
+    return accum
   }, 0)
-  return userHydrationStats
+  return userHydrationStats / numOfEntries.length
+}
+
+///////////return specific day fluid ounces//////////////////
+const getOzByDay = (id, day) => {
+  const usersDailyHydrationLog = userHydrationData.hydrationData
+  const usersDailyOz = usersDailyHydrationLog.find(log => log.userID === id && log.date === day)
+  if(usersDailyOz) {
+    return console.log('look here', usersDailyOz.numOunces)
+  }
 }
 
 // event listener:
 window.addEventListener('load', () => {
   displayRandomUser()
   displayAverageSteps()
-  getAvgDailyOunces()
+  getAvgDailyOunces(1)
+  getOzByDay(50, "2023/07/01")
 });
 
 export {
@@ -63,5 +75,6 @@ export {
   // functions
   getUserData,
   getAvgSteps,
-  getAvgDailyOunces
+  getAvgDailyOunces,
+  getOzByDay
 }
