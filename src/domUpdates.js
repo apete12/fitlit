@@ -1,17 +1,21 @@
 //NOTE: Your DOM manipulation will occur in this file
 
 import userData from './data/users';
+
 import { 
   // query selectors:
   userInfoContainer,
   activityContainer,
   welcomeHeading,
   friendList,
-  // functions
+} from './scripts';
+
+import {
+  calculateWeeklyOunces,
   getUserData, 
   getAvgSteps,
   getAvgOunces,
-} from './scripts';
+} from './dataModel';
 
 
 var currentUser;

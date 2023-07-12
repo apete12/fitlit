@@ -1,4 +1,5 @@
 import userData from './data/users';
+import userHydrationData from './data/hydration'
 
 
 const getUserData = ((userId) => {
@@ -36,10 +37,28 @@ if(usersDailyOz) {
 }
 }
 
+const calculateWeeklyOunces = (id) => {
+  const usersDailyHydrationLog = userHydrationData.hydrationData
+  let userWaterEntries = usersDailyHydrationLog.filter((entry) => {
+    return entry.userID === id
+  })
+  
+  const lastSevenDays = userWaterEntries.slice(-7)
+
+  const object = lastSevenDays.reduce ((accu, curr) => {
+    accu.ounces.push(curr.numOunces)
+    accu.dates.push(curr.date)
+    return accu
+  }, {ounces: [], dates: []})
+  
+  return object
+}
+
 
 export {
   getUserData,
   getAvgSteps,
   getAvgDailyOunces,
   getOzByDay,
+  calculateWeeklyOunces
 }

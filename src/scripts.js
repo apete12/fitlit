@@ -20,6 +20,7 @@ import {
   getAvgSteps,
   getAvgDailyOunces,
   getOzByDay,
+  calculateWeeklyOunces
 } from './dataModel';
 
 // importing functionality from .domUpdates
@@ -39,7 +40,7 @@ window.addEventListener('load', () => {
   displayRandomUser()
   displayAverageSteps()
   getAvgDailyOunces(1)
-  getOzByDay(50, "2023/07/01")
+  calculateWeeklyOunces(1)
 });
 
 export {
