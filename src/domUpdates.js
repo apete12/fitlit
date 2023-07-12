@@ -71,9 +71,6 @@ const displayAverageSteps = (array) => {
 
 const displayHydrationStats = () => {
   const todaysDate = calculateWeeklyOunces(currentUser.id)
-  console.log('currentUser.id: ', currentUser.id)
-  console.log('todaysDat.dates[6]: ', todaysDate.dates[6])
-  // const today = todaysDate.dates[6]
   const todaysOunces = getOzByDay(currentUser.id, todaysDate.dates[6])
   console.log(todaysOunces)
 
