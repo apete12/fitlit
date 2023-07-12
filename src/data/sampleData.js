@@ -42,35 +42,36 @@ const sampleData = { users: [
   }]
 }
 
-  // const hydrationData = [
-  //   {
-  //     "userID": 1,
-  //     "date": "2023/03/24",
-  //     "numOunces": 28
-  //   },
-  //   {
-  //     "userID": 2,
-  //     "date": "2023/03/24",
-  //     "numOunces": 35
-  //   },
-  //   {
-  //     "userID": 3,
-  //     "date": "2023/03/24",
-  //     "numOunces": 95
-  //   },
-  //   {
-  //     "userID": 1,
-  //     "date": "2023/03/24",
-  //     "numOunces": 74
-  //   },
-  //   {
-  //     "userID": 2,
-  //     "date": "2023/03/24",
-  //     "numOunces": 47
-  //   },
-  // ]
+  const sampleDataHydration = { hydrationData: [
+    {
+      "userID": 1,
+      "date": "2023/03/24",
+      "numOunces": 28
+    },
+    {
+      "userID": 2,
+      "date": "2023/03/24",
+      "numOunces": 35
+    },
+    {
+      "userID": 3,
+      "date": "2023/03/24",
+      "numOunces": 95
+    },
+    {
+      "userID": 1,
+      "date": "2023/03/24",
+      "numOunces": 74
+    },
+    {
+      "userID": 2,
+      "date": "2023/03/24",
+      "numOunces": 47
+    },
+  ]}
 
 
   export {
-    sampleData
+    sampleData,
+    sampleDataHydration
   }
