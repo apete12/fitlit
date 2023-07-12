@@ -13,7 +13,7 @@ import './images/turing-logo.png';
 import { 
   displayRandomUser, 
   displayAverageSteps,
-  displayHydrationStats
+  displayHydrationStats,
   displayFriendList,
 } from './domUpdates';
 
