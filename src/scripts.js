@@ -13,6 +13,7 @@ import './images/turing-logo.png';
 import { 
   displayRandomUser, 
   displayAverageSteps,
+  displayFriendList,
 } from './domUpdates';
 
 import {
@@ -40,7 +41,7 @@ window.addEventListener('load', () => {
   displayRandomUser()
   displayAverageSteps()
   getAvgDailyOunces(1)
-  calculateWeeklyOunces(1)
+  displayFriendList()
 });
 
 export {
