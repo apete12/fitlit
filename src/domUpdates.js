@@ -80,7 +80,7 @@ const displayDailyHydrationStats = () => {
 
 const displayWeeklyHydrationStats = () => {
  const weeklyOzArray = calculateWeeklyOunces(currentUser.id)
- 
+
  weeklyHydrationStats.innerHTML = `<div> Day: ${weeklyOzArray.dates}, Oz: ${weeklyOzArray.ounces}`
 }
 
