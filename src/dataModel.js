@@ -44,14 +44,14 @@ const calculateWeeklyOunces = (id) => {
   })
   
   const lastSevenDays = userWaterEntries.slice(-7)
-  
-  console.log(lastSevenDays)
 
-  // console.log('before', userWaterEntries)
-  // let sortedWaterEntries = userWaterEntries.sort((a, b) => b.userID - a.userID)
+  const object = lastSevenDays.reduce ((accu, curr) => {
+    accu.ounces.push(curr.numOunces)
+    accu.dates.push(curr.date)
+    return accu
+  }, {ounces: [], dates: []})
   
-  // console.log('after', sortedWaterEntries)
-  // console.log('arraylength', sortedWaterEntries.length)
+  return object
 }
 
 
