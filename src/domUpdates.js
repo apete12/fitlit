@@ -8,6 +8,7 @@ import {
   activityContainer,
   welcomeHeading,
   friendList,
+  hydrationStats,
 } from './scripts';
 
 import {
@@ -15,6 +16,7 @@ import {
   getUserData, 
   getAvgSteps,
   getAvgOunces,
+  getOzByDay,
 } from './dataModel';
 
 
@@ -67,8 +69,19 @@ const displayAverageSteps = (array) => {
   activityContainer.innerText = `${avgSteps}`
  }
 
+const displayHydrationStats = () => {
+  const todaysDate = calculateWeeklyOunces(currentUser.id)
+  const todaysOunces = getOzByDay(currentUser.id, todaysDate.dates[6])
+  console.log(todaysOunces)
+
+  hydrationStats.innerHTML = ` 
+<div>Today, you've consumed: ${todaysOunces} ounces of water!</div>`
+}
+
+
 export {
   displayRandomUser,
   displayAverageSteps,
   displayFriendList,
+  displayHydrationStats,
 }
