@@ -85,9 +85,20 @@ const displayWeeklyHydrationStats = () => {
   const formattedDay = weeklyHydrationPerDay.map((day) => {
     return dayjs(day).format('ddd D')
   }) 
-
+console.log(weeklyOzArray)
  weeklyHydrationStats.innerHTML = `
- <div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
+ <div class="last-week"> ${formattedDay[0]}</div>
+ <div class="last-week"> ${formattedDay[1]}</div>
+ <div class="last-week"> ${formattedDay[2]}</div>
+ <div class="last-week"> ${formattedDay[3]}</div>
+ <div class="last-week"> ${formattedDay[4]}</div>
+ <div> ${formattedDay[5]}</div>
+ <div class="oz">${weeklyOzArray.ounces[0]}oz</div>
+ <div class="oz">${weeklyOzArray.ounces[1]}oz</div>
+ <div class="oz">${weeklyOzArray.ounces[2]}oz</div>
+ <div class="oz">${weeklyOzArray.ounces[3]}oz</div>
+ <div class="oz">${weeklyOzArray.ounces[4]}oz</div>
+ <div class="oz-last">${weeklyOzArray.ounces[5]}oz</div>
  `
 }
 

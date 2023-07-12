@@ -153,3 +153,27 @@ section {
   font-family: 'Abel', sans-serif;
   font-size: 25px; 
 }
+
+.weekly-hydration-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  position: inherit;
+  grid-gap: 0px;
+  padding: 0%;
+  border: 1px solid black;
+  grid-template-rows: auto auto;
+  align-items: center;
+}
+
+.last-week {
+  border-right: 1px solid black;
+}
+
+.oz {
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.oz-last {
+  border-top: 1px solid black;
+}
