@@ -22,6 +22,7 @@ import {
 
 
 var currentUser;
+const dayjs = require('dayjs')
 
 // generate random ID number
 const getRandomIndex = () => {
@@ -79,11 +80,16 @@ const displayDailyHydrationStats = () => {
 }
 
 const displayWeeklyHydrationStats = () => {
- const weeklyOzArray = calculateWeeklyOunces(currentUser.id)
+  const weeklyOzArray = calculateWeeklyOunces(currentUser.id)
+  const weeklyHydrationPerDay = weeklyOzArray.dates
+  const formattedDay = weeklyHydrationPerDay.map((day) => {
+    return dayjs(day).format('ddd D')
+  }) 
 
- weeklyHydrationStats.innerHTML = `<div> Day: ${weeklyOzArray.dates}, Oz: ${weeklyOzArray.ounces}`
+ weeklyHydrationStats.innerHTML = `
+ <div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
+ `
 }
-
 
 export {
   displayRandomUser,
