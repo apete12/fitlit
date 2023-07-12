@@ -24,8 +24,8 @@ let sumOfSteps = dataList.users.reduce((sum, user) => {
 return sumOfSteps / dataList.users.length
 }
 
-const getAvgDailyOunces = (id) => {
-const usersDailyHydrationLog = userHydrationData.hydrationData
+const getAvgDailyOunces = (id, dataList) => {
+const usersDailyHydrationLog = dataList.hydrationData
 let numOfEntries = []
 const userHydrationStats = usersDailyHydrationLog.reduce((accum, userObj) => {
   if (userObj.userID === id) {
