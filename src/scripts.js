@@ -23,6 +23,7 @@ import {
 var userInfoContainer = document.querySelector('.user-info');
 var welcomeHeading = document.querySelector('.welcome-heading');
 var activityContainer = document.querySelector('.average-steps')
+var friendList = document.querySelector('.friend-list')
 
 const getUserData = ((userId) => {
     let filteredById = userData.users.find(user => user.id === userId);
@@ -72,6 +73,7 @@ export {
   userInfoContainer,
   activityContainer,
   welcomeHeading,
+  friendList,
   // functions
   getUserData,
   getAvgSteps,
