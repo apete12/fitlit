@@ -70,16 +70,6 @@ const sampleUserData = [
   ]
 
 
-
-
-
-
-
-
-
-
-
-
 export {
   sampleUserData,
   hydrationData,
