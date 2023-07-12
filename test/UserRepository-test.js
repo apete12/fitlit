@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { getUserData, getAvgSteps, getAvgDailyOunces } from '../src/dataModel';
+import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay } from '../src/dataModel';
 import {sampleUserData, hydrationData } from '../src/data/sampleData';
 
 
@@ -42,33 +42,6 @@ it('should return average daily ounces for user', () => {
 })
 
 it('should return number of OZ for a specific day', () => {
-  const hydrationData = [
-    {
-      "userID": 1,
-      "date": "2023/03/23",
-      "numOunces": 28
-    },
-    {
-      "userID": 2,
-      "date": "2023/03/24",
-      "numOunces": 35
-    },
-    {
-      "userID": 3,
-      "date": "2023/03/24",
-      "numOunces": 95
-    },
-    {
-      "userID": 1,
-      "date": "2023/03/24",
-      "numOunces": 74
-    },
-    {
-      "userID": 2,
-      "date": "2023/03/24",
-      "numOunces": 47
-    },
-  ]
 
   const userOneMarch24OZ = getOzByDay(1, "2023/03/24")
   expect(userOneMarch24OZ).to.equal(74)

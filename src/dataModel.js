@@ -1,6 +1,14 @@
 import userData from './data/users';
 import userHydrationData from './data/hydration'
+// import {apiCall} from 'lksadjf;lk'
 
+// function dosomethingapi() {
+//   //checkj out promise all
+//   apiCall(url)
+//   .then(data, () => {
+//     getUserData(data)
+//   }
+// }
 
 const getUserData = ((userId) => {
   let filteredById = userData.users.find(user => user.id === userId);
@@ -46,13 +54,13 @@ const calculateWeeklyOunces = (id) => {
   
   const lastSevenDays = userWaterEntries.slice(-7)
 
-  const object = lastSevenDays.reduce ((accu, curr) => {
+  const weeklyHydrationInfo = lastSevenDays.reduce ((accu, curr) => {
     accu.ounces.push(curr.numOunces)
     accu.dates.push(curr.date)
     return accu
   }, {ounces: [], dates: []})
   
-  return object
+  return weeklyHydrationInfo
 }
 
 
