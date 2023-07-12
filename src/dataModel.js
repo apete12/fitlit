@@ -1,5 +1,6 @@
 import userData from './data/users';
 import userHydrationData from './data/hydration'
+
 // import {apiCall} from 'lksadjf;lk'
 
 // function dosomethingapi() {
@@ -10,8 +11,8 @@ import userHydrationData from './data/hydration'
 //   }
 // }
 
-const getUserData = ((userId) => {
-  let filteredById = userData.users.find(user => user.id === userId);
+const getUserData = ((userId, dataList) => {
+  let filteredById = dataList.users.find(user => user.id === userId);
   return filteredById
 });
 
