@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { getUserData, getAvgSteps, getAvgDailyOunces } from '../src/scripts'
+import { getUserData, getAvgSteps, getAvgDailyOunces } from '../src/dataModel';
 
 
 describe('User Repository', () => {
