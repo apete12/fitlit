@@ -38,10 +38,9 @@ return userHydrationStats / numOfEntries.length
 }
 
 ///////////return specific day fluid ounces//////////////////
-const getOzByDay = (id, day) => {
-const usersDailyHydrationLog = userHydrationData.hydrationData
+const getOzByDay = (id, day, dataList) => {
+const usersDailyHydrationLog = dataList.hydrationData
 const usersDailyOz = usersDailyHydrationLog.find(log => log.userID === id && log.date === day)
-console.log('day: ', day)
 if(usersDailyOz) {
   return usersDailyOz.numOunces
 }
