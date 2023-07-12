@@ -1,6 +1,7 @@
 //NOTE: Your DOM manipulation will occur in this file
 
 import userData from './data/users';
+import userHydrationData from './data/hydration'
 
 import { 
   // query selectors:
@@ -24,12 +25,10 @@ import {
 var currentUser;
 // const dayjs = require('dayjs')
 
-// generate random ID number
 const getRandomIndex = () => {
   return Math.floor(Math.random() * userData.users.length)
 }
 
-// generate random user profile
 const generateRandomUser = (array) =>{
   const randomUserIndex = getRandomIndex(array)
   const userDataInfo = getUserData(randomUserIndex, userData)
@@ -37,7 +36,6 @@ const generateRandomUser = (array) =>{
   return userDataInfo
 }
 
-// display user information
 const displayRandomUser = (array) => {
   currentUser = generateRandomUser(userData)
   let wholeName = currentUser.name
@@ -55,7 +53,6 @@ const displayRandomUser = (array) => {
   `
 }
 
-// display user friend list (separate box)
 const displayFriendList = () => {
   const friendsNames = currentUser.friends.map((id) => {
     const userFriendDetails = getUserData(id, userData)
@@ -65,35 +62,24 @@ const displayFriendList = () => {
   friendList.innerHTML = `<div>Friend List: ${friendsNames}</div>`
  }
 
- // User should be able to see average step count
 const displayAverageSteps = () => {
   const avgSteps = getAvgSteps(userData)
   activityContainer.innerText = `${avgSteps}`
  }
 
 const displayDailyHydrationStats = () => {
-  const todaysDate = calculateWeeklyOunces(currentUser.id)
-  const todaysOunces = getOzByDay(currentUser.id, todaysDate.dates[6])
+  const todaysDate = calculateWeeklyOunces(currentUser.id, userHydrationData)
+  const todaysOunces = getOzByDay(currentUser.id, todaysDate.dates[6], userHydrationData)
 
   dailyHydrationStats.innerHTML = ` 
 <div>Today, you've consumed: ${todaysOunces} ounces of water!</div>`
 }
 
 const displayWeeklyHydrationStats = () => {
- const weeklyOzArray = calculateWeeklyOunces(currentUser.id)
+ const weeklyOzArray = calculateWeeklyOunces(currentUser.id, userHydrationData)
 
  weeklyHydrationStats.innerHTML = `<div> Day: ${weeklyOzArray.dates}, Oz: ${weeklyOzArray.ounces}`
 }
-
-// `<div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
-// <div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
-// <div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
-// <div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
-// <div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
-// <div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
-// <div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
-// `
-
 
 export {
   displayRandomUser,

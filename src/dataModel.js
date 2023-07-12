@@ -37,7 +37,6 @@ const userHydrationStats = usersDailyHydrationLog.reduce((accum, userObj) => {
 return userHydrationStats / numOfEntries.length
 }
 
-///////////return specific day fluid ounces//////////////////
 const getOzByDay = (id, day, dataList) => {
 const usersDailyHydrationLog = dataList.hydrationData
 const usersDailyOz = usersDailyHydrationLog.find(log => log.userID === id && log.date === day)
@@ -46,8 +45,8 @@ if(usersDailyOz) {
 }
 }
 
-const calculateWeeklyOunces = (id) => {
-  const usersDailyHydrationLog = userHydrationData.hydrationData
+const calculateWeeklyOunces = (id, dataList) => {
+  const usersDailyHydrationLog = dataList.hydrationData
   let userWaterEntries = usersDailyHydrationLog.filter((entry) => {
     return entry.userID === id
   })
@@ -62,9 +61,6 @@ const calculateWeeklyOunces = (id) => {
   
   return weeklyHydrationInfo
 }
-
-
-
 
 export {
   getUserData,
