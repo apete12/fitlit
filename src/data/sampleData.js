@@ -60,7 +60,7 @@ const sampleData = { users: [
     },
     {
       "userID": 1,
-      "date": "2023/03/24",
+      "date": "2023/06/10",
       "numOunces": 74
     },
     {
