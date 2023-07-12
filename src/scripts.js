@@ -51,4 +51,5 @@ export {
   activityContainer,
   welcomeHeading,
   friendList,
+  hydrationStats,
 }
