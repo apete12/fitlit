@@ -24,16 +24,12 @@ describe('User Repository', () => {
 
   })
   
-
 //////////////// getAvgDailyOunces test///////////////////////
 
 it('Should return average daily ounces for user', () => {
-  
 
   const user2Avg = getAvgDailyOunces(2, sampleDataHydration)
-  
   const user1Avg = getAvgDailyOunces(1, sampleDataHydration)
-
   const user3Avg = getAvgDailyOunces(3, sampleDataHydration)
 
   expect(user3Avg).to.be.a('number')
@@ -43,13 +39,16 @@ it('Should return average daily ounces for user', () => {
 
 })
 
+it('Should return number of OZ for a specific day', () => {
 
-// it.skip('Should return number of OZ for a specific day', () => {
+  const userOneMarch24OZ = getOzByDay(1, "2023/03/24", sampleDataHydration)
+  const userOneJune10OZ = getOzByDay(1, "2023/06/10", sampleDataHydration)
+  const userTwoMarch24OZ = getOzByDay(1, "2023/03/24", sampleDataHydration)
 
-//   const userOneMarch24OZ = getOzByDay(1, "2023/03/24")
-//   expect(userOneMarch24OZ).to.equal(74)
-
-// })
+  expect(userOneMarch24OZ).to.equal(28)
+  expect(userOneJune10OZ).to.equal(74)
+  expect(userTwoMarch24OZ).to.be.a('number')
+})
 
 });
 
