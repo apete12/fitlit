@@ -6,67 +6,65 @@ import {
   userInfoContainer,
   activityContainer,
   welcomeHeading,
+  friendList,
   // functions
   getUserData, 
   getAvgSteps,
+  getAvgOunces,
 } from './scripts';
 
 
-// On load, a user should be chosen at random.
-const getRandomUser = () => {
+var currentUser;
+
+// generate random ID number
+const getRandomIndex = () => {
   return Math.floor(Math.random() * userData.users.length)
 }
 
-// Users should be able to view info card with all of info on the page
-const displayRandomUser = (array) => {
-  // var userInfoContainer = document.querySelector('.user-info');
-  // var welcomeHeading = document.querySelector('.welcome-heading');
+// generate random user profile
+const generateRandomUser = (array) =>{
+  const randomUserIndex = getRandomIndex(array)
+  const userData = getUserData(randomUserIndex)
 
-  const randomUserIndex = getRandomUser(array)
-  const randomUser = getUserData(randomUserIndex)
-  let wholeName = randomUser.name
+  return userData
+}
+
+// display user information
+const displayRandomUser = (array) => {
+  currentUser = generateRandomUser(array)
+  let wholeName = currentUser.name
   let firstNameOnly = wholeName.split(' ')
 
   welcomeHeading.innerText = `Welcome ${firstNameOnly[0]}!`
 
-  const friendsNames = randomUser.friends.map((id) => {
-    const userFriendDetails = getUserData(id)
-    return userFriendDetails.name
-  }).join(', ') 
-
   userInfoContainer.innerHTML = ` 
-
-    <div>User ID: ${randomUser.id}</div>
-    <div>Name: ${randomUser.name}</div>
-    <div>Address: ${randomUser.address}</div>
-    <div>Email: ${randomUser.email}</div>
-    <div>Stride Length: ${randomUser.strideLength}</div>
-    <div>Daily Step Goal: ${randomUser.dailyStepGoal}</div>
-    <div>Friend List: ${friendsNames}</div>
+    <div>User ID: ${currentUser.id}</div>
+    <div>Name: ${currentUser.name}</div>
+    <div>Address: ${currentUser.address}</div>
+    <div>Email: ${currentUser.email}</div>
+    <div>Stride Length: ${currentUser.strideLength}</div>
+    <div>Daily Step Goal: ${currentUser.dailyStepGoal}</div>
   `
 }
 
-const displayAverageSteps = (array) => {
-  // var activityContainer = document.querySelector('.activity')
+// display user friend list (separate box)
+const displayFriendList = (array) => {
+  const friendsNames = currentUser.friends.map((id) => {
+    const userFriendDetails = getUserData(id)
+    return userFriendDetails.name
+  }).join(', ') 
+  
+  friendList.innerHTML = `<div>Friend List: ${friendsNames}</div>`
+ }
 
+ // User should be able to see average step count
+const displayAverageSteps = (array) => {
   const avgSteps = getAvgSteps(array)
   activityContainer.innerText = `${avgSteps}`
  }
 
-
 export {
   displayRandomUser,
   displayAverageSteps,
-  // userInfoContainer,
-  // activityContainer,
-  // welcomeHeading,
+  displayFriendList,
 }
-
-// semantic inner html, add classes, css
-{/* <section>User ID: ${randomUser.id}</section> */}
-{/* <section>Name: ${randomUser.name}</section> */}
-{/* <section>Address: ${randomUser.address}</section> */}
-{/* <section>Email: ${randomUser.email}</section> */}
-{/* <section>Stride Length: ${randomUser.strideLength}</section> */}
-{/* <section>Daily Step Goal: ${randomUser.dailyStepGoal}</section> */}
-{/* <section>Friend List: ${randomUser.friends}</section> */}
