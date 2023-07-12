@@ -8,7 +8,8 @@ import {
   activityContainer,
   welcomeHeading,
   friendList,
-  hydrationStats,
+  dailyHydrationStats,
+  weeklyHydrationStats
 } from './scripts';
 
 import {
@@ -69,13 +70,18 @@ const displayAverageSteps = (array) => {
   activityContainer.innerText = `${avgSteps}`
  }
 
-const displayHydrationStats = () => {
+const displayDailyHydrationStats = () => {
   const todaysDate = calculateWeeklyOunces(currentUser.id)
   const todaysOunces = getOzByDay(currentUser.id, todaysDate.dates[6])
-  console.log(todaysOunces)
 
-  hydrationStats.innerHTML = ` 
+  dailyHydrationStats.innerHTML = ` 
 <div>Today, you've consumed: ${todaysOunces} ounces of water!</div>`
+}
+
+const displayWeeklyHydrationStats = () => {
+ const weeklyOzArray = calculateWeeklyOunces(currentUser.id)
+ 
+ weeklyHydrationStats.innerHTML = `<div> Day: ${weeklyOzArray.dates}, Oz: ${weeklyOzArray.ounces}`
 }
 
 
@@ -83,5 +89,6 @@ export {
   displayRandomUser,
   displayAverageSteps,
   displayFriendList,
-  displayHydrationStats,
+  displayDailyHydrationStats,
+  displayWeeklyHydrationStats
 }
