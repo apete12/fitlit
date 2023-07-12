@@ -54,7 +54,7 @@ const displayRandomUser = (array) => {
 }
 
 // display user friend list (separate box)
-const displayFriendList = (array) => {
+const displayFriendList = () => {
   const friendsNames = currentUser.friends.map((id) => {
     const userFriendDetails = getUserData(id)
     return userFriendDetails.name

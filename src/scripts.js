@@ -14,6 +14,7 @@ import {
   displayRandomUser, 
   displayAverageSteps,
   displayHydrationStats
+  displayFriendList,
 } from './domUpdates';
 
 import {
@@ -43,6 +44,7 @@ window.addEventListener('load', () => {
   getAvgDailyOunces(1)
   calculateWeeklyOunces(1)
   displayHydrationStats()
+  displayFriendList()
 });
 
 export {
