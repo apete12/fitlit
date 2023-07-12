@@ -17,15 +17,14 @@ describe('User Repository', () => {
     expect(userTwo.dailyStepGoal).to.equal(9000)
   })
 
-  it.skip('Should be a function', function() {
-    expect(getAvgSteps).to.be.a('function')
-  })
+  it('Should return average step goal amongst all users', function() {
 
-  const avgSteps = getAvgSteps(sampleData) 
-  it.skip('Should return average step goal amongst all users', function() {
-    expect(avgSteps).to.equal(6333.333333333333)
+    expect(getAvgSteps(sampleData)).to.be.a('number')
+    expect(getAvgSteps(sampleData)).to.equal(6333.333333333333)
+
   })
   
+
 //////////////// getAvgDailyOunces test///////////////////////
 
 // it.skip('should return average daily ounces for user', () => {

@@ -16,12 +16,12 @@ const getUserData = ((userId, dataList) => {
   return filteredById
 });
 
-const getAvgSteps = () => {
-let sumOfSteps = userData.users.reduce((sum, user) => {
+const getAvgSteps = (dataList) => {
+let sumOfSteps = dataList.users.reduce((sum, user) => {
   sum += user.dailyStepGoal
   return sum
 }, 0)
-return sumOfSteps / userData.users.length
+return sumOfSteps / dataList.users.length
 }
 
 const getAvgDailyOunces = (id) => {
