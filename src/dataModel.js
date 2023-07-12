@@ -32,8 +32,9 @@ return userHydrationStats / numOfEntries.length
 const getOzByDay = (id, day) => {
 const usersDailyHydrationLog = userHydrationData.hydrationData
 const usersDailyOz = usersDailyHydrationLog.find(log => log.userID === id && log.date === day)
+console.log('day: ', day)
 if(usersDailyOz) {
-  return console.log('look here', usersDailyOz.numOunces)
+  return usersDailyOz.numOunces
 }
 }
 
@@ -53,6 +54,8 @@ const calculateWeeklyOunces = (id) => {
   
   return object
 }
+
+
 
 
 export {

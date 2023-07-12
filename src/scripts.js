@@ -13,6 +13,7 @@ import './images/turing-logo.png';
 import { 
   displayRandomUser, 
   displayAverageSteps,
+  displayHydrationStats
 } from './domUpdates';
 
 import {
@@ -32,7 +33,7 @@ var userInfoContainer = document.querySelector('.user-info');
 var welcomeHeading = document.querySelector('.welcome-heading');
 var activityContainer = document.querySelector('.average-steps')
 var friendList = document.querySelector('.friend-list')
-
+var hydrationStats = document.querySelector('.hydration-stats')
 
 
 // event listener:
@@ -41,6 +42,7 @@ window.addEventListener('load', () => {
   displayAverageSteps()
   getAvgDailyOunces(1)
   calculateWeeklyOunces(1)
+  displayHydrationStats()
 });
 
 export {
