@@ -22,6 +22,7 @@ import {
 
 
 var currentUser;
+// const dayjs = require('dayjs')
 
 // generate random ID number
 const getRandomIndex = () => {
@@ -31,14 +32,14 @@ const getRandomIndex = () => {
 // generate random user profile
 const generateRandomUser = (array) =>{
   const randomUserIndex = getRandomIndex(array)
-  const userData = getUserData(randomUserIndex)
+  const userDataInfo = getUserData(randomUserIndex, userData)
 
-  return userData
+  return userDataInfo
 }
 
 // display user information
 const displayRandomUser = (array) => {
-  currentUser = generateRandomUser(array)
+  currentUser = generateRandomUser(userData)
   let wholeName = currentUser.name
   let firstNameOnly = wholeName.split(' ')
 
@@ -57,7 +58,7 @@ const displayRandomUser = (array) => {
 // display user friend list (separate box)
 const displayFriendList = () => {
   const friendsNames = currentUser.friends.map((id) => {
-    const userFriendDetails = getUserData(id)
+    const userFriendDetails = getUserData(id, userData)
     return userFriendDetails.name
   }).join(', ') 
   
@@ -65,8 +66,8 @@ const displayFriendList = () => {
  }
 
  // User should be able to see average step count
-const displayAverageSteps = (array) => {
-  const avgSteps = getAvgSteps(array)
+const displayAverageSteps = () => {
+  const avgSteps = getAvgSteps(userData)
   activityContainer.innerText = `${avgSteps}`
  }
 
@@ -83,6 +84,15 @@ const displayWeeklyHydrationStats = () => {
 
  weeklyHydrationStats.innerHTML = `<div> Day: ${weeklyOzArray.dates}, Oz: ${weeklyOzArray.ounces}`
 }
+
+// `<div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
+// <div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
+// <div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
+// <div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
+// <div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
+// <div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
+// <div> ${formattedDay}, Oz: ${weeklyOzArray.ounces}
+// `
 
 
 export {

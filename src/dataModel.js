@@ -1,5 +1,6 @@
 import userData from './data/users';
 import userHydrationData from './data/hydration'
+
 // import {apiCall} from 'lksadjf;lk'
 
 // function dosomethingapi() {
@@ -10,21 +11,21 @@ import userHydrationData from './data/hydration'
 //   }
 // }
 
-const getUserData = ((userId) => {
-  let filteredById = userData.users.find(user => user.id === userId);
+const getUserData = ((userId, dataList) => {
+  let filteredById = dataList.users.find(user => user.id === userId);
   return filteredById
 });
 
-const getAvgSteps = () => {
-let sumOfSteps = userData.users.reduce((sum, user) => {
+const getAvgSteps = (dataList) => {
+let sumOfSteps = dataList.users.reduce((sum, user) => {
   sum += user.dailyStepGoal
   return sum
 }, 0)
-return sumOfSteps / userData.users.length
+return sumOfSteps / dataList.users.length
 }
 
-const getAvgDailyOunces = (id) => {
-const usersDailyHydrationLog = userHydrationData.hydrationData
+const getAvgDailyOunces = (id, dataList) => {
+const usersDailyHydrationLog = dataList.hydrationData
 let numOfEntries = []
 const userHydrationStats = usersDailyHydrationLog.reduce((accum, userObj) => {
   if (userObj.userID === id) {
@@ -37,10 +38,9 @@ return userHydrationStats / numOfEntries.length
 }
 
 ///////////return specific day fluid ounces//////////////////
-const getOzByDay = (id, day) => {
-const usersDailyHydrationLog = userHydrationData.hydrationData
+const getOzByDay = (id, day, dataList) => {
+const usersDailyHydrationLog = dataList.hydrationData
 const usersDailyOz = usersDailyHydrationLog.find(log => log.userID === id && log.date === day)
-console.log('day: ', day)
 if(usersDailyOz) {
   return usersDailyOz.numOunces
 }

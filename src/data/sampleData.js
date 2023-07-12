@@ -1,4 +1,4 @@
-const sampleUserData = [
+const sampleData = { users: [
   {
   "id": 1,
   "name": "Trystan Gorczany",
@@ -39,9 +39,10 @@ const sampleUserData = [
     15,
     7
   ]
-  }];
+  }]
+}
 
-  const hydrationData = [
+  const sampleDataHydration = { hydrationData: [
     {
       "userID": 1,
       "date": "2023/03/24",
@@ -59,7 +60,7 @@ const sampleUserData = [
     },
     {
       "userID": 1,
-      "date": "2023/03/24",
+      "date": "2023/06/10",
       "numOunces": 74
     },
     {
@@ -67,10 +68,10 @@ const sampleUserData = [
       "date": "2023/03/24",
       "numOunces": 47
     },
-  ]
+  ]}
 
 
-export {
-  sampleUserData,
-  hydrationData,
-}
+  export {
+    sampleData,
+    sampleDataHydration
+  }
