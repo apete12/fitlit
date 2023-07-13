@@ -36,12 +36,6 @@ export const fetchUserData = (dataType) => {
 // }
 // 
 
-
-// fetch('https://fitlit-api.herokuapp.com/api/v1/users')
-    //   .then(response => response.json())
-    //   .then(data => console.log(data))
-
-
 // function dosomethingapi() {
 //   //checkj out promise all
 //   apiCall(url)
