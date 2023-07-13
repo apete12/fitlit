@@ -43,7 +43,7 @@ window.addEventListener('load', () => {
   // displayDailyHydrationStats()
   // displayFriendList()
   // displayWeeklyHydrationStats()
-  fetchUserData().then(result => {
+  fetchUserData('users').then(result => {
     displayRandomUser(result)
     displayAverageSteps(result)
     displayDailyHydrationStats()

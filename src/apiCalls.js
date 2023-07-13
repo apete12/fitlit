@@ -6,8 +6,8 @@
 // }
 
 
-export const fetchUserData = () => { 
-   return fetch('https://fitlit-api.herokuapp.com/api/v1/users')
+export const fetchUserData = (dataType) => { 
+   return fetch(`https://fitlit-api.herokuapp.com/api/v1/${dataType}`)
     .then(res => res.json())
     // .then(data => {
     //     console.log(data)
