@@ -15,8 +15,6 @@ export const fetchUserData = (dataType) => {
     .catch(error => console.log("ERROR", error));
 };
 
-
-
 // export const fetchUserData = (dataType) => { 
     // fetch(`https://fitlit-api.herokuapp.com/api/v1/${dataType}`)
     // .then(res => res.json())
