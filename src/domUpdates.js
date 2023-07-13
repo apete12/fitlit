@@ -1,7 +1,7 @@
 //NOTE: Your DOM manipulation will occur in this file
 
 // import userData from './data/users';
-import userHydrationData from './data/hydration'
+// import userHydrationData from './data/hydration'
 
 import { 
   // query selectors:
@@ -68,16 +68,16 @@ const displayAverageSteps = (array) => {
   activityContainer.innerText = `${avgSteps}`
  }
 
-const displayDailyHydrationStats = () => {
-  const todaysDate = calculateWeeklyOunces(currentUser.id, userHydrationData)
-  const todaysOunces = getOzByDay(currentUser.id, todaysDate.dates[6], userHydrationData)
+const displayDailyHydrationStats = (array) => {
+  const todaysDate = calculateWeeklyOunces(currentUser.id, array)
+  const todaysOunces = getOzByDay(currentUser.id, todaysDate.dates[6], array)
 
   dailyHydrationStats.innerHTML = ` 
 <div>Today, you've consumed<br> ${todaysOunces} ounces of water!<br></div>`
 }
 
-const displayWeeklyHydrationStats = () => {
-  const weeklyOzArray = calculateWeeklyOunces(currentUser.id, userHydrationData)
+const displayWeeklyHydrationStats = (array) => {
+  const weeklyOzArray = calculateWeeklyOunces(currentUser.id, array)
   const weeklyHydrationPerDay = weeklyOzArray.dates
   const formattedDay = weeklyHydrationPerDay.map((day) => {
     return dayjs(day).format('ddd D')
