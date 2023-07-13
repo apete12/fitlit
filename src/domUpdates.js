@@ -1,6 +1,6 @@
 //NOTE: Your DOM manipulation will occur in this file
 
-import userData from './data/users';
+// import userData from './data/users';
 import userHydrationData from './data/hydration'
 
 import { 
@@ -26,19 +26,19 @@ var currentUser;
 const dayjs = require('dayjs')
 
 
-const getRandomIndex = () => {
-  return Math.floor(Math.random() * userData.users.length)
+const getRandomIndex = (array) => {
+  return Math.floor(Math.random() * array.users.length)
 }
 
 const generateRandomUser = (array) =>{
   const randomUserIndex = getRandomIndex(array)
-  const userDataInfo = getUserData(randomUserIndex, userData)
+  const userDataInfo = getUserData(randomUserIndex, array)
 
   return userDataInfo
 }
 
 const displayRandomUser = (array) => {
-  currentUser = generateRandomUser(userData)
+  currentUser = generateRandomUser(array)
   let wholeName = currentUser.name
   let firstNameOnly = wholeName.split(' ')
 
@@ -54,17 +54,17 @@ const displayRandomUser = (array) => {
   `
 }
 
-const displayFriendList = () => {
+const displayFriendList = (array) => {
   const friendsNames = currentUser.friends.map((id) => {
-    const userFriendDetails = getUserData(id, userData)
+    const userFriendDetails = getUserData(id, array)
     return userFriendDetails.name
   }).join(', ') 
   
   friendList.innerHTML = `<div>Friend List: ${friendsNames}</div>`
  }
 
-const displayAverageSteps = () => {
-  const avgSteps = getAvgSteps(userData)
+const displayAverageSteps = (array) => {
+  const avgSteps = getAvgSteps(array)
   activityContainer.innerText = `${avgSteps}`
  }
 

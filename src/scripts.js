@@ -2,7 +2,7 @@
 // Do not delete or rename this file ********
 
 // Imports:
-import userData from './data/users';
+// import userData from './data/users';
 import userHydrationData from './data/hydration'
 import './css/styles.css'
 import './images/turing-logo.png';
@@ -23,6 +23,11 @@ import {
   calculateWeeklyOunces
 } from './dataModel';
 
+import {
+  fetchUserData,
+  // getUserData,
+} from './apiCalls'
+
 // Query Selectors:
 var userInfoContainer = document.querySelector('.user-info');
 var welcomeHeading = document.querySelector('.welcome-heading');
@@ -33,12 +38,24 @@ var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
 
 // event listener:
 window.addEventListener('load', () => {
-  displayRandomUser()
-  displayAverageSteps()
-  displayDailyHydrationStats()
-  displayFriendList()
-  displayWeeklyHydrationStats()
-});
+  // displayRandomUser()
+  // displayAverageSteps()
+  // displayDailyHydrationStats()
+  // displayFriendList()
+  // displayWeeklyHydrationStats()
+  fetchUserData('users').then(result => {
+    displayRandomUser(result)
+    displayAverageSteps(result)
+    displayDailyHydrationStats()
+    displayFriendList(result)
+    // displayWeeklyHydrationStats()
+    // console.log(result)
+    // displayAverageStep s(result),
+
+  })
+    // displayAverageSteps(results)
+  })
+// });
 
 export {
   // query selectors:
