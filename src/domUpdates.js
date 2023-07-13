@@ -26,19 +26,19 @@ var currentUser;
 const dayjs = require('dayjs')
 
 
-const getRandomIndex = () => {
-  return Math.floor(Math.random() * userData.users.length)
+const getRandomIndex = (array) => {
+  return Math.floor(Math.random() * array.users.length)
 }
 
 const generateRandomUser = (array) =>{
   const randomUserIndex = getRandomIndex(array)
-  const userDataInfo = getUserData(randomUserIndex, userData)
+  const userDataInfo = getUserData(randomUserIndex, array)
 
   return userDataInfo
 }
 
 const displayRandomUser = (array) => {
-  currentUser = generateRandomUser(userData)
+  currentUser = generateRandomUser(array)
   let wholeName = currentUser.name
   let firstNameOnly = wholeName.split(' ')
 
@@ -63,8 +63,8 @@ const displayFriendList = () => {
   friendList.innerHTML = `<div>Friend List: ${friendsNames}</div>`
  }
 
-const displayAverageSteps = () => {
-  const avgSteps = getAvgSteps(userData)
+const displayAverageSteps = (array) => {
+  const avgSteps = getAvgSteps(array)
   activityContainer.innerText = `${avgSteps}`
  }
 

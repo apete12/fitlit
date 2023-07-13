@@ -38,13 +38,20 @@ var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
 
 // event listener:
 window.addEventListener('load', () => {
-  displayRandomUser()
-  displayAverageSteps()
-  displayDailyHydrationStats()
-  displayFriendList()
-  displayWeeklyHydrationStats()
-  fetchUserData('users')
-});
+  // displayRandomUser()
+  // displayAverageSteps()
+  // displayDailyHydrationStats()
+  // displayFriendList()
+  // displayWeeklyHydrationStats()
+  fetchUserData().then(result => {
+    displayRandomUser(result)
+    // console.log(result)
+    // displayAverageStep s(result),
+
+  })
+    // displayAverageSteps(results)
+  })
+// });
 
 export {
   // query selectors:

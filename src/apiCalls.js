@@ -6,12 +6,12 @@
 // }
 
 
-export const fetchUserData = (dataType) => { 
-    fetch('https://fitlit-api.herokuapp.com/api/v1/users')
+export const fetchUserData = () => { 
+   return fetch('https://fitlit-api.herokuapp.com/api/v1/users')
     .then(res => res.json())
-    .then(data => {
-        console.log(data)
-    })
+    // .then(data => {
+    //     console.log(data)
+    // })
     .catch(error => console.log("ERROR", error));
 };
 
