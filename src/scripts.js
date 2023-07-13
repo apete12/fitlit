@@ -3,7 +3,7 @@
 
 // Imports:
 // import userData from './data/users';
-import userHydrationData from './data/hydration'
+// import userHydrationData from './data/hydration'
 import './css/styles.css'
 import './images/turing-logo.png';
 
@@ -38,24 +38,25 @@ var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
 
 // event listener:
 window.addEventListener('load', () => {
-  // displayRandomUser()
-  // displayAverageSteps()
-  // displayDailyHydrationStats()
-  // displayFriendList()
-  // displayWeeklyHydrationStats()
   fetchUserData('users').then(result => {
     displayRandomUser(result)
     displayAverageSteps(result)
-    displayDailyHydrationStats()
     displayFriendList(result)
-    // displayWeeklyHydrationStats()
-    // console.log(result)
-    // displayAverageStep s(result),
+  })
 
+  fetchUserData('hydration').then(result => {
+    displayDailyHydrationStats(result)
+    displayWeeklyHydrationStats(result)
   })
-    // displayAverageSteps(results)
-  })
-// });
+
+  // fetchUserData('sleep').then(result => {
+  
+  // })
+
+  // fetchUserData('activity').then(result => {
+  
+  // })
+})
 
 export {
   // query selectors:
