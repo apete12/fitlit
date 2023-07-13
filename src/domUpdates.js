@@ -23,7 +23,8 @@ import {
 
 
 var currentUser;
-// const dayjs = require('dayjs')
+const dayjs = require('dayjs')
+
 
 const getRandomIndex = () => {
   return Math.floor(Math.random() * userData.users.length)
@@ -72,13 +73,30 @@ const displayDailyHydrationStats = () => {
   const todaysOunces = getOzByDay(currentUser.id, todaysDate.dates[6], userHydrationData)
 
   dailyHydrationStats.innerHTML = ` 
-<div>Today, you've consumed: ${todaysOunces} ounces of water!</div>`
+<div>Today, you've consumed<br> ${todaysOunces} ounces of water!<br></div>`
 }
 
 const displayWeeklyHydrationStats = () => {
- const weeklyOzArray = calculateWeeklyOunces(currentUser.id, userHydrationData)
-
- weeklyHydrationStats.innerHTML = `<div> Day: ${weeklyOzArray.dates}, Oz: ${weeklyOzArray.ounces}`
+  const weeklyOzArray = calculateWeeklyOunces(currentUser.id, userHydrationData)
+  const weeklyHydrationPerDay = weeklyOzArray.dates
+  const formattedDay = weeklyHydrationPerDay.map((day) => {
+    return dayjs(day).format('ddd D')
+  }) 
+  
+ weeklyHydrationStats.innerHTML = `
+ <div class="last-week"> ${formattedDay[0]}</div>
+ <div class="last-week"> ${formattedDay[1]}</div>
+ <div class="last-week"> ${formattedDay[2]}</div>
+ <div class="last-week"> ${formattedDay[3]}</div>
+ <div class="last-week"> ${formattedDay[4]}</div>
+ <div class="last-week-last"> ${formattedDay[5]}</div>
+ <div class="oz">${weeklyOzArray.ounces[0]}oz</div>
+ <div class="oz">${weeklyOzArray.ounces[1]}oz</div>
+ <div class="oz">${weeklyOzArray.ounces[2]}oz</div>
+ <div class="oz">${weeklyOzArray.ounces[3]}oz</div>
+ <div class="oz">${weeklyOzArray.ounces[4]}oz</div>
+ <div class="oz-last">${weeklyOzArray.ounces[5]}oz</div>
+ `
 }
 
 export {

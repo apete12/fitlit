@@ -128,7 +128,79 @@ main {
   justify-content: space-around;
 }
 
-.hydration, .sleep, .activity {
+.hydration {
+  height: 90%;
+  width: 30%;
+  border: solid 10px #044553;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Abel', sans-serif;
+  font-size: 25px; 
+}
+
+.friend-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Abel', sans-serif;
+  font-size: 25px; 
+}
+
+.hydration {
+  height: 90%;
+  width: 30%;
+  text-align: center;
+}
+
+.grid-calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.calendar-top {
+  width: 95%;
+  height: 25%;
+  display: grid;
+  align-items: center;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 0px;
+  margin: 0px;
+  background-color: #044553;
+}
+
+.weekly-hydration-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  position: inherit;
+  grid-gap: 0px;
+  padding: 0%;
+  border: 1px solid black;
+  grid-template-rows: auto auto;
+  align-items: center;
+  width: 95%;
+  font-size: 25px;
+}
+
+.last-week {
+  border-right: 1px solid #044553;
+}
+
+.oz {
+  border-top: 1px solid #044553;
+  border-right: 1px solid #044553;
+}
+
+.oz-last {
+  border-top: 1px solid #044553;
+}
+
+.sleep, .activity {
   height: 90%;
   width: 30%;
   border: solid 10px #044553;
@@ -140,16 +212,8 @@ main {
   font-size: 25px; 
 }
 
-section {
+.sleep-stats, .average-steps {
   height: 70%;
   width: 95%;
-}
-
-.friend-list {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-family: 'Abel', sans-serif;
-  font-size: 25px; 
+  text-align: center;
 }
