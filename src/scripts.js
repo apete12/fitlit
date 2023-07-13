@@ -3,10 +3,7 @@
 
 // Imports:
 import userData from './data/users';
-// importing the object that has 1 key-value pair of users: []
-
 import userHydrationData from './data/hydration'
-
 import './css/styles.css'
 import './images/turing-logo.png';
 
@@ -26,10 +23,6 @@ import {
   calculateWeeklyOunces
 } from './dataModel';
 
-// importing functionality from .domUpdates
-// ./ is a relative path, the module is in the same directory as the current module file
-
-
 // Query Selectors:
 var userInfoContainer = document.querySelector('.user-info');
 var welcomeHeading = document.querySelector('.welcome-heading');
@@ -38,13 +31,10 @@ var friendList = document.querySelector('.friend-list')
 var dailyHydrationStats = document.querySelector('.daily-hydration-stats')
 var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
 
-
 // event listener:
 window.addEventListener('load', () => {
   displayRandomUser()
   displayAverageSteps()
-  getAvgDailyOunces(1)
-  calculateWeeklyOunces(1)
   displayDailyHydrationStats()
   displayFriendList()
   displayWeeklyHydrationStats()

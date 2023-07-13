@@ -1,6 +1,7 @@
 //NOTE: Your DOM manipulation will occur in this file
 
 import userData from './data/users';
+import userHydrationData from './data/hydration'
 
 import { 
   // query selectors:
@@ -24,22 +25,20 @@ import {
 var currentUser;
 const dayjs = require('dayjs')
 
-// generate random ID number
+
 const getRandomIndex = () => {
   return Math.floor(Math.random() * userData.users.length)
 }
 
-// generate random user profile
 const generateRandomUser = (array) =>{
   const randomUserIndex = getRandomIndex(array)
-  const userData = getUserData(randomUserIndex)
+  const userDataInfo = getUserData(randomUserIndex, userData)
 
-  return userData
+  return userDataInfo
 }
 
-// display user information
 const displayRandomUser = (array) => {
-  currentUser = generateRandomUser(array)
+  currentUser = generateRandomUser(userData)
   let wholeName = currentUser.name
   let firstNameOnly = wholeName.split(' ')
 
@@ -55,32 +54,30 @@ const displayRandomUser = (array) => {
   `
 }
 
-// display user friend list (separate box)
 const displayFriendList = () => {
   const friendsNames = currentUser.friends.map((id) => {
-    const userFriendDetails = getUserData(id)
+    const userFriendDetails = getUserData(id, userData)
     return userFriendDetails.name
   }).join(', ') 
   
   friendList.innerHTML = `<div>Friend List: ${friendsNames}</div>`
  }
 
- // User should be able to see average step count
-const displayAverageSteps = (array) => {
-  const avgSteps = getAvgSteps(array)
+const displayAverageSteps = () => {
+  const avgSteps = getAvgSteps(userData)
   activityContainer.innerText = `${avgSteps}`
  }
 
 const displayDailyHydrationStats = () => {
-  const todaysDate = calculateWeeklyOunces(currentUser.id)
-  const todaysOunces = getOzByDay(currentUser.id, todaysDate.dates[6])
+  const todaysDate = calculateWeeklyOunces(currentUser.id, userHydrationData)
+  const todaysOunces = getOzByDay(currentUser.id, todaysDate.dates[6], userHydrationData)
 
   dailyHydrationStats.innerHTML = ` 
 <div>Today, you've consumed<br> ${todaysOunces} ounces of water!<br></div>`
 }
 
 const displayWeeklyHydrationStats = () => {
-  const weeklyOzArray = calculateWeeklyOunces(currentUser.id)
+  const weeklyOzArray = calculateWeeklyOunces(currentUser.id, userHydrationData)
   const weeklyHydrationPerDay = weeklyOzArray.dates
   const formattedDay = weeklyHydrationPerDay.map((day) => {
     return dayjs(day).format('ddd D')
