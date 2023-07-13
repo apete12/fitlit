@@ -23,6 +23,11 @@ import {
   calculateWeeklyOunces
 } from './dataModel';
 
+import {
+  fetchUserData,
+  // getUserData,
+} from './apiCalls'
+
 // Query Selectors:
 var userInfoContainer = document.querySelector('.user-info');
 var welcomeHeading = document.querySelector('.welcome-heading');
