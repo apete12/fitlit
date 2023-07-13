@@ -1,6 +1,6 @@
 //NOTE: Your DOM manipulation will occur in this file
 
-import userData from './data/users';
+// import userData from './data/users';
 import userHydrationData from './data/hydration'
 
 import { 
@@ -54,9 +54,9 @@ const displayRandomUser = (array) => {
   `
 }
 
-const displayFriendList = () => {
+const displayFriendList = (array) => {
   const friendsNames = currentUser.friends.map((id) => {
-    const userFriendDetails = getUserData(id, userData)
+    const userFriendDetails = getUserData(id, array)
     return userFriendDetails.name
   }).join(', ') 
   

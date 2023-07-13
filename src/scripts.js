@@ -2,7 +2,7 @@
 // Do not delete or rename this file ********
 
 // Imports:
-import userData from './data/users';
+// import userData from './data/users';
 import userHydrationData from './data/hydration'
 import './css/styles.css'
 import './images/turing-logo.png';
@@ -45,6 +45,10 @@ window.addEventListener('load', () => {
   // displayWeeklyHydrationStats()
   fetchUserData().then(result => {
     displayRandomUser(result)
+    displayAverageSteps(result)
+    displayDailyHydrationStats()
+    displayFriendList(result)
+    // displayWeeklyHydrationStats()
     // console.log(result)
     // displayAverageStep s(result),
 
