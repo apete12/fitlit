@@ -42,6 +42,7 @@ var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
 window.addEventListener('load', () => {
   Promise.all(promises)
   .then(results => {
+    console.log('activity here', results[3])
     console.log('here', results)
     displayRandomUser(results[0])
     displayAverageSteps(results[0])
@@ -61,3 +62,4 @@ export {
   dailyHydrationStats,
   weeklyHydrationStats
 }
+

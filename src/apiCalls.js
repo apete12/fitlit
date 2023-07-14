@@ -18,6 +18,10 @@ export const promises = [
     fetchUserData('activity')
 ]
 
+
+
+
+
 // export const fetchUserData = (dataType) => { 
     // fetch(`https://fitlit-api.herokuapp.com/api/v1/${dataType}`)
     // .then(res => res.json())

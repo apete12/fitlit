@@ -1,6 +1,3 @@
-// import userData from './data/users';
-import userHydrationData from './data/hydration'
-
 var currentUser
 
 const getRandomIndex = (array) => {
@@ -23,8 +20,8 @@ const getAvgSteps = (dataList) => {
 let sumOfSteps = dataList.users.reduce((sum, user) => {
   sum += user.dailyStepGoal
   return sum
-}, 0)
-return sumOfSteps / dataList.users.length
+  }, 0)
+    return sumOfSteps / dataList.users.length
 }
 
 const getAvgDailyOunces = (id, dataList) => {
@@ -41,11 +38,11 @@ return userHydrationStats / numOfEntries.length
 }
 
 const getOzByDay = (id, day, dataList) => {
-const usersDailyHydrationLog = dataList.hydrationData
-const usersDailyOz = usersDailyHydrationLog.find(log => log.userID === id && log.date === day)
-if(usersDailyOz) {
-  return usersDailyOz.numOunces
-}
+  const usersDailyHydrationLog = dataList.hydrationData
+  const usersDailyOz = usersDailyHydrationLog.find(log => log.userID === id && log.date === day)
+  if(usersDailyOz) {
+    return usersDailyOz.numOunces
+    }
 }
 
 const calculateWeeklyOunces = (id, dataList) => {
@@ -65,6 +62,22 @@ const calculateWeeklyOunces = (id, dataList) => {
   return weeklyHydrationInfo
 }
 
+const sleepAmountByDay = (id, day, dataList) => {
+  const usersDailySleepLog = dataList.sleepData
+  const usersDailySleepAmount = usersDailySleepLog.find(log => log.userID === id && log.date === day)
+  if(usersDailySleepAmount) {
+    return usersDailySleepAmount.hoursSlept
+  }
+}
+
+const sleepQualityByDay = (id, day, dataList) => {
+  const usersDailySleepLog = dataList.sleepData
+  const usersDailySleepQuality = usersDailySleepLog.find(log => log.userID === id && log.date === day)
+    if(usersDailySleepQuality) {
+      return usersDailySleepQuality.sleepQuality
+    }
+}
+
 export {
   getUserData,
   getAvgSteps,
@@ -72,5 +85,7 @@ export {
   getOzByDay,
   calculateWeeklyOunces,
   getRandomIndex,
-  generateRandomUser
+  generateRandomUser,
+  sleepAmountByDay, 
+  sleepQualityByDay
 }
