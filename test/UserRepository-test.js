@@ -1,6 +1,7 @@
 import { expect } from 'chai';
-import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay, calculateWeeklyOunces, calculateUserAvgDailyHoursSlept, calculateUserAvgSleepQuality, calculateDailyMilesWalked} from '../src/dataModel';
-import { sampleData, sampleDataHydration, weeklyDataSample, sampleActivityData } from '../src/data/sampleData';
+
+import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay, calculateWeeklyOunces, calculateUserAvgDailyHoursSlept, calculateUserAvgSleepQuality, calculateDailyMilesWalked, sleepAmountByDay, sleepQualityByDay} from '../src/dataModel';
+import { sampleData, sampleDataHydration, weeklyDataSample, sampleActivityData, sampleSleepData } from '../src/data/sampleData';
 
 describe('User Repository', () => {
 
@@ -59,6 +60,28 @@ describe('User Repository', () => {
 })
 
 });
+
+describe('Average Daily Sleep Quantity and Quality', () => {
+  it('should return amount of sleep for given day', function () {
+    const userOneSleepHoursByDay = sleepAmountByDay(1, '2023/03/21', sampleSleepData)
+    const userTwoSleepHoursByDay = sleepAmountByDay(2, '2023/03/22', sampleSleepData)
+
+    expect(userOneSleepHoursByDay).to.be.a('number')
+    expect(userOneSleepHoursByDay).to.equal(9.9)
+    expect(userTwoSleepHoursByDay).to.equal(4.2)
+  })
+
+  it('should return sleep quality score for given day', function () {
+    const userOneSleepQualityForDay = sleepQualityByDay(1, '2023/03/21', sampleSleepData)
+    const userTwoSleepQualityForDay = sleepQualityByDay(2, '2023/03/30', sampleSleepData)
+    
+    expect(userOneSleepQualityForDay).to.be.a('number')
+    expect(userOneSleepQualityForDay).to.equal(4.7)
+    expect(userTwoSleepQualityForDay).to.equal(4.7)
+  })
+
+
+})
 
 describe('Should test sleepData', () => {
 
