@@ -20,11 +20,13 @@ import {
   getAvgSteps,
   getAvgDailyOunces,
   getOzByDay,
-  calculateWeeklyOunces
+  calculateWeeklyOunces,
+  generateRandomUser
 } from './dataModel';
 
 import {
   fetchUserData,
+  promises
   // getUserData,
 } from './apiCalls'
 
@@ -38,24 +40,16 @@ var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
 
 // event listener:
 window.addEventListener('load', () => {
-  fetchUserData('users').then(result => {
-    displayRandomUser(result)
-    displayAverageSteps(result)
-    displayFriendList(result)
+  Promise.all(promises)
+  .then(results => {
+    console.log('here', results)
+    displayRandomUser(results[0])
+    displayAverageSteps(results[0])
+    displayFriendList(results[0])
+    displayDailyHydrationStats(results[1])
+    displayWeeklyHydrationStats(results[1])
   })
-
-  fetchUserData('hydration').then(result => {
-    displayDailyHydrationStats(result)
-    displayWeeklyHydrationStats(result)
-  })
-
-  // fetchUserData('sleep').then(result => {
-  
-  // })
-
-  // fetchUserData('activity').then(result => {
-  
-  // })
+  .catch(error => console.log('ERROR', error))
 })
 
 export {

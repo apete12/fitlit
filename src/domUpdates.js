@@ -1,3 +1,4 @@
+const dayjs = require('dayjs')
 //NOTE: Your DOM manipulation will occur in this file
 
 // import userData from './data/users';
@@ -19,23 +20,11 @@ import {
   getAvgSteps,
   getAvgOunces,
   getOzByDay,
+  getRandomIndex,
+  generateRandomUser
 } from './dataModel';
 
-
-var currentUser;
-const dayjs = require('dayjs')
-
-
-const getRandomIndex = (array) => {
-  return Math.floor(Math.random() * array.users.length)
-}
-
-const generateRandomUser = (array) =>{
-  const randomUserIndex = getRandomIndex(array)
-  const userDataInfo = getUserData(randomUserIndex, array)
-
-  return userDataInfo
-}
+var currentUser
 
 const displayRandomUser = (array) => {
   currentUser = generateRandomUser(array)
