@@ -78,6 +78,18 @@ const calculateWeeklyOunces = (id, dataList) => {
     return userSleepStats / entries.length
   }
 
+  const calculateUserAvgSleepQuality = (id, dataList) => {
+    const usersDailySleepQualityLog = dataList.sleepData
+    let entries = []
+    const userSleepQualityStats = usersDailySleepQualityLog.reduce((accum, userObj) => {
+      if (userObj.userID === id) {
+        entries.push(userObj.userID)
+        accum += userObj.sleepQuality
+      }
+      return accum
+    }, 0)
+    return userSleepQualityStats / entries.length
+  }
 
 export {
   getUserData,
