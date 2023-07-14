@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay, calculateWeeklyOunces, calculateUserAvgDailyHoursSlept, calculateUserAvgSleepQuality, calculateDailyMilesWalked, sleepAmountByDay, sleepQualityByDay, getWeeklySleepStats, calculateMinutesActive, checkIfStepGoalWasMade} from '../src/dataModel';
+import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay, calculateWeeklyOunces, calculateUserAvgDailyHoursSlept, calculateUserAvgSleepQuality, calculateDailyMilesWalked, sleepAmountByDay, sleepQualityByDay, getWeeklySleepStats, calculateMinutesActive, checkIfStepGoalWasMade, getWeeklySleepQualityStats} from '../src/dataModel';
 import { sampleData, sampleDataHydration, weeklyDataSample, sampleActivityData, sampleSleepData } from '../src/data/sampleData';
 
 describe('User Repository', () => {
@@ -102,6 +102,16 @@ describe('Should test sleepData', () => {
     expect(user1SleepAverage).to.equal(7.499999999999999)
     expect(user2SleepAverage).to.equal(6.342857142857143)
   })
+
+  it('should return an object of sleep quality for a week', () => {
+
+    const userOneWeeklySleepQuality = getWeeklySleepQualityStats(2, sampleSleepData, '2023/03/22')
+
+    expect(userOneWeeklySleepQuality).to.be.an('object')
+    expect(userOneWeeklySleepQuality.day).to.be.an('array')
+    expect(userOneWeeklySleepQuality.sleepQuality[2]).to.equal(3.5)
+  })
+
 })
 
 describe('Activity', () => {
@@ -129,5 +139,7 @@ describe('Activity', () => {
 
     expect(userOne).to.equal(true)
   })
+
+
 
 })
