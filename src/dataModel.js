@@ -104,6 +104,22 @@ const sleepQualityByDay = (id, day, dataList) => {
     return userSleepQualityStats / entries.length
   }
 
+  const getWeeklySleepStats = (id, dataList, startDate) => {
+    let sleepDataByID = dataList.sleepData.filter((entry) => entry.userID === id)
+  
+    let startDateEntry = sleepDataByID.find((log) => log.date === startDate)
+    let entryPosition = sleepDataByID.indexOf(startDateEntry)
+  
+    let weeklyUserData = sleepDataByID.slice(entryPosition, entryPosition + 7)
+  
+    let totalSleep = weeklyUserData.reduce((a, c) => {
+      a += c.hoursSlept
+      return a
+    }, 0)
+  
+    return totalSleep/weeklyUserData.length
+  }
+
 const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
   const userLog = dataList1.users
   const userStrideData = userLog.find(log => id === log.id)
@@ -131,4 +147,5 @@ export {
   calculateDailyMilesWalked,
   calculateUserAvgDailyHoursSlept,
   calculateUserAvgSleepQuality,
+  getWeeklySleepStats
 }
