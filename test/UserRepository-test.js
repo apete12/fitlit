@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay, calculateWeeklyOunces } from '../src/dataModel';
-import { sampleData, sampleDataHydration, weeklyDataSample } from '../src/data/sampleData';
+import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay, calculateWeeklyOunces, calculateDailyMilesWalked } from '../src/dataModel';
+import { sampleData, sampleDataHydration, weeklyDataSample, sampleActivityData } from '../src/data/sampleData';
 
 
 describe('User Repository', () => {
@@ -61,3 +61,16 @@ describe('User Repository', () => {
 
 });
 
+describe('Activity', () => {
+
+  it('Should return stride length', () => {
+
+    const userOne = calculateDailyMilesWalked(2, '2023/03/28', sampleData, sampleActivityData)
+    const userTwo = calculateDailyMilesWalked(1, '2023/03/20', sampleData, sampleActivityData)
+
+    expect(userOne).to.be.a('number')
+    expect(userOne).to.equal(12.548863636363636)
+    expect(userTwo).to.equal(5.577272727272727)
+  })
+
+})
