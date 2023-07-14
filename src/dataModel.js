@@ -1,15 +1,18 @@
 // import userData from './data/users';
 import userHydrationData from './data/hydration'
 
-// import {apiCall} from 'lksadjf;lk'
+var currentUser
 
-// function dosomethingapi() {
-//   //checkj out promise all
-//   apiCall(url)
-//   .then(data, () => {
-//     getUserData(data)
-//   }
-// }
+const getRandomIndex = (array) => {
+  return Math.floor(Math.random() * array.users.length)
+}
+
+const generateRandomUser = (array) =>{
+  const randomUserIndex = getRandomIndex(array)
+  const userDataInfo = getUserData(randomUserIndex, array)
+  currentUser = userDataInfo
+  return currentUser
+}
 
 const getUserData = ((userId, dataList) => {
   let filteredById = dataList.users.find(user => user.id === userId);
@@ -67,5 +70,7 @@ export {
   getAvgSteps,
   getAvgDailyOunces,
   getOzByDay,
-  calculateWeeklyOunces
+  calculateWeeklyOunces,
+  getRandomIndex,
+  generateRandomUser
 }
