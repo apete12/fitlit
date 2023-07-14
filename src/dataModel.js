@@ -65,6 +65,32 @@ const calculateWeeklyOunces = (id, dataList) => {
   return weeklyHydrationInfo
 }
 
+  const calculateUserAvgDailyHoursSlept = (id, dataList) => {
+    const usersDailySleepLog = dataList.sleepData
+    let entries = []
+    const userSleepStats = usersDailySleepLog.reduce((accum, userObj) => {
+      if (userObj.userID === id) {
+        entries.push(userObj.userID)
+        accum += userObj.hoursSlept
+      }
+      return accum
+    }, 0)
+    return userSleepStats / entries.length
+  }
+
+  const calculateUserAvgSleepQuality = (id, dataList) => {
+    const usersDailySleepQualityLog = dataList.sleepData
+    let entries = []
+    const userSleepQualityStats = usersDailySleepQualityLog.reduce((accum, userObj) => {
+      if (userObj.userID === id) {
+        entries.push(userObj.userID)
+        accum += userObj.sleepQuality
+      }
+      return accum
+    }, 0)
+    return userSleepQualityStats / entries.length
+  }
+
 const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
   const userLog = dataList1.users
   const userStrideData = userLog.find(log => id === log.id)
@@ -77,6 +103,7 @@ const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
   return (userStride * userDailyStep)/5280
 }
 
+
 export {
   getUserData,
   getAvgSteps,
@@ -86,4 +113,6 @@ export {
   getRandomIndex,
   generateRandomUser,
   calculateDailyMilesWalked
+  calculateUserAvgDailyHoursSlept,
+  calculateUserAvgSleepQuality
 }
