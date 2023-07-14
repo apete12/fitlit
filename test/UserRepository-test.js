@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay, calculateWeeklyOunces, calculateUserAvgDailyHoursSlept, calculateUserAvgSleepQuality, calculateDailyMilesWalked, sleepAmountByDay, sleepQualityByDay, getWeeklySleepStats} from '../src/dataModel';
+import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay, calculateWeeklyOunces, calculateUserAvgDailyHoursSlept, calculateUserAvgSleepQuality, calculateDailyMilesWalked, sleepAmountByDay, sleepQualityByDay, getWeeklySleepStats, calculateMinutesActive, checkIfStepGoalWasMade} from '../src/dataModel';
 import { sampleData, sampleDataHydration, weeklyDataSample, sampleActivityData, sampleSleepData } from '../src/data/sampleData';
 
 describe('User Repository', () => {
@@ -115,4 +115,19 @@ describe('Activity', () => {
     expect(userOne).to.equal(12.548863636363636)
     expect(userTwo).to.equal(5.577272727272727)
   })
+
+  it('should return calculation of minutes active', () => {
+    
+    const userOne = calculateMinutesActive(2, '2023/03/28', sampleActivityData)
+
+    expect(userOne).to.equal(279)
+  })
+
+  it('check if step goal was made', () => {
+    
+    const userOne = checkIfStepGoalWasMade(2, '2023/03/28', sampleData, sampleActivityData)
+
+    expect(userOne).to.equal(true)
+  })
+
 })

@@ -132,7 +132,26 @@ const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
   return (userStride * userDailyStep)/5280
 }
 
+const calculateMinutesActive = (id, day, dataList) => {
+  const activityLog = dataList.activityData
+  const activeMinutes = activityLog.find(log => log.userID === id && log.date === day)
+  console.log(activeMinutes)
+  return activeMinutes.minutesActive
+}
 
+const checkIfStepGoalWasMade = (id, day, dataList1, dataList2) => {
+  const userLog = dataList1.users
+  const userData = userLog.find(log => id === log.id)
+  const userStepGoal = userData.dailyStepGoal
+
+  const activityLog = dataList2.activityData
+  const userStepData = activityLog.find(log => log.userID === id && log.date === day)
+  const userDailyStep = userStepData.numSteps
+  
+  if(userDailyStep >= userStepGoal) {
+    return true
+  }
+}
 
 export {
   getUserData,
@@ -147,5 +166,7 @@ export {
   calculateDailyMilesWalked,
   calculateUserAvgDailyHoursSlept,
   calculateUserAvgSleepQuality,
-  getWeeklySleepStats
+  getWeeklySleepStats,
+  calculateMinutesActive,
+  checkIfStepGoalWasMade
 }
