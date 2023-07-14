@@ -65,6 +65,20 @@ const calculateWeeklyOunces = (id, dataList) => {
   return weeklyHydrationInfo
 }
 
+  const calculateUserAvgDailyHoursSlept = (id, dataList) => {
+    const usersDailySleepLog = dataList.sleepData
+    let entries = []
+    const userSleepStats = usersDailySleepLog.reduce((accum, userObj) => {
+      if (userObj.userID === id) {
+        entries.push(userObj.userID)
+        accum += userObj.hoursSlept
+      }
+      return accum
+    }, 0)
+    return userSleepStats / entries.length
+  }
+
+
 export {
   getUserData,
   getAvgSteps,
@@ -72,5 +86,6 @@ export {
   getOzByDay,
   calculateWeeklyOunces,
   getRandomIndex,
-  generateRandomUser
+  generateRandomUser,
+  calculateUserAvgDailyHoursSlept,
 }
