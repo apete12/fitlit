@@ -1,4 +1,4 @@
-// import userData from './data/users';
+import {users,sampleActivityData} from './data/users';
 import userHydrationData from './data/hydration'
 
 var currentUser
@@ -65,6 +65,18 @@ const calculateWeeklyOunces = (id, dataList) => {
   return weeklyHydrationInfo
 }
 
+const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
+  const userLog = dataList1.users
+  const userStrideData = userLog.find(log => id === log.id)
+  const userStride = userStrideData.strideLength
+
+  const activityLog = dataList2.activityData
+  const userStepData = activityLog.find(log => log.userID === id && log.date === day)
+  const userDailyStep = userStepData.numSteps
+
+  return (userStride * userDailyStep)/5280
+}
+
 export {
   getUserData,
   getAvgSteps,
@@ -72,5 +84,6 @@ export {
   getOzByDay,
   calculateWeeklyOunces,
   getRandomIndex,
-  generateRandomUser
+  generateRandomUser,
+  calculateDailyMilesWalked
 }
