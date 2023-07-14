@@ -184,6 +184,7 @@ const sampleData = { users: [
       }
   ]}
 
+
   const sampleSleepData = { sleepData: [
     {
       userID: 1, 
@@ -304,7 +305,8 @@ const sampleData = { users: [
     },
   ]}
 
-  const sampleActivityData = { users: [
+
+  const sampleActivityData = { activityData: [
     {userID: 1, 
     date: '2023/03/20', 
     numSteps: 7362, 
@@ -440,6 +442,7 @@ const sampleData = { users: [
       flightsOfStairs: 48
     }
     ]}
+
 
 
   export {

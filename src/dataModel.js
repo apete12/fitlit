@@ -78,6 +78,46 @@ const sleepQualityByDay = (id, day, dataList) => {
     }
 }
 
+  const calculateUserAvgDailyHoursSlept = (id, dataList) => {
+    const usersDailySleepLog = dataList.sleepData
+    let entries = []
+    const userSleepStats = usersDailySleepLog.reduce((accum, userObj) => {
+      if (userObj.userID === id) {
+        entries.push(userObj.userID)
+        accum += userObj.hoursSlept
+      }
+      return accum
+    }, 0)
+    return userSleepStats / entries.length
+  }
+
+  const calculateUserAvgSleepQuality = (id, dataList) => {
+    const usersDailySleepQualityLog = dataList.sleepData
+    let entries = []
+    const userSleepQualityStats = usersDailySleepQualityLog.reduce((accum, userObj) => {
+      if (userObj.userID === id) {
+        entries.push(userObj.userID)
+        accum += userObj.sleepQuality
+      }
+      return accum
+    }, 0)
+    return userSleepQualityStats / entries.length
+  }
+
+const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
+  const userLog = dataList1.users
+  const userStrideData = userLog.find(log => id === log.id)
+  const userStride = userStrideData.strideLength
+
+  const activityLog = dataList2.activityData
+  const userStepData = activityLog.find(log => log.userID === id && log.date === day)
+  const userDailyStep = userStepData.numSteps
+
+  return (userStride * userDailyStep)/5280
+}
+
+
+
 export {
   getUserData,
   getAvgSteps,
@@ -87,5 +127,8 @@ export {
   getRandomIndex,
   generateRandomUser,
   sleepAmountByDay, 
-  sleepQualityByDay
+  sleepQualityByDay,
+  calculateDailyMilesWalked,
+  calculateUserAvgDailyHoursSlept,
+  calculateUserAvgSleepQuality,
 }
