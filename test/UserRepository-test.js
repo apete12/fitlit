@@ -1,7 +1,6 @@
 import { expect } from 'chai';
-import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay, calculateWeeklyOunces, calculateUserAvgDailyHoursSlept, calculateUserAvgSleepQuality } from '../src/dataModel';
-import { sampleData, sampleDataHydration, weeklyDataSample } from '../src/data/sampleData';
-
+import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay, calculateWeeklyOunces, calculateUserAvgDailyHoursSlept, calculateUserAvgSleepQuality, calculateDailyMilesWalked} from '../src/dataModel';
+import { sampleData, sampleDataHydration, weeklyDataSample, sampleActivityData } from '../src/data/sampleData';
 
 describe('User Repository', () => {
 
@@ -95,4 +94,17 @@ describe('Should test sleepData', () => {
     expect(calculateUserAvgSleepQuality(1, sampleSleepData)).to.equal(3.1599999999999997)
     expect(calculateUserAvgSleepQuality(2, sampleSleepData)).to.equal(2.85)
   })
+
 })
+
+describe('Activity', () => {
+
+  it('Should return miles user walked in a day', () => {
+
+    const userOne = calculateDailyMilesWalked(2, '2023/03/28', sampleData, sampleActivityData)
+    const userTwo = calculateDailyMilesWalked(1, '2023/03/20', sampleData, sampleActivityData)
+
+    expect(userOne).to.be.a('number')
+    expect(userOne).to.equal(12.548863636363636)
+    expect(userTwo).to.equal(5.577272727272727)
+  })
