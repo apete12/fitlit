@@ -100,4 +100,5 @@ export {
   getRandomIndex,
   generateRandomUser,
   calculateUserAvgDailyHoursSlept,
+  calculateUserAvgSleepQuality
 }

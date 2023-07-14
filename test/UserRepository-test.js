@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay, calculateWeeklyOunces, calculateUserAvgDailyHoursSlept } from '../src/dataModel';
+import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay, calculateWeeklyOunces, calculateUserAvgDailyHoursSlept, calculateUserAvgSleepQuality } from '../src/dataModel';
 import { sampleData, sampleDataHydration, weeklyDataSample } from '../src/data/sampleData';
 
 
@@ -91,7 +91,8 @@ describe('Should test sleepData', () => {
     expect(calculateUserAvgDailyHoursSlept(2, sampleSleepData)).to.equal(6.13)
   })
 
-  // it('Should be able to calculate the average sleep quality per day over all time', () => {
-  //   expect()
-  // }
+  it('Should be able to calculate the average sleep quality per day over all time', () => {
+    expect(calculateUserAvgSleepQuality(1, sampleSleepData)).to.equal(3.1599999999999997)
+    expect(calculateUserAvgSleepQuality(2, sampleSleepData)).to.equal(2.85)
+  })
 })
