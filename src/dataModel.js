@@ -104,13 +104,36 @@ const sleepQualityByDay = (id, day, dataList) => {
     return userSleepQualityStats / entries.length
   }
 
+function breakDownToWeeklyStatsArray(id, dataList, startDate) {
+
+  const  makeWeeklyArray = () => {
+  let sleepDataByID = dataList.sleepData.filter((entry) => entry.userID === id)
+
+  let startDateEntry = sleepDataByID.find((log) => log.date === startDate)
+  let entryPosition = sleepDataByID.indexOf(startDateEntry)
+
+  let weeklyUserData = sleepDataByID.slice(entryPosition, entryPosition + 7)
+  return weeklyUserData
+  }
+  return makeWeeklyArray
+}
+
+const getWeeklySleepQualityStats = (id, dataList, startDate) => {
+  const currentUserWeeklySleepData = breakDownToWeeklyStatsArray(id, dataList, startDate)
+  const weeklyUserData = currentUserWeeklySleepData()
+
+  let sleepQualityWeeklyStats = weeklyUserData.reduce((a, c) => {
+      a.day.push(c.date)
+      a.sleepQuality.push(c.sleepQuality)
+    return a
+  }, {day: [], sleepQuality: []})
+
+  return sleepQualityWeeklyStats
+}
+
   const getWeeklySleepStats = (id, dataList, startDate) => {
-    let sleepDataByID = dataList.sleepData.filter((entry) => entry.userID === id)
-  
-    let startDateEntry = sleepDataByID.find((log) => log.date === startDate)
-    let entryPosition = sleepDataByID.indexOf(startDateEntry)
-  
-    let weeklyUserData = sleepDataByID.slice(entryPosition, entryPosition + 7)
+    const currentUserWeeklySleepData = breakDownToWeeklyStatsArray(id, dataList, startDate)
+    const weeklyUserData = currentUserWeeklySleepData()
   
     let totalSleep = weeklyUserData.reduce((a, c) => {
       a += c.hoursSlept
@@ -135,7 +158,6 @@ const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
 const calculateMinutesActive = (id, day, dataList) => {
   const activityLog = dataList.activityData
   const activeMinutes = activityLog.find(log => log.userID === id && log.date === day)
-  console.log(activeMinutes)
   return activeMinutes.minutesActive
 }
 
@@ -168,5 +190,6 @@ export {
   calculateUserAvgSleepQuality,
   getWeeklySleepStats,
   calculateMinutesActive,
-  checkIfStepGoalWasMade
+  checkIfStepGoalWasMade,
+  getWeeklySleepQualityStats
 }
