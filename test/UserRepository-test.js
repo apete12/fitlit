@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay, calculateWeeklyOunces, calculateUserAvgDailyHoursSlept, calculateUserAvgSleepQuality, calculateDailyMilesWalked, sleepAmountByDay, sleepQualityByDay, getWeeklySleepStats, calculateMinutesActive, checkIfStepGoalWasMade, getWeeklySleepQualityStats} from '../src/dataModel';
+import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay, calculateWeeklyOunces, calculateUserAvgDailyHoursSlept, calculateUserAvgSleepQuality, calculateDailyMilesWalked, sleepAmountByDay, sleepQualityByDay, getWeeklySleepStats, calculateMinutesActive, checkIfStepGoalWasMade, getWeeklySleepQualityStats, getTodaysDate} from '../src/dataModel';
 import { sampleData, sampleDataHydration, weeklyDataSample, sampleActivityData, sampleSleepData } from '../src/data/sampleData';
 
 describe('User Repository', () => {
@@ -142,4 +142,11 @@ describe('Activity', () => {
 
 
 
+})
+
+describe('getTodaysDate function', () => {
+  it('Should return a date', () => {
+    const getHydration = getTodaysDate(1, sampleDataHydration)
+    expect(getHydration).to.equal('2023/06/10')
+  })
 })
