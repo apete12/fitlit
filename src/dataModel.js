@@ -16,6 +16,29 @@ const getUserData = ((userId, dataList) => {
   return filteredById
 });
 
+const getTodaysDate = ((id, dataList) => {
+  let today;
+
+  if (dataList.hydrationData) {
+    today = dataList.hydrationData.filter(log => log.userID === id);
+    console.log('today: ', today)
+    
+
+  } else if (dataList.sleepData) {
+    today = dataList.sleepData.find(log => log.userID === id);
+    
+
+  } else if(dataList.activityData) {
+    today = dataList.activityData.find(log => log.userID === id);
+    
+  }
+
+  today = today[today.length - 1]
+  console.log('today.date: ',today.date)
+  return today.date
+});
+
+
 const getAvgSteps = (dataList) => {
 let sumOfSteps = dataList.users.reduce((sum, user) => {
   sum += user.dailyStepGoal
@@ -191,5 +214,6 @@ export {
   getWeeklySleepStats,
   calculateMinutesActive,
   checkIfStepGoalWasMade,
-  getWeeklySleepQualityStats
+  getWeeklySleepQualityStats,
+  getTodaysDate,
 }
