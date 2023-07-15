@@ -20,18 +20,7 @@ import {
 } from './domUpdates';
 
 import {
-  getUserData,
-  getAvgSteps,
-  getAvgDailyOunces,
-  getOzByDay,
-  calculateWeeklyOunces,
-  generateRandomUser,
-} from './dataModel';
-
-import {
-  fetchUserData,
   promises
-  // getUserData,
 } from './apiCalls'
 
 // Query Selectors:

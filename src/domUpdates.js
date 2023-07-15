@@ -7,7 +7,6 @@ import {
   userInfoContainer,
   welcomeHeading,
   friendList,
-  activityContainer,
   // hydration
   dailyHydrationStats,
   weeklyHydrationStats,
@@ -17,7 +16,6 @@ import {
   weeklySleepStats,
   // activity
   usersStepGoal,
-  weeklyStepCountGoal,
   milesWalkedByDay,
   dailyActiveMinutes,
   dailyStepCount,
@@ -25,10 +23,8 @@ import {
 
 import {
   // users
-  getRandomIndex,
   generateRandomUser,
   getTodaysDate,
-  breakDownToWeeklyStatsArray,
   // hydration
   calculateWeeklyOunces,
   getAvgOunces,
@@ -49,6 +45,9 @@ import {
 
 var currentUser
 
+
+
+// USER INFO
 const displayRandomUser = (array) => {
   currentUser = generateRandomUser(array)
   let wholeName = currentUser.name
@@ -75,6 +74,9 @@ const displayFriendList = (array) => {
   friendList.innerHTML = `<div>Friend List: ${friendsNames}</div>`
  }
 
+
+
+ // HYDRATION INFO
 const displayDailyHydrationStats = (array) => {
   const todaysDate = calculateWeeklyOunces(currentUser.id, array)
   const todaysOunces = getOzByDay(currentUser.id, todaysDate.dates[6], array)
@@ -108,6 +110,9 @@ const displayWeeklyHydrationStats = (array) => {
  `
 }
 
+
+
+ // SLEEP INFO
 const displayTodaysSleepData = (dataList) => {
 
   let todaysDate = getTodaysDate(currentUser.id, dataList);
@@ -117,43 +122,12 @@ const displayTodaysSleepData = (dataList) => {
   <div>Today, you slept ${todaysSleepQuantity} hours!</div>`
 }
 
-
 const displayAllTimeAvgSleepHoursAndQuality = (dataList) => {
   const avgSleepQuality = calculateUserAvgSleepQuality(currentUser.id, dataList)
   const avgSleepHours = calculateUserAvgDailyHoursSlept(currentUser.id, dataList)
   
   avgAllTimeSleepStats.innerHTML = `<div>All-Time Avg Sleep Quality: ${avgSleepQuality}</div>
   <div>All-Time Avg Hours Slept: ${avgSleepHours}</div>`
-}
-
-const displayAverageSteps = (array) => {
-  const avgSteps = getAvgSteps(array)
-  usersStepGoal.innerHTML = `All users step goal: ${avgSteps}`
- }
-
-const displayDailySteps = (dataList) => {
-  let todaysDate = getTodaysDate(currentUser.id, dataList);
-  const todaysStepCount = getDailySteps(currentUser.id, todaysDate.date, dataList);
-
-  dailyStepCount.innerHTML = ` 
-  <div>Today, you've walked ${todaysStepCount} steps!</div>
-  `
-}
-const displayDailyActiveMinutes = (dataList) => {
-  let todaysDate = getTodaysDate(currentUser.id, dataList);
-  const todaysActiveMin = getActiveMinutes(currentUser.id, todaysDate.date, dataList);
-
-  dailyActiveMinutes.innerHTML = `
-  <div>Today, you have ${todaysActiveMin} active minutes!</div>
-  `
-}
-
-const displayMilesWalkedByDay = (dataList1, dataList2) => {
-  let todaysDate = getTodaysDate(currentUser.id, dataList2)
-  const todaysMilesWalked = calculateDailyMilesWalked(currentUser.id, todaysDate.date, dataList1, dataList2)
-
-  milesWalkedByDay.innerHTML = ` 
-  <div>Today, you walked ${todaysMilesWalked} miles!</div>`
 }
 
 const displayWeeklySleepHoursAndQuality = (dataList) => {
@@ -189,6 +163,40 @@ const displayWeeklySleepHoursAndQuality = (dataList) => {
  
  `
 }
+
+
+
+// ACTIVITY INFO
+const displayAverageSteps = (array) => {
+  const avgSteps = getAvgSteps(array)
+  usersStepGoal.innerHTML = `All users step goal: ${avgSteps}`
+ }
+
+const displayDailySteps = (dataList) => {
+  let todaysDate = getTodaysDate(currentUser.id, dataList);
+  const todaysStepCount = getDailySteps(currentUser.id, todaysDate.date, dataList);
+
+  dailyStepCount.innerHTML = ` 
+  <div>Today, you've walked ${todaysStepCount} steps!</div>
+  `
+}
+const displayDailyActiveMinutes = (dataList) => {
+  let todaysDate = getTodaysDate(currentUser.id, dataList);
+  const todaysActiveMin = getActiveMinutes(currentUser.id, todaysDate.date, dataList);
+
+  dailyActiveMinutes.innerHTML = `
+  <div>Today, you have ${todaysActiveMin} active minutes!</div>
+  `
+}
+
+const displayMilesWalkedByDay = (dataList1, dataList2) => {
+  let todaysDate = getTodaysDate(currentUser.id, dataList2)
+  const todaysMilesWalked = calculateDailyMilesWalked(currentUser.id, todaysDate.date, dataList1, dataList2)
+
+  milesWalkedByDay.innerHTML = ` 
+  <div>Today, you walked ${todaysMilesWalked} miles!</div>`
+}
+
 
 
 export {
