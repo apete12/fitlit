@@ -16,7 +16,8 @@ import {
   checkIfStepGoalWasMade, 
   getWeeklySleepQualityStats, 
   getTodaysDate, 
-  getDailySteps
+  getDailySteps,
+  getActiveMinutes
 } from '../src/dataModel';
 
 import { 
