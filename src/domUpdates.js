@@ -13,6 +13,7 @@ import {
   dailyHydrationStats,
   weeklyHydrationStats,
   sleepStatsByDay,
+  avgAllTimeSleepStats,
 } from './scripts';
 
 import {
@@ -25,6 +26,8 @@ import {
   generateRandomUser,
   getTodaysDate,
   sleepAmountByDay,
+  calculateUserAvgSleepQuality,
+  calculateUserAvgDailyHoursSlept,
 } from './dataModel';
 
 var currentUser
@@ -101,9 +104,13 @@ const displayTodaysSleepData = (dataList) => {
 
 const displayAllTimeAvgSleepHoursAndQuality = (dataList) => {
   const avgSleepQuality = calculateUserAvgSleepQuality(currentUser.id, dataList)
+
+  console.log('avgSleepQuality: ', avgSleepQuality)
   const avgSleepHours = calculateUserAvgDailyHoursSlept(currentUser.id, dataList)
-  avgAllTimeSleepStats.innerHTML = `<div>All-Time Avg Sleep Quality: ${avgSleepQuality}</div>`
-  avgAllTimeSleepStats.innerHTML = `<div>All-Time Avg Hours Slept: ${avgAllTimeSleepStats}</div>`
+  
+  avgAllTimeSleepStats.innerHTML = `<div>All-Time Avg Sleep Quality: ${avgSleepQuality}</div>
+  <div>All-Time Avg Hours Slept: ${avgSleepHours}</div>`
+  
 }
 
 export {
@@ -113,4 +120,5 @@ export {
   displayDailyHydrationStats,
   displayWeeklyHydrationStats,
   displayTodaysSleepData,
+  displayAllTimeAvgSleepHoursAndQuality,
 }
