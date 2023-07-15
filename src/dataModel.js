@@ -126,19 +126,46 @@ const calculateUserAvgSleepQuality = (id, dataList) => {
     return userAvgSleepQual.toFixed(2)
   }
 
-function breakDownToWeeklyStatsArray(id, dataList, startDate) {
+// function breakDownToWeeklyStatsArray(id, dataList, startDate) {
 
-  const  makeWeeklyArray = () => {
-  let sleepDataByID = dataList.sleepData.filter((entry) => entry.userID === id)
+//   const  makeWeeklyArray = () => {
+//   let sleepDataByID = dataList.sleepData.filter((entry) => entry.userID === id)
 
-  let startDateEntry = sleepDataByID.find((log) => log.date === startDate)
-  let entryPosition = sleepDataByID.indexOf(startDateEntry)
+//   let startDateEntry = sleepDataByID.find((log) => log.date === startDate)
+//   let entryPosition = sleepDataByID.indexOf(startDateEntry)
 
-  let weeklyUserData = sleepDataByID.slice(entryPosition, entryPosition + 7)
-  return weeklyUserData
-  }
-  return makeWeeklyArray
-}
+//   let weeklyUserData = sleepDataByID.slice(entryPosition, entryPosition + 7)
+//   return weeklyUserData
+//   }
+//   return makeWeeklyArray
+// }
+
+const breakDownToWeeklyStatsArray = (id, dataList, startDate) => {
+  const makeWeeklyArray = () => {
+    const todaysDate = getTodaysDate(id, dataList);
+    const sleepDataByID = dataList.sleepData.filter((entry) => entry.userID === id);
+
+    const startDateEntry = sleepDataByID.find((log) => log.date === startDate && todaysDate !== startDate);
+    if (startDateEntry) {
+      const entryPosition = sleepDataByID.indexOf(startDateEntry);
+      const weeklyUserData = sleepDataByID.slice(entryPosition, entryPosition + 7);
+      console.log('weeklyUserData: ', weeklyUserData)
+      return weeklyUserData;
+    }
+
+    const todaysDateEntry = sleepDataByID.find((log) => log.date === startDate && todaysDate === startDate);
+    if (todaysDateEntry) {
+      const entryPosition = sleepDataByID.indexOf(todaysDateEntry);
+      const weeklyUserData = sleepDataByID.slice(entryPosition - 7, entryPosition);
+      console.log('weeklyUserData: ', weeklyUserData)
+      return weeklyUserData;
+    }
+
+    return []; // Return an empty array if no matching entries are found
+  };
+
+  return makeWeeklyArray;
+};
 
 const getWeeklySleepQualityStats = (id, dataList, startDate) => {
   const currentUserWeeklySleepData = breakDownToWeeklyStatsArray(id, dataList, startDate)
@@ -154,15 +181,16 @@ const getWeeklySleepQualityStats = (id, dataList, startDate) => {
 }
 
 const getWeeklySleepStats = (id, dataList, startDate) => {
-    const currentUserWeeklySleepData = breakDownToWeeklyStatsArray(id, dataList, startDate)
-    const weeklyUserData = currentUserWeeklySleepData()
+    let currentUserWeeklySleepData = breakDownToWeeklyStatsArray(id, dataList, startDate)
+    let weeklyUserData = currentUserWeeklySleepData()
   
-    let totalSleep = weeklyUserData.reduce((a, c) => {
-      a += c.hoursSlept
-      return a
-    }, 0)
+    let sleepHoursWeeklyStats = weeklyUserData.reduce((a, c) => {
+      a.day.push(c.date)
+      a.sleepHours.push(c.hoursSlept)
+    return a
+  }, {day: [], sleepHours: []})
   
-    return totalSleep/weeklyUserData.length
+    return sleepHoursWeeklyStats
   }
 
 const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
@@ -222,5 +250,6 @@ export {
   checkIfStepGoalWasMade,
   getWeeklySleepQualityStats,
   getTodaysDate,
-  getDailySteps
+  getDailySteps,
+  breakDownToWeeklyStatsArray
 }
