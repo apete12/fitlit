@@ -111,7 +111,8 @@ const sleepQualityByDay = (id, day, dataList) => {
       }
       return accum
     }, 0)
-    return userSleepStats / entries.length
+    let userAvgSleep = userSleepStats / entries.length
+    return userAvgSleep.toFixed(2)
   }
 
   const calculateUserAvgSleepQuality = (id, dataList) => {
@@ -124,7 +125,9 @@ const sleepQualityByDay = (id, day, dataList) => {
       }
       return accum
     }, 0)
-    return userSleepQualityStats / entries.length
+    let userAvgSleepQual = userSleepQualityStats / entries.length
+    
+    return userAvgSleepQual.toFixed(2)
   }
 
 function breakDownToWeeklyStatsArray(id, dataList, startDate) {
