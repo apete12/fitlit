@@ -257,5 +257,6 @@ export {
   getWeeklySleepQualityStats,
   getTodaysDate,
   getDailySteps,
-  breakDownToWeeklyStatsArray
+  breakDownToWeeklyStatsArray,
+  getActiveMinutes
 }
