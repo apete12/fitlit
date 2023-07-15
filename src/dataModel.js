@@ -35,7 +35,6 @@ const getTodaysDate = ((id, dataList) => {
   return today.date
 });
 
-
 const getAvgSteps = (dataList) => {
 let sumOfSteps = dataList.users.reduce((sum, user) => {
   sum += user.dailyStepGoal
