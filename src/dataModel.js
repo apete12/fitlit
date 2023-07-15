@@ -195,6 +195,13 @@ const checkIfStepGoalWasMade = (id, day, dataList1, dataList2) => {
   }
 }
 
+const getDailySteps = (id, day, dataList) => {
+  const activityLog = dataList.activityData 
+  const dailySteps = activityLog.find(log => log.userID === id && log.date === day)
+
+  return dailySteps.numSteps
+}
+
 export {
   getUserData,
   getAvgSteps,
@@ -213,4 +220,5 @@ export {
   checkIfStepGoalWasMade,
   getWeeklySleepQualityStats,
   getTodaysDate,
+  getDailySteps
 }
