@@ -19,6 +19,7 @@ import {
   weeklyStepCountGoal,
   milesWalkedByDay,
   weeklySleepStats,
+  dailyActiveMinutes
 } from './scripts';
 
 import {

@@ -49,6 +49,7 @@ var dailyStepCount = document.querySelector('.daily-steps')
 var weeklyStepCountGoal = document.querySelector('.weekly-step-count-goal')
 var milesWalkedByDay = document.querySelector('.todays-miles-walked')
 var weeklySleepStats = document.querySelector('.weekly-sleep')
+var dailyActiveMinutes = document.querySelector('.daily-active-minutes')
 
 // event listener:
 window.addEventListener('load', () => {
@@ -83,5 +84,6 @@ export {
   weeklyStepCountGoal,
   milesWalkedByDay,
   weeklySleepStats,
+  dailyActiveMinutes
 }
 
