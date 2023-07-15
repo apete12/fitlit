@@ -99,6 +99,13 @@ const displayTodaysSleepData = (dataList) => {
   <div>Today, you slept ${todaysSleepQuantity} hours!</div>`
 }
 
+const displayAllTimeAvgSleepHoursAndQuality = (dataList) => {
+  const avgSleepQuality = calculateUserAvgSleepQuality(currentUser.id, dataList)
+  const avgSleepHours = calculateUserAvgDailyHoursSlept(currentUser.id, dataList)
+  avgAllTimeSleepStats.innerHTML = `<div>All-Time Avg Sleep Quality: ${avgSleepQuality}</div>`
+  avgAllTimeSleepStats.innerHTML = `<div>All-Time Avg Hours Slept: ${avgAllTimeSleepStats}</div>`
+}
+
 export {
   displayRandomUser,
   displayAverageSteps,
