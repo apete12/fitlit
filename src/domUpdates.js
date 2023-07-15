@@ -38,7 +38,8 @@ import {
   getDailySteps,
   calculateDailyMilesWalked,
   breakDownToWeeklyStatsArray,
-  getActiveMinutes
+  getActiveMinutes,
+  getWeeklySleepQualityStats
 } from './dataModel';
 
 var currentUser
@@ -143,7 +144,6 @@ const displayDailyActiveMinutes = (dataList) => {
   `
 }
 
-
 const displayMilesWalkedByDay = (dataList1, dataList2) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList2)
   const todaysMilesWalked = calculateDailyMilesWalked(currentUser.id, todaysDate.date, dataList1, dataList2)
@@ -155,21 +155,14 @@ const displayMilesWalkedByDay = (dataList1, dataList2) => {
 const displayWeeklySleepDayHours = (dataList) => {
   
   let todaysDate = getTodaysDate(currentUser.id, dataList);
-  
+
+  const weeklySleepQualStats = getWeeklySleepQualityStats(currentUser.id, dataList, todaysDate.date)
+
   const weeklySleepStatsObject = getWeeklySleepStats(currentUser.id, dataList, todaysDate.date)
-
-  // console.log('weeklySleepStatsObject: ', weeklySleepStatsObject)
-
   const formattedDay = weeklySleepStatsObject.day.map((day) => {
     return dayjs(day).format('ddd D')
   })
-
-
   const weeklySleepHoursArray = getWeeklySleepStats(currentUser.id, dataList, todaysDate.date)
-  
-  // const weeklySleepQualityObject = getWeeklySleepQualityStats
-
-  // console.log('formattedDay: ', formattedDay)
 
   weeklySleepStats.innerHTML = `
  <div class="last-week"> ${formattedDay[0]}</div>
@@ -184,6 +177,14 @@ const displayWeeklySleepDayHours = (dataList) => {
  <div class="oz">${weeklySleepHoursArray.sleepHours[3]}oz</div>
  <div class="oz">${weeklySleepHoursArray.sleepHours[4]}oz</div>
  <div class="oz-last">${weeklySleepHoursArray.sleepHours[5]}oz</div>
+
+ <div class="oz">${weeklySleepQualStats.sleepQuality[0]}oz</div>
+<div class="oz">${weeklySleepQualStats.sleepQuality[1]}oz</div>
+<div class="oz">${weeklySleepQualStats.sleepQuality[2]}oz</div>
+<div class="oz">${weeklySleepQualStats.sleepQuality[3]}oz</div>
+<div class="oz">${weeklySleepQualStats.sleepQuality[4]}oz</div>
+<div class="oz-last">${weeklySleepQualStats.sleepQuality[5]}oz</div>
+ 
  `
 }
 

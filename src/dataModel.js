@@ -188,7 +188,7 @@ const getWeeklySleepStats = (id, dataList, startDate) => {
     return a
   }, {day: [], sleepHours: []})
 
-    return sleepHoursWeeklyStats
+  return sleepHoursWeeklyStats
   }
 
 const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
@@ -258,5 +258,5 @@ export {
   getTodaysDate,
   getDailySteps,
   breakDownToWeeklyStatsArray,
-  getActiveMinutes
+  getActiveMinutes,
 }
