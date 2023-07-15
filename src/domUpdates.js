@@ -18,6 +18,7 @@ import {
   usersStepGoal,
   weeklyStepCountGoal,
   milesWalkedByDay,
+  weeklySleepStats,
 } from './scripts';
 
 import {
@@ -32,8 +33,10 @@ import {
   sleepAmountByDay,
   calculateUserAvgSleepQuality,
   calculateUserAvgDailyHoursSlept,
+  getWeeklySleepStats,
   getDailySteps,
   calculateDailyMilesWalked,
+  breakDownToWeeklyStatsArray,
 } from './dataModel';
 
 var currentUser
@@ -137,6 +140,46 @@ const displayMilesWalkedByDay = (dataList1, dataList2) => {
   <div>Today, you walked ${todaysMilesWalked} miles!</div>`
 }
 
+const displayWeeklySleepDayHours = (dataList) => {
+  
+  let todaysDate = getTodaysDate(currentUser.id, dataList);
+  
+  const weeklySleepStatsObject = getWeeklySleepStats(currentUser.id, dataList, todaysDate)
+
+
+
+  // weeklySleepStats.innerHTML = `<div> Stats: ${weeklySleepStatsObject}</div>`
+
+  const formattedDay = weeklySleepStatsObject.day.map((day) => {
+    return dayjs(day).format('ddd D')
+  })
+
+  // const weeklyOzArray = calculateWeeklyOunces(currentUser.id, array)
+  // const weeklyHydrationPerDay = weeklyOzArray.dates
+
+  const weeklySleepHoursArray = getWeeklySleepStats(currentUser.id, dataList, todaysDate)
+  
+  // weeklySleepHoursArray.sleepHours[0]
+
+  weeklySleepStats.innerHTML = `
+ <div class="last-week"> ${formattedDay[0]}</div>
+ <div class="last-week"> ${formattedDay[1]}</div>
+ <div class="last-week"> ${formattedDay[2]}</div>
+ <div class="last-week"> ${formattedDay[3]}</div>
+ <div class="last-week"> ${formattedDay[4]}</div>
+ <div class="last-week-last"> ${formattedDay[5]}</div>
+ <div class="oz">${weeklySleepHoursArray.sleepHours[0]}oz</div>
+ <div class="oz">${weeklySleepHoursArray.sleepHours[1]}oz</div>
+ <div class="oz">${weeklySleepHoursArray.sleepHours[2]}oz</div>
+ <div class="oz">${weeklySleepHoursArray.sleepHours[3]}oz</div>
+ <div class="oz">${weeklySleepHoursArray.sleepHours[4]}oz</div>
+ <div class="oz-last">${weeklySleepHoursArray.sleepHours[5]}oz</div>
+ `
+}
+
+
+// }
+
 export {
   displayRandomUser,
   displayAverageSteps,
@@ -146,5 +189,6 @@ export {
   displayTodaysSleepData,
   displayAllTimeAvgSleepHoursAndQuality,
   displayDailySteps,
-  displayMilesWalkedByDay
+  displayMilesWalkedByDay,
+  displayWeeklySleepDayHours
 }
