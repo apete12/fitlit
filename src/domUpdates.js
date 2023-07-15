@@ -133,6 +133,16 @@ const displayDailySteps = (dataList) => {
   <div>Today, you've walked ${todaysStepCount} steps!</div>
   `
 }
+const displayDailyActiveMinutes = (dataList) => {
+  let todaysDate = getTodaysDate(currentUser.id, dataList);
+
+  const todaysActiveMin = getActiveMinutes(currentUser.id, todaysDate, dataList);
+
+  dailyActiveMinutes.innerHTML = `
+  <div>Today, you have ${todaysActiveMin} active minutes!</div>
+  `
+}
+
 
 const displayMilesWalkedByDay = (dataList1, dataList2) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList2)
