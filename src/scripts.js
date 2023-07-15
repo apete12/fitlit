@@ -14,6 +14,7 @@ import {
   displayFriendList,
   displayWeeklyHydrationStats,
   displayTodaysSleepData,
+  displayMilesWalkedByDay,
 } from './domUpdates';
 
 import {
@@ -39,18 +40,20 @@ var friendList = document.querySelector('.friend-list')
 var dailyHydrationStats = document.querySelector('.daily-hydration-stats')
 var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
 var sleepStatsByDay = document.querySelector('.sleep-stats')
+var milesWalkedByDay = document.querySelector('.average-steps')
 
 // event listener:
 window.addEventListener('load', () => {
   Promise.all(promises)
   .then(results => {
+    console.log(results)
     displayRandomUser(results[0])
     displayAverageSteps(results[0])
     displayFriendList(results[0])
     displayDailyHydrationStats(results[1])
     displayWeeklyHydrationStats(results[1])
-    console.log('results[2]: ', results[2])
     displayTodaysSleepData(results[2])
+    displayMilesWalkedByDay(results[0], results[3])
     
   })
   .catch(error => console.log('ERROR', error))
@@ -65,5 +68,6 @@ export {
   dailyHydrationStats,
   weeklyHydrationStats,
   sleepStatsByDay,
+  milesWalkedByDay
 }
 

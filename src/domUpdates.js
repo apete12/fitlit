@@ -13,6 +13,7 @@ import {
   dailyHydrationStats,
   weeklyHydrationStats,
   sleepStatsByDay,
+  milesWalkedByDay,
 } from './scripts';
 
 import {
@@ -25,6 +26,7 @@ import {
   generateRandomUser,
   getTodaysDate,
   sleepAmountByDay,
+  calculateDailyMilesWalked,
 } from './dataModel';
 
 var currentUser
@@ -94,9 +96,16 @@ const displayWeeklyHydrationStats = (array) => {
 const displayTodaysSleepData = (dataList) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList)
   const todaysSleepQuantity = sleepAmountByDay(currentUser.id, todaysDate, dataList)
-  console.log('todaysSleepQuantity: ', todaysSleepQuantity)
   sleepStatsByDay.innerHTML = ` 
   <div>Today, you slept ${todaysSleepQuantity} hours!</div>`
+}
+
+const displayMilesWalkedByDay = (dataList1, dataList2) => {
+  let todaysDate = getTodaysDate(currentUser.id, dataList2)
+  const todaysMilesWalked = calculateDailyMilesWalked(currentUser.id, todaysDate, dataList1, dataList2)
+
+  milesWalkedByDay.innerHTML = ` 
+  <div>Today, you walked ${todaysMilesWalked} miles!</div>`
 }
 
 export {
@@ -106,4 +115,5 @@ export {
   displayDailyHydrationStats,
   displayWeeklyHydrationStats,
   displayTodaysSleepData,
+  displayMilesWalkedByDay
 }

@@ -174,8 +174,8 @@ const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
   const activityLog = dataList2.activityData
   const userStepData = activityLog.find(log => log.userID === id && log.date === day)
   const userDailyStep = userStepData.numSteps
-
-  return (userStride * userDailyStep)/5280
+  const walkedMiles = (userStride * userDailyStep)/5280
+  return walkedMiles.toFixed(2)
 }
 
 const calculateMinutesActive = (id, day, dataList) => {
