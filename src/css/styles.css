@@ -217,3 +217,31 @@ main {
   width: 95%;
   text-align: center;
 }
+
+
+
+.weekly-sleep-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  position: inherit;
+  grid-gap: 0px;
+  padding: 0%;
+  border: 1px solid black;
+  grid-template-rows: auto auto;
+  align-items: center;
+  width: 95%;
+  font-size: 25px;
+}
+
+.last-week {
+  border-right: 1px solid #044553;
+}
+
+.oz {
+  border-top: 1px solid #044553;
+  border-right: 1px solid #044553;
+}
+
+.oz-last {
+  border-top: 1px solid #044553;
+}

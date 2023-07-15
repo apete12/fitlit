@@ -38,7 +38,7 @@ var dailyActiveMinutes = document.querySelector('.daily-active-minutes')
 var weeklyStepCountGoal = document.querySelector('.weekly-step-count-goal')
 var milesWalkedByDay = document.querySelector('.todays-miles-walked')
 // sleep
-var weeklySleepStats = document.querySelector('.weekly-sleep')
+var weeklySleepStats = document.querySelector('.weekly-sleep-stats')
 var sleepStatsByDay = document.querySelector('.sleep-stats')
 var avgAllTimeSleepStats = document.querySelector('.avg-sleep-qual')
 

@@ -3,21 +3,21 @@ const dayjs = require('dayjs')
 
 import { 
   // query selectors:
-  // users
+  // USER DATA
   userInfoContainer,
   welcomeHeading,
   friendList,
 
-  // hydration
+  // HYDRATION DATA
   dailyHydrationStats,
   weeklyHydrationStats,
 
-  // sleep
+  // SLEEP DATA
   sleepStatsByDay,
   avgAllTimeSleepStats,
   weeklySleepStats,
 
-  // activity
+  // ACTIVITY DATA
   usersStepGoal,
   milesWalkedByDay,
   dailyActiveMinutes,
@@ -25,22 +25,22 @@ import {
 } from './scripts';
 
 import {
-  // users
+  // USER DATA
   generateRandomUser,
   getTodaysDate,
 
-  // hydration
+  // HYDRATION DATA
   calculateWeeklyOunces,
   getAvgOunces,
   getOzByDay,
 
-  // sleep
+  // SLEEP DATA
   sleepAmountByDay,
   calculateUserAvgSleepQuality,
   calculateUserAvgDailyHoursSlept,
   getWeeklySleepHoursStats,
 
-  // activity
+  // ACTIVITY DATA
   getUserData, 
   getAvgSteps,
   getDailySteps,
