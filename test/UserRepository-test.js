@@ -170,6 +170,14 @@ describe('Activity', () => {
 
   })
 
+  it('Should return active minutes for specific day', () => {
+    const userOne = getActiveMinutes(1, '2023/03/20', sampleActivityData)
+    const userTwo = getActiveMinutes(2, '2023/03/20' , sampleActivityData)
+    expect(userOne).to.be.a('number')
+    expect(userOne).to.equal(261)
+    expect(userTwo).to.equal(56)
+  })
+
 })
 
 describe('getTodaysDate function', () => {
