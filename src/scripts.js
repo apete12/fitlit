@@ -15,6 +15,8 @@ import {
   displayWeeklyHydrationStats,
   displayTodaysSleepData,
   displayAllTimeAvgSleepHoursAndQuality,
+  displayDailySteps,
+  displayMilesWalkedByDay,
 } from './domUpdates';
 
 import {
@@ -23,7 +25,7 @@ import {
   getAvgDailyOunces,
   getOzByDay,
   calculateWeeklyOunces,
-  generateRandomUser
+  generateRandomUser,
 } from './dataModel';
 
 import {
@@ -35,25 +37,30 @@ import {
 // Query Selectors:
 var userInfoContainer = document.querySelector('.user-info');
 var welcomeHeading = document.querySelector('.welcome-heading');
-var activityContainer = document.querySelector('.average-steps')
+var usersStepGoal = document.querySelector('.all-users-step-goal')
 var friendList = document.querySelector('.friend-list')
 var dailyHydrationStats = document.querySelector('.daily-hydration-stats')
 var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
 var sleepStatsByDay = document.querySelector('.sleep-stats')
 var avgAllTimeSleepStats = document.querySelector('.avg-sleep-qual')
+var dailyStepCount = document.querySelector('.daily-steps')
+var weeklyStepCountGoal = document.querySelector('.weekly-step-count-goal')
+var milesWalkedByDay = document.querySelector('.todays-miles-walked')
 
 // event listener:
 window.addEventListener('load', () => {
   Promise.all(promises)
   .then(results => {
+    console.log(results)
     displayRandomUser(results[0])
     displayAverageSteps(results[0])
     displayFriendList(results[0])
     displayDailyHydrationStats(results[1])
     displayWeeklyHydrationStats(results[1])
-    console.log('results[2]: ', results[2])
     displayTodaysSleepData(results[2])
     displayAllTimeAvgSleepHoursAndQuality(results[2])
+    displayDailySteps(results[3])
+    displayMilesWalkedByDay(results[0], results[3])
   })
   .catch(error => console.log('ERROR', error))
 })
@@ -61,12 +68,15 @@ window.addEventListener('load', () => {
 export {
   // query selectors:
   userInfoContainer,
-  activityContainer,
   welcomeHeading,
   friendList,
   dailyHydrationStats,
   weeklyHydrationStats,
   sleepStatsByDay,
   avgAllTimeSleepStats,
+  dailyStepCount,
+  usersStepGoal,
+  weeklyStepCountGoal
+  milesWalkedByDay
 }
 
