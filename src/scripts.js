@@ -14,6 +14,7 @@ import {
   displayFriendList,
   displayWeeklyHydrationStats,
   displayTodaysSleepData,
+  displayAllTimeAvgSleepHoursAndQuality,
 } from './domUpdates';
 
 import {
@@ -39,6 +40,7 @@ var friendList = document.querySelector('.friend-list')
 var dailyHydrationStats = document.querySelector('.daily-hydration-stats')
 var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
 var sleepStatsByDay = document.querySelector('.sleep-stats')
+var avgAllTimeSleepStats = document.querySelector('.avg-sleep-qual')
 
 // event listener:
 window.addEventListener('load', () => {
@@ -51,7 +53,7 @@ window.addEventListener('load', () => {
     displayWeeklyHydrationStats(results[1])
     console.log('results[2]: ', results[2])
     displayTodaysSleepData(results[2])
-    
+    displayAllTimeAvgSleepHoursAndQuality(results[2])
   })
   .catch(error => console.log('ERROR', error))
 })
@@ -65,5 +67,6 @@ export {
   dailyHydrationStats,
   weeklyHydrationStats,
   sleepStatsByDay,
+  avgAllTimeSleepStats,
 }
 
