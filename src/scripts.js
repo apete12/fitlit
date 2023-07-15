@@ -17,6 +17,8 @@ import {
   displayAllTimeAvgSleepHoursAndQuality,
   displayDailySteps,
   displayMilesWalkedByDay,
+  displayWeeklySleepDayHours
+
 } from './domUpdates';
 
 import {
@@ -46,6 +48,7 @@ var avgAllTimeSleepStats = document.querySelector('.avg-sleep-qual')
 var dailyStepCount = document.querySelector('.daily-steps')
 var weeklyStepCountGoal = document.querySelector('.weekly-step-count-goal')
 var milesWalkedByDay = document.querySelector('.todays-miles-walked')
+var weeklySleepStats = document.querySelector('.weekly-sleep')
 
 // event listener:
 window.addEventListener('load', () => {
@@ -61,6 +64,7 @@ window.addEventListener('load', () => {
     displayAllTimeAvgSleepHoursAndQuality(results[2])
     displayDailySteps(results[3])
     displayMilesWalkedByDay(results[0], results[3])
+    displayWeeklySleepDayHours(results[2])
   })
   .catch(error => console.log('ERROR', error))
 })
@@ -76,7 +80,8 @@ export {
   avgAllTimeSleepStats,
   dailyStepCount,
   usersStepGoal,
-  weeklyStepCountGoal
-  milesWalkedByDay
+  weeklyStepCountGoal,
+  milesWalkedByDay,
+  weeklySleepStats,
 }
 
