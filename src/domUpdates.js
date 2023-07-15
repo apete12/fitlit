@@ -7,13 +7,16 @@ import {
   userInfoContainer,
   welcomeHeading,
   friendList,
+
   // hydration
   dailyHydrationStats,
   weeklyHydrationStats,
+
   // sleep
   sleepStatsByDay,
   avgAllTimeSleepStats,
   weeklySleepStats,
+
   // activity
   usersStepGoal,
   milesWalkedByDay,
@@ -25,15 +28,18 @@ import {
   // users
   generateRandomUser,
   getTodaysDate,
+
   // hydration
   calculateWeeklyOunces,
   getAvgOunces,
   getOzByDay,
+
   // sleep
   sleepAmountByDay,
   calculateUserAvgSleepQuality,
   calculateUserAvgDailyHoursSlept,
-  getWeeklySleepStats,
+  getWeeklySleepHoursStats,
+
   // activity
   getUserData, 
   getAvgSteps,
@@ -134,7 +140,7 @@ const displayWeeklySleepHoursAndQuality = (dataList) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList);
 
   const weeklySleepQualStats = getWeeklySleepQualityStats(currentUser.id, dataList, todaysDate.date)
-  const weeklySleepHoursStats = getWeeklySleepStats(currentUser.id, dataList, todaysDate.date)
+  const weeklySleepHoursStats = getWeeklySleepHoursStats(currentUser.id, dataList, todaysDate.date)
 
   const formattedDay = weeklySleepHoursStats.day.map((day) => {
     return dayjs(day).format('ddd D')

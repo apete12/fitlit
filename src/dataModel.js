@@ -104,7 +104,6 @@ date === day)
   return activeMinutes.minutesActive
 }
 
-
 const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
   const userLog = dataList1.users
   const userStrideData = userLog.find(log => id === log.id)
@@ -226,7 +225,6 @@ const calculateUserAvgSleepQuality = (id, dataList) => {
     return userAvgSleepQual.toFixed(2)
   }
 
-
 const getWeeklySleepQualityStats = (id, dataList, startDate) => {
   const currentUserWeeklySleepData = breakDownToWeeklyStatsArray(id, dataList, startDate)
   const weeklyUserData = currentUserWeeklySleepData()
@@ -240,7 +238,7 @@ const getWeeklySleepQualityStats = (id, dataList, startDate) => {
   return sleepQualityWeeklyStats
 }
 
-const getWeeklySleepStats = (id, dataList, startDate) => {
+const getWeeklySleepHoursStats = (id, dataList, startDate) => {
     let currentUserWeeklySleepData = breakDownToWeeklyStatsArray(id, dataList, startDate)
     let weeklyUserData = currentUserWeeklySleepData()
   
@@ -274,7 +272,7 @@ export {
   sleepQualityByDay,
   calculateUserAvgDailyHoursSlept,
   calculateUserAvgSleepQuality,
-  getWeeklySleepStats,
+  getWeeklySleepHoursStats,
   getWeeklySleepQualityStats,
 
   // ACTIVITY DATA
