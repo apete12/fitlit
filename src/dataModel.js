@@ -21,9 +21,7 @@ const getTodaysDate = ((id, dataList) => {
 
   if (dataList.hydrationData) {
     today = dataList.hydrationData.filter(log => log.userID === id);
-    console.log('today: ', today)
     
-
   } else if (dataList.sleepData) {
     today = dataList.sleepData.filter(log => log.userID === id);
     
