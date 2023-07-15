@@ -38,6 +38,7 @@ import {
   getDailySteps,
   calculateDailyMilesWalked,
   breakDownToWeeklyStatsArray,
+  getActiveMinutes
 } from './dataModel';
 
 var currentUser
