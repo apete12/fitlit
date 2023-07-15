@@ -34,7 +34,6 @@ const getTodaysDate = ((id, dataList) => {
   }
 
   today = today[today.length - 1]
-  // console.log('today.date: ', today.date)
   return today.date
 });
 
@@ -101,7 +100,7 @@ const sleepQualityByDay = (id, day, dataList) => {
     }
 }
 
-  const calculateUserAvgDailyHoursSlept = (id, dataList) => {
+const calculateUserAvgDailyHoursSlept = (id, dataList) => {
     const usersDailySleepLog = dataList.sleepData
     let entries = []
     const userSleepStats = usersDailySleepLog.reduce((accum, userObj) => {
@@ -114,7 +113,7 @@ const sleepQualityByDay = (id, day, dataList) => {
     return userSleepStats / entries.length
   }
 
-  const calculateUserAvgSleepQuality = (id, dataList) => {
+const calculateUserAvgSleepQuality = (id, dataList) => {
     const usersDailySleepQualityLog = dataList.sleepData
     let entries = []
     const userSleepQualityStats = usersDailySleepQualityLog.reduce((accum, userObj) => {
@@ -154,7 +153,7 @@ const getWeeklySleepQualityStats = (id, dataList, startDate) => {
   return sleepQualityWeeklyStats
 }
 
-  const getWeeklySleepStats = (id, dataList, startDate) => {
+const getWeeklySleepStats = (id, dataList, startDate) => {
     const currentUserWeeklySleepData = breakDownToWeeklyStatsArray(id, dataList, startDate)
     const weeklyUserData = currentUserWeeklySleepData()
   

@@ -92,12 +92,15 @@ const displayWeeklyHydrationStats = (array) => {
 }
 
 const displayTodaysSleepData = (dataList) => {
-  let todaysDate = getTodaysDate(currentUser.id, dataList)
-  const todaysSleepQuantity = sleepAmountByDay(currentUser.id, todaysDate, dataList)
-  console.log('todaysSleepQuantity: ', todaysSleepQuantity)
+  let todaysDate = getTodaysDate(currentUser.id, dataList);
+  const todaysSleepQuantity = sleepAmountByDay(currentUser.id, todaysDate, dataList);
+
   sleepStatsByDay.innerHTML = ` 
   <div>Today, you slept ${todaysSleepQuantity} hours!</div>`
 }
+
+
+
 
 export {
   displayRandomUser,
