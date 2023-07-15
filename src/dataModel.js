@@ -17,22 +17,25 @@ const getUserData = ((userId, dataList) => {
 });
 
 const getTodaysDate = ((id, dataList) => {
-  let today;
+  let today = {dataListType: '', date: null};
 
   if (dataList.hydrationData) {
-    today = dataList.hydrationData.filter(log => log.userID === id);
+    today.date = dataList.hydrationData.filter(log => log.userID === id);
+    today.dataListType = 'hydration'
     
   } else if (dataList.sleepData) {
-    today = dataList.sleepData.filter(log => log.userID === id);
-    
+    today.date = dataList.sleepData.filter(log => log.userID === id);
+    today.dataListType = 'sleep'
 
   } else if(dataList.activityData) {
-    today = dataList.activityData.filter(log => log.userID === id);
+    today.date = dataList.activityData.filter(log => log.userID === id);
+    today.dataListType = 'activity'
     
   }
 
-  today = today[today.length - 1]
-  return today.date
+  today.date = today.date[today.date.length - 1].date
+
+  return today
 });
 
 const getAvgSteps = (dataList) => {
@@ -126,38 +129,33 @@ const calculateUserAvgSleepQuality = (id, dataList) => {
     return userAvgSleepQual.toFixed(2)
   }
 
-// function breakDownToWeeklyStatsArray(id, dataList, startDate) {
-
-//   const  makeWeeklyArray = () => {
-//   let sleepDataByID = dataList.sleepData.filter((entry) => entry.userID === id)
-
-//   let startDateEntry = sleepDataByID.find((log) => log.date === startDate)
-//   let entryPosition = sleepDataByID.indexOf(startDateEntry)
-
-//   let weeklyUserData = sleepDataByID.slice(entryPosition, entryPosition + 7)
-//   return weeklyUserData
-//   }
-//   return makeWeeklyArray
-// }
-
 const breakDownToWeeklyStatsArray = (id, dataList, startDate) => {
   const makeWeeklyArray = () => {
     const todaysDate = getTodaysDate(id, dataList);
-    const sleepDataByID = dataList.sleepData.filter((entry) => entry.userID === id);
+    let dataTypeById
 
-    const startDateEntry = sleepDataByID.find((log) => log.date === startDate && todaysDate !== startDate);
+    if (todaysDate.dataListType === 'hydration') {
+      dataTypeById = dataList.hydrationData.filter((entry) => entry.userID === id);
+    } else if (todaysDate.dataListType === 'sleep') {
+      dataTypeById = dataList.sleepData.filter((entry) => entry.userID === id)
+    } else if (todaysDate.dataListType === 'activity') {
+      dataTypeById = dataList.activityData.filter((entry) => entry.userID === id)
+    }
+    
+
+    const startDateEntry = dataTypeById.find((log) => log.date === startDate && todaysDate.date !== startDate);
+
     if (startDateEntry) {
-      const entryPosition = sleepDataByID.indexOf(startDateEntry);
-      const weeklyUserData = sleepDataByID.slice(entryPosition, entryPosition + 7);
-      console.log('weeklyUserData: ', weeklyUserData)
+      const entryPosition = dataTypeById.indexOf(startDateEntry);
+      const weeklyUserData = dataTypeById.slice(entryPosition, entryPosition + 7);
+      
       return weeklyUserData;
     }
 
-    const todaysDateEntry = sleepDataByID.find((log) => log.date === startDate && todaysDate === startDate);
+    const todaysDateEntry = dataTypeById.find((log) => log.date === startDate && todaysDate.date === startDate);
     if (todaysDateEntry) {
-      const entryPosition = sleepDataByID.indexOf(todaysDateEntry);
-      const weeklyUserData = sleepDataByID.slice(entryPosition - 7, entryPosition);
-      console.log('weeklyUserData: ', weeklyUserData)
+      const entryPosition = dataTypeById.indexOf(todaysDateEntry);
+      const weeklyUserData = dataTypeById.slice(entryPosition - 7, entryPosition);
       return weeklyUserData;
     }
 
@@ -189,7 +187,7 @@ const getWeeklySleepStats = (id, dataList, startDate) => {
       a.sleepHours.push(c.hoursSlept)
     return a
   }, {day: [], sleepHours: []})
-  
+
     return sleepHoursWeeklyStats
   }
 
