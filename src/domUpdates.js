@@ -11,7 +11,8 @@ import {
   welcomeHeading,
   friendList,
   dailyHydrationStats,
-  weeklyHydrationStats
+  weeklyHydrationStats,
+  sleepStatsByDay,
 } from './scripts';
 
 import {
@@ -21,7 +22,9 @@ import {
   getAvgOunces,
   getOzByDay,
   getRandomIndex,
-  generateRandomUser
+  generateRandomUser,
+  getTodaysDate,
+  sleepAmountByDay,
 } from './dataModel';
 
 var currentUser
@@ -88,10 +91,19 @@ const displayWeeklyHydrationStats = (array) => {
  `
 }
 
+const displayTodaysSleepData = (dataList) => {
+  let todaysDate = getTodaysDate(currentUser.id, dataList)
+  const todaysSleepQuantity = sleepAmountByDay(currentUser.id, todaysDate, dataList)
+  console.log('todaysSleepQuantity: ', todaysSleepQuantity)
+  sleepStatsByDay.innerHTML = ` 
+  <div>Today, you slept ${todaysSleepQuantity} hours!</div>`
+}
+
 export {
   displayRandomUser,
   displayAverageSteps,
   displayFriendList,
   displayDailyHydrationStats,
-  displayWeeklyHydrationStats
+  displayWeeklyHydrationStats,
+  displayTodaysSleepData,
 }
