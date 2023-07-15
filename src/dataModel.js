@@ -25,16 +25,16 @@ const getTodaysDate = ((id, dataList) => {
     
 
   } else if (dataList.sleepData) {
-    today = dataList.sleepData.find(log => log.userID === id);
+    today = dataList.sleepData.filter(log => log.userID === id);
     
 
   } else if(dataList.activityData) {
-    today = dataList.activityData.find(log => log.userID === id);
+    today = dataList.activityData.filter(log => log.userID === id);
     
   }
 
   today = today[today.length - 1]
-  console.log('today.date: ',today.date)
+  // console.log('today.date: ', today.date)
   return today.date
 });
 
