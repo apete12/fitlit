@@ -46,7 +46,6 @@ var avgAllTimeSleepStats = document.querySelector('.avg-sleep-qual')
 window.addEventListener('load', () => {
   Promise.all(promises)
   .then(results => {
-    console.log(results)
     // user
     displayRandomUser(results[0])
     displayFriendList(results[0])

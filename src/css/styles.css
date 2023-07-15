@@ -80,7 +80,7 @@ main {
 
 .welcome {
   display: flex;
-  width: 80%;
+  width: 100%;
   justify-content: space-evenly;
   align-items: center;
 }
@@ -113,7 +113,7 @@ main {
   width: 95%;
 }
 
-.graphics {
+.friends {
   height: 75%;
   width: 30%;
   font-family: 'Abel', sans-serif;
@@ -122,7 +122,7 @@ main {
 
 .cards {
   display: flex;
-  width: 80%;
+  width: 100%;
   flex-wrap: wrap;
   align-content: space-around;
   justify-content: space-around;
@@ -176,7 +176,7 @@ main {
 
 .weekly-hydration-stats {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   position: inherit;
   grid-gap: 0px;
   padding: 0%;
@@ -200,9 +200,9 @@ main {
   border-top: 1px solid #044553;
 }
 
-.sleep, .activity {
+.sleep, .activity, .hydration {
   height: 90%;
-  width: 30%;
+  width: 32%;
   border: solid 10px #044553;
   display: flex;
   justify-content: space-evenly;
@@ -212,17 +212,9 @@ main {
   font-size: 25px; 
 }
 
-.sleep-stats, .average-steps {
-  height: 70%;
-  width: 95%;
-  text-align: center;
-}
-
-
-
 .weekly-sleep-stats {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   position: inherit;
   grid-gap: 0px;
   padding: 0%;
