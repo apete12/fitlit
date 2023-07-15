@@ -91,13 +91,15 @@ const displayWeeklyHydrationStats = (array) => {
  <div class="last-week"> ${formattedDay[2]}</div>
  <div class="last-week"> ${formattedDay[3]}</div>
  <div class="last-week"> ${formattedDay[4]}</div>
- <div class="last-week-last"> ${formattedDay[5]}</div>
+ <div class="last-week"> ${formattedDay[5]}</div>
+ <div class="last-week-last"> ${formattedDay[6]}</div>
  <div class="oz">${weeklyOzArray.ounces[0]}oz</div>
  <div class="oz">${weeklyOzArray.ounces[1]}oz</div>
  <div class="oz">${weeklyOzArray.ounces[2]}oz</div>
  <div class="oz">${weeklyOzArray.ounces[3]}oz</div>
  <div class="oz">${weeklyOzArray.ounces[4]}oz</div>
- <div class="oz-last">${weeklyOzArray.ounces[5]}oz</div>
+ <div class="oz">${weeklyOzArray.ounces[5]}oz</div>
+ <div class="oz-last">${weeklyOzArray.ounces[6]}oz</div>
  `
 }
 
@@ -171,6 +173,7 @@ const displayWeeklySleepDayHours = (dataList) => {
  <div class="last-week"> ${formattedDay[3]}</div>
  <div class="last-week"> ${formattedDay[4]}</div>
  <div class="last-week-last"> ${formattedDay[5]}</div>
+ 
  <div class="oz">${weeklySleepHoursArray.sleepHours[0]}oz</div>
  <div class="oz">${weeklySleepHoursArray.sleepHours[1]}oz</div>
  <div class="oz">${weeklySleepHoursArray.sleepHours[2]}oz</div>
