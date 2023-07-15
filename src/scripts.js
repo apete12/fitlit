@@ -14,7 +14,8 @@ import {
   displayFriendList,
   displayWeeklyHydrationStats,
   displayTodaysSleepData,
-  displayDailySteps
+  displayAllTimeAvgSleepHoursAndQuality,
+  displayDailySteps,
   displayMilesWalkedByDay,
 } from './domUpdates';
 
@@ -41,10 +42,10 @@ var friendList = document.querySelector('.friend-list')
 var dailyHydrationStats = document.querySelector('.daily-hydration-stats')
 var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
 var sleepStatsByDay = document.querySelector('.sleep-stats')
+var avgAllTimeSleepStats = document.querySelector('.avg-sleep-qual')
 var dailyStepCount = document.querySelector('.daily-steps')
 var weeklyStepCountGoal = document.querySelector('.weekly-step-count-goal')
 var milesWalkedByDay = document.querySelector('.todays-miles-walked')
-
 
 // event listener:
 window.addEventListener('load', () => {
@@ -57,6 +58,7 @@ window.addEventListener('load', () => {
     displayDailyHydrationStats(results[1])
     displayWeeklyHydrationStats(results[1])
     displayTodaysSleepData(results[2])
+    displayAllTimeAvgSleepHoursAndQuality(results[2])
     displayDailySteps(results[3])
     displayMilesWalkedByDay(results[0], results[3])
   })
@@ -71,6 +73,7 @@ export {
   dailyHydrationStats,
   weeklyHydrationStats,
   sleepStatsByDay,
+  avgAllTimeSleepStats,
   dailyStepCount,
   usersStepGoal,
   weeklyStepCountGoal
