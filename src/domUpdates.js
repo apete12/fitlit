@@ -99,7 +99,15 @@ const displayTodaysSleepData = (dataList) => {
   <div>Today, you slept ${todaysSleepQuantity} hours!</div>`
 }
 
+const displayDailyStepsData = (dataList) => {
+  let todaysDate = getTodaysDate(currentUser.id, dataList);
+  const todaysStepCount = getDailySteps(currentUser.id, todaysDate, dataList);
 
+  stepsByDay.innerHTML = ` 
+  <div>Today, you've walked ${} steps!</div>`
+
+
+}
 
 
 export {
@@ -109,4 +117,5 @@ export {
   displayDailyHydrationStats,
   displayWeeklyHydrationStats,
   displayTodaysSleepData,
+  displayDailyStepsData,
 }
