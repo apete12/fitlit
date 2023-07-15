@@ -13,7 +13,9 @@ import {
   dailyHydrationStats,
   weeklyHydrationStats,
   sleepStatsByDay,
-  dailyStepCount
+  dailyStepCount,
+  usersStepGoal,
+  weeklyStepCountGoal
 } from './scripts';
 
 import {
@@ -57,11 +59,6 @@ const displayFriendList = (array) => {
   friendList.innerHTML = `<div>Friend List: ${friendsNames}</div>`
  }
 
-const displayAverageSteps = (array) => {
-  const avgSteps = getAvgSteps(array)
-  activityContainer.innerText = `${avgSteps}`
- }
-
 const displayDailyHydrationStats = (array) => {
   const todaysDate = calculateWeeklyOunces(currentUser.id, array)
   const todaysOunces = getOzByDay(currentUser.id, todaysDate.dates[6], array)
@@ -101,6 +98,11 @@ const displayTodaysSleepData = (dataList) => {
   <div>Today, you slept ${todaysSleepQuantity} hours!</div>`
 }
 
+const displayAverageSteps = (array) => {
+  const avgSteps = getAvgSteps(array)
+  usersStepGoal.innerHTML = `All users step goal: ${avgSteps}`
+ }
+
 const displayDailySteps = (dataList) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList);
   const todaysStepCount = getDailySteps(currentUser.id, todaysDate, dataList);
@@ -109,7 +111,6 @@ const displayDailySteps = (dataList) => {
   <div>Today, you've walked ${todaysStepCount} steps!</div>
   `
 }
-
 
 export {
   displayRandomUser,

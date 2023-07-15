@@ -35,12 +35,13 @@ import {
 // Query Selectors:
 var userInfoContainer = document.querySelector('.user-info');
 var welcomeHeading = document.querySelector('.welcome-heading');
-var activityContainer = document.querySelector('.average-steps')
+var usersStepGoal = document.querySelector('.all-users-step-goal')
 var friendList = document.querySelector('.friend-list')
 var dailyHydrationStats = document.querySelector('.daily-hydration-stats')
 var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
 var sleepStatsByDay = document.querySelector('.sleep-stats')
-var dailyStepCount = document.querySelector('.average-steps')
+var dailyStepCount = document.querySelector('.daily-steps')
+var weeklyStepCountGoal = document.querySelector('.weekly-step-count-goal')
 
 // event listener:
 window.addEventListener('load', () => {
@@ -60,12 +61,13 @@ window.addEventListener('load', () => {
 export {
   // query selectors:
   userInfoContainer,
-  activityContainer,
   welcomeHeading,
   friendList,
   dailyHydrationStats,
   weeklyHydrationStats,
   sleepStatsByDay,
-  dailyStepCount
+  dailyStepCount,
+  usersStepGoal,
+  weeklyStepCountGoal
 }
 
