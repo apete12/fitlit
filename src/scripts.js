@@ -2,8 +2,6 @@
 // Do not delete or rename this file ********
 
 // Imports:
-// import userData from './data/users';
-// import userHydrationData from './data/hydration'
 import './css/styles.css'
 import './images/turing-logo.png';
 
@@ -17,7 +15,7 @@ import {
   displayAllTimeAvgSleepHoursAndQuality,
   displayDailySteps,
   displayMilesWalkedByDay,
-  displayWeeklySleepDayHours,
+  displayWeeklySleepHoursAndQuality,
   displayDailyActiveMinutes
 } from './domUpdates';
 
@@ -37,6 +35,7 @@ import {
 } from './apiCalls'
 
 // Query Selectors:
+// users
 var userInfoContainer = document.querySelector('.user-info');
 var welcomeHeading = document.querySelector('.welcome-heading');
 var friendList = document.querySelector('.friend-list')
@@ -73,7 +72,7 @@ window.addEventListener('load', () => {
     // sleep
     displayTodaysSleepData(results[2])
     displayAllTimeAvgSleepHoursAndQuality(results[2])
-    displayWeeklySleepDayHours(results[2])
+    displayWeeklySleepHoursAndQuality(results[2])
   })
   .catch(error => console.log('ERROR', error))
 })

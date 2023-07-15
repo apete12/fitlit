@@ -1,43 +1,48 @@
 const dayjs = require('dayjs')
 //NOTE: Your DOM manipulation will occur in this file
 
-// import userData from './data/users';
-// import userHydrationData from './data/hydration'
-
 import { 
   // query selectors:
+  // users
   userInfoContainer,
-  activityContainer,
   welcomeHeading,
   friendList,
+  activityContainer,
+  // hydration
   dailyHydrationStats,
   weeklyHydrationStats,
+  // sleep
   sleepStatsByDay,
   avgAllTimeSleepStats,
-  dailyStepCount,
+  weeklySleepStats,
+  // activity
   usersStepGoal,
   weeklyStepCountGoal,
   milesWalkedByDay,
-  weeklySleepStats,
-  dailyActiveMinutes
+  dailyActiveMinutes,
+  dailyStepCount,
 } from './scripts';
 
 import {
-  calculateWeeklyOunces,
-  getUserData, 
-  getAvgSteps,
-  getAvgOunces,
-  getOzByDay,
+  // users
   getRandomIndex,
   generateRandomUser,
   getTodaysDate,
+  breakDownToWeeklyStatsArray,
+  // hydration
+  calculateWeeklyOunces,
+  getAvgOunces,
+  getOzByDay,
+  // sleep
   sleepAmountByDay,
   calculateUserAvgSleepQuality,
   calculateUserAvgDailyHoursSlept,
   getWeeklySleepStats,
+  // activity
+  getUserData, 
+  getAvgSteps,
   getDailySteps,
   calculateDailyMilesWalked,
-  breakDownToWeeklyStatsArray,
   getActiveMinutes,
   getWeeklySleepQualityStats
 } from './dataModel';
@@ -115,8 +120,6 @@ const displayTodaysSleepData = (dataList) => {
 
 const displayAllTimeAvgSleepHoursAndQuality = (dataList) => {
   const avgSleepQuality = calculateUserAvgSleepQuality(currentUser.id, dataList)
-
-  // console.log('avgSleepQuality: ', avgSleepQuality)
   const avgSleepHours = calculateUserAvgDailyHoursSlept(currentUser.id, dataList)
   
   avgAllTimeSleepStats.innerHTML = `<div>All-Time Avg Sleep Quality: ${avgSleepQuality}</div>
@@ -138,7 +141,6 @@ const displayDailySteps = (dataList) => {
 }
 const displayDailyActiveMinutes = (dataList) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList);
-
   const todaysActiveMin = getActiveMinutes(currentUser.id, todaysDate.date, dataList);
 
   dailyActiveMinutes.innerHTML = `
@@ -154,8 +156,7 @@ const displayMilesWalkedByDay = (dataList1, dataList2) => {
   <div>Today, you walked ${todaysMilesWalked} miles!</div>`
 }
 
-const displayWeeklySleepDayHours = (dataList) => {
-  
+const displayWeeklySleepHoursAndQuality = (dataList) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList);
 
   const weeklySleepQualStats = getWeeklySleepQualityStats(currentUser.id, dataList, todaysDate.date)
@@ -173,7 +174,7 @@ const displayWeeklySleepDayHours = (dataList) => {
  <div class="last-week"> ${formattedDay[3]}</div>
  <div class="last-week"> ${formattedDay[4]}</div>
  <div class="last-week-last"> ${formattedDay[5]}</div>
- 
+
  <div class="oz">${weeklySleepHoursArray.sleepHours[0]}oz</div>
  <div class="oz">${weeklySleepHoursArray.sleepHours[1]}oz</div>
  <div class="oz">${weeklySleepHoursArray.sleepHours[2]}oz</div>
@@ -192,8 +193,6 @@ const displayWeeklySleepDayHours = (dataList) => {
 }
 
 
-// }
-
 export {
   displayRandomUser,
   displayAverageSteps,
@@ -204,6 +203,6 @@ export {
   displayAllTimeAvgSleepHoursAndQuality,
   displayDailySteps,
   displayMilesWalkedByDay,
-  displayWeeklySleepDayHours,
+  displayWeeklySleepHoursAndQuality,
   displayDailyActiveMinutes
 }
