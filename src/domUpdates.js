@@ -1,48 +1,59 @@
 const dayjs = require('dayjs')
 //NOTE: Your DOM manipulation will occur in this file
 
-// import userData from './data/users';
-// import userHydrationData from './data/hydration'
-
 import { 
   // query selectors:
+  // USER DATA
   userInfoContainer,
-  activityContainer,
   welcomeHeading,
   friendList,
+
+  // HYDRATION DATA
   dailyHydrationStats,
   weeklyHydrationStats,
+
+  // SLEEP DATA
   sleepStatsByDay,
   avgAllTimeSleepStats,
-  dailyStepCount,
-  usersStepGoal,
-  weeklyStepCountGoal,
-  milesWalkedByDay,
   weeklySleepStats,
-  dailyActiveMinutes
+
+  // ACTIVITY DATA
+  usersStepGoal,
+  milesWalkedByDay,
+  dailyActiveMinutes,
+  dailyStepCount,
 } from './scripts';
 
 import {
-  calculateWeeklyOunces,
-  getUserData, 
-  getAvgSteps,
-  getAvgOunces,
-  getOzByDay,
-  getRandomIndex,
+  // USER DATA
   generateRandomUser,
   getTodaysDate,
+
+  // HYDRATION DATA
+  calculateWeeklyOunces,
+  getAvgOunces,
+  getOzByDay,
+
+  // SLEEP DATA
   sleepAmountByDay,
   calculateUserAvgSleepQuality,
   calculateUserAvgDailyHoursSlept,
-  getWeeklySleepStats,
+  getWeeklySleepHoursStats,
+
+  // ACTIVITY DATA
+  getUserData, 
+  getAvgSteps,
   getDailySteps,
   calculateDailyMilesWalked,
-  breakDownToWeeklyStatsArray,
-  getActiveMinutes
+  getActiveMinutes,
+  getWeeklySleepQualityStats
 } from './dataModel';
 
 var currentUser
 
+
+
+// USER INFO
 const displayRandomUser = (array) => {
   currentUser = generateRandomUser(array)
   let wholeName = currentUser.name
@@ -69,6 +80,9 @@ const displayFriendList = (array) => {
   friendList.innerHTML = `<div>Friend List: ${friendsNames}</div>`
  }
 
+
+
+ // HYDRATION INFO
 const displayDailyHydrationStats = (array) => {
   const todaysDate = calculateWeeklyOunces(currentUser.id, array)
   const todaysOunces = getOzByDay(currentUser.id, todaysDate.dates[6], array)
@@ -90,36 +104,78 @@ const displayWeeklyHydrationStats = (array) => {
  <div class="last-week"> ${formattedDay[2]}</div>
  <div class="last-week"> ${formattedDay[3]}</div>
  <div class="last-week"> ${formattedDay[4]}</div>
- <div class="last-week-last"> ${formattedDay[5]}</div>
+ <div class="last-week"> ${formattedDay[5]}</div>
+ <div class="last-week-last"> ${formattedDay[6]}</div>
  <div class="oz">${weeklyOzArray.ounces[0]}oz</div>
  <div class="oz">${weeklyOzArray.ounces[1]}oz</div>
  <div class="oz">${weeklyOzArray.ounces[2]}oz</div>
  <div class="oz">${weeklyOzArray.ounces[3]}oz</div>
  <div class="oz">${weeklyOzArray.ounces[4]}oz</div>
- <div class="oz-last">${weeklyOzArray.ounces[5]}oz</div>
+ <div class="oz">${weeklyOzArray.ounces[5]}oz</div>
+ <div class="oz-last">${weeklyOzArray.ounces[6]}oz</div>
  `
 }
 
+
+
+ // SLEEP INFO
 const displayTodaysSleepData = (dataList) => {
 
   let todaysDate = getTodaysDate(currentUser.id, dataList);
-  const todaysSleepQuantity = sleepAmountByDay(currentUser.id, todaysDate, dataList);
+  const todaysSleepQuantity = sleepAmountByDay(currentUser.id, todaysDate.date, dataList);
 
   sleepStatsByDay.innerHTML = ` 
   <div>Today, you slept ${todaysSleepQuantity} hours!</div>`
 }
 
-
 const displayAllTimeAvgSleepHoursAndQuality = (dataList) => {
   const avgSleepQuality = calculateUserAvgSleepQuality(currentUser.id, dataList)
-
-  // console.log('avgSleepQuality: ', avgSleepQuality)
   const avgSleepHours = calculateUserAvgDailyHoursSlept(currentUser.id, dataList)
   
   avgAllTimeSleepStats.innerHTML = `<div>All-Time Avg Sleep Quality: ${avgSleepQuality}</div>
   <div>All-Time Avg Hours Slept: ${avgSleepHours}</div>`
 }
 
+const displayWeeklySleepHoursAndQuality = (dataList) => {
+  let todaysDate = getTodaysDate(currentUser.id, dataList);
+
+  const weeklySleepQualStats = getWeeklySleepQualityStats(currentUser.id, dataList, todaysDate.date)
+  const weeklySleepHoursStats = getWeeklySleepHoursStats(currentUser.id, dataList, todaysDate.date)
+
+  const formattedDay = weeklySleepHoursStats.day.map((day) => {
+    return dayjs(day).format('ddd D')
+  })
+  weeklySleepStats.innerHTML = `
+ <div class="last-week"> ${formattedDay[0]}</div>
+ <div class="last-week"> ${formattedDay[1]}</div>
+ <div class="last-week"> ${formattedDay[2]}</div>
+ <div class="last-week"> ${formattedDay[3]}</div>
+ <div class="last-week"> ${formattedDay[4]}</div>
+ <div class="last-week"> ${formattedDay[5]}</div>
+ <div class="last-week-last"> ${formattedDay[6]}</div>
+
+ <div class="oz">${weeklySleepHoursStats.sleepHours[0]}oz</div>
+ <div class="oz">${weeklySleepHoursStats.sleepHours[1]}oz</div>
+ <div class="oz">${weeklySleepHoursStats.sleepHours[2]}oz</div>
+ <div class="oz">${weeklySleepHoursStats.sleepHours[3]}oz</div>
+ <div class="oz">${weeklySleepHoursStats.sleepHours[4]}oz</div>
+ <div class="oz">${weeklySleepHoursStats.sleepHours[5]}oz</div>
+ <div class="oz-last">${weeklySleepHoursStats.sleepHours[6]}oz</div>
+
+ <div class="oz">${weeklySleepQualStats.sleepQuality[0]}oz</div>
+<div class="oz">${weeklySleepQualStats.sleepQuality[1]}oz</div>
+<div class="oz">${weeklySleepQualStats.sleepQuality[2]}oz</div>
+<div class="oz">${weeklySleepQualStats.sleepQuality[3]}oz</div>
+<div class="oz">${weeklySleepQualStats.sleepQuality[4]}oz</div>
+<div class="oz">${weeklySleepQualStats.sleepQuality[5]}oz</div>
+<div class="oz-last">${weeklySleepQualStats.sleepQuality[6]}oz</div>
+ 
+ `
+}
+
+
+
+// ACTIVITY INFO
 const displayAverageSteps = (array) => {
   const avgSteps = getAvgSteps(array)
   usersStepGoal.innerHTML = `All users step goal: ${avgSteps}`
@@ -135,14 +191,12 @@ const displayDailySteps = (dataList) => {
 }
 const displayDailyActiveMinutes = (dataList) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList);
-
   const todaysActiveMin = getActiveMinutes(currentUser.id, todaysDate.date, dataList);
 
   dailyActiveMinutes.innerHTML = `
   <div>Today, you have ${todaysActiveMin} active minutes!</div>
   `
 }
-
 
 const displayMilesWalkedByDay = (dataList1, dataList2) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList2)
@@ -152,43 +206,7 @@ const displayMilesWalkedByDay = (dataList1, dataList2) => {
   <div>Today, you walked ${todaysMilesWalked} miles!</div>`
 }
 
-const displayWeeklySleepDayHours = (dataList) => {
-  
-  let todaysDate = getTodaysDate(currentUser.id, dataList);
-  
-  const weeklySleepStatsObject = getWeeklySleepStats(currentUser.id, dataList, todaysDate.date)
 
-  // console.log('weeklySleepStatsObject: ', weeklySleepStatsObject)
-
-  const formattedDay = weeklySleepStatsObject.day.map((day) => {
-    return dayjs(day).format('ddd D')
-  })
-
-
-  const weeklySleepHoursArray = getWeeklySleepStats(currentUser.id, dataList, todaysDate.date)
-  
-  // const weeklySleepQualityObject = getWeeklySleepQualityStats
-
-  // console.log('formattedDay: ', formattedDay)
-
-  weeklySleepStats.innerHTML = `
- <div class="last-week"> ${formattedDay[0]}</div>
- <div class="last-week"> ${formattedDay[1]}</div>
- <div class="last-week"> ${formattedDay[2]}</div>
- <div class="last-week"> ${formattedDay[3]}</div>
- <div class="last-week"> ${formattedDay[4]}</div>
- <div class="last-week-last"> ${formattedDay[5]}</div>
- <div class="oz">${weeklySleepHoursArray.sleepHours[0]}oz</div>
- <div class="oz">${weeklySleepHoursArray.sleepHours[1]}oz</div>
- <div class="oz">${weeklySleepHoursArray.sleepHours[2]}oz</div>
- <div class="oz">${weeklySleepHoursArray.sleepHours[3]}oz</div>
- <div class="oz">${weeklySleepHoursArray.sleepHours[4]}oz</div>
- <div class="oz-last">${weeklySleepHoursArray.sleepHours[5]}oz</div>
- `
-}
-
-
-// }
 
 export {
   displayRandomUser,
@@ -200,6 +218,6 @@ export {
   displayAllTimeAvgSleepHoursAndQuality,
   displayDailySteps,
   displayMilesWalkedByDay,
-  displayWeeklySleepDayHours,
+  displayWeeklySleepHoursAndQuality,
   displayDailyActiveMinutes
 }

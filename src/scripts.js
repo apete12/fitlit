@@ -2,8 +2,6 @@
 // Do not delete or rename this file ********
 
 // Imports:
-// import userData from './data/users';
-// import userHydrationData from './data/hydration'
 import './css/styles.css'
 import './images/turing-logo.png';
 
@@ -17,26 +15,16 @@ import {
   displayAllTimeAvgSleepHoursAndQuality,
   displayDailySteps,
   displayMilesWalkedByDay,
-  displayWeeklySleepDayHours,
+  displayWeeklySleepHoursAndQuality,
   displayDailyActiveMinutes
 } from './domUpdates';
 
 import {
-  getUserData,
-  getAvgSteps,
-  getAvgDailyOunces,
-  getOzByDay,
-  calculateWeeklyOunces,
-  generateRandomUser,
-} from './dataModel';
-
-import {
-  fetchUserData,
   promises
-  // getUserData,
 } from './apiCalls'
 
 // Query Selectors:
+// users
 var userInfoContainer = document.querySelector('.user-info');
 var welcomeHeading = document.querySelector('.welcome-heading');
 var friendList = document.querySelector('.friend-list')
@@ -50,7 +38,7 @@ var dailyActiveMinutes = document.querySelector('.daily-active-minutes')
 var weeklyStepCountGoal = document.querySelector('.weekly-step-count-goal')
 var milesWalkedByDay = document.querySelector('.todays-miles-walked')
 // sleep
-var weeklySleepStats = document.querySelector('.weekly-sleep')
+var weeklySleepStats = document.querySelector('.weekly-sleep-stats')
 var sleepStatsByDay = document.querySelector('.sleep-stats')
 var avgAllTimeSleepStats = document.querySelector('.avg-sleep-qual')
 
@@ -58,7 +46,6 @@ var avgAllTimeSleepStats = document.querySelector('.avg-sleep-qual')
 window.addEventListener('load', () => {
   Promise.all(promises)
   .then(results => {
-    console.log(results)
     // user
     displayRandomUser(results[0])
     displayFriendList(results[0])
@@ -73,7 +60,7 @@ window.addEventListener('load', () => {
     // sleep
     displayTodaysSleepData(results[2])
     displayAllTimeAvgSleepHoursAndQuality(results[2])
-    displayWeeklySleepDayHours(results[2])
+    displayWeeklySleepHoursAndQuality(results[2])
   })
   .catch(error => console.log('ERROR', error))
 })

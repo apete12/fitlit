@@ -1,3 +1,5 @@
+
+// USER DATA
 var currentUser
 
 const getRandomIndex = (array) => {
@@ -15,6 +17,8 @@ const getUserData = ((userId, dataList) => {
   let filteredById = dataList.users.find(user => user.id === userId);
   return filteredById
 });
+
+// HELPER FUNCTIONS
 
 const getTodaysDate = ((id, dataList) => {
   let today = {dataListType: '', date: null};
@@ -38,6 +42,45 @@ const getTodaysDate = ((id, dataList) => {
   return today
 });
 
+
+const breakDownToWeeklyStatsArray = (id, dataList, startDate) => {
+  const makeWeeklyArray = () => {
+    const todaysDate = getTodaysDate(id, dataList);
+    let dataTypeById
+
+    if (todaysDate.dataListType === 'hydration') {
+      dataTypeById = dataList.hydrationData.filter((entry) => entry.userID === id);
+    } else if (todaysDate.dataListType === 'sleep') {
+      dataTypeById = dataList.sleepData.filter((entry) => entry.userID === id)
+    } else if (todaysDate.dataListType === 'activity') {
+      dataTypeById = dataList.activityData.filter((entry) => entry.userID === id)
+    }
+    
+    const startDateEntry = dataTypeById.find((log) => log.date === startDate && todaysDate.date !== startDate);
+
+    if (startDateEntry) {
+      const entryPosition = dataTypeById.indexOf(startDateEntry);
+      const weeklyUserData = dataTypeById.slice(entryPosition, entryPosition + 7);
+      
+      return weeklyUserData;
+    }
+
+    const todaysDateEntry = dataTypeById.find((log) => log.date === startDate && todaysDate.date === startDate);
+    if (todaysDateEntry) {
+      const entryPosition = dataTypeById.indexOf(todaysDateEntry);
+      const weeklyUserData = dataTypeById.slice(entryPosition - 7, entryPosition);
+      return weeklyUserData;
+    }
+
+    return [];
+  };
+
+  return makeWeeklyArray;
+};
+
+
+// ACTIVITY DATA
+
 const getAvgSteps = (dataList) => {
 let sumOfSteps = dataList.users.reduce((sum, user) => {
   sum += user.dailyStepGoal
@@ -45,6 +88,56 @@ let sumOfSteps = dataList.users.reduce((sum, user) => {
   }, 0)
     return sumOfSteps / dataList.users.length
 }
+
+const getDailySteps = (id, day, dataList) => {
+  const activityLog = dataList.activityData 
+  const dailySteps = activityLog.find(log => log.userID === id && log.date === day)
+
+  return dailySteps.numSteps
+}
+
+const getActiveMinutes = (id, day, dataList) => {
+  const activityLog = dataList.activityData 
+  const activeMinutes = activityLog.find(log => log.userID === id && log.
+date === day)
+
+  return activeMinutes.minutesActive
+}
+
+const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
+  const userLog = dataList1.users
+  const userStrideData = userLog.find(log => id === log.id)
+  const userStride = userStrideData.strideLength
+
+  const activityLog = dataList2.activityData
+  const userStepData = activityLog.find(log => log.userID === id && log.date === day)
+  const userDailyStep = userStepData.numSteps
+  const walkedMiles = (userStride * userDailyStep)/5280
+  return walkedMiles.toFixed(2)
+}
+
+const calculateMinutesActive = (id, day, dataList) => {
+  const activityLog = dataList.activityData
+  const activeMinutes = activityLog.find(log => log.userID === id && log.date === day)
+  return activeMinutes.minutesActive
+}
+
+const checkIfStepGoalWasMade = (id, day, dataList1, dataList2) => {
+  const userLog = dataList1.users
+  const userData = userLog.find(log => id === log.id)
+  const userStepGoal = userData.dailyStepGoal
+
+  const activityLog = dataList2.activityData
+  const userStepData = activityLog.find(log => log.userID === id && log.date === day)
+  const userDailyStep = userStepData.numSteps
+  
+  if(userDailyStep >= userStepGoal) {
+    return true
+  }
+}
+
+
+// HYDRATION DATA
 
 const getAvgDailyOunces = (id, dataList) => {
 const usersDailyHydrationLog = dataList.hydrationData
@@ -83,6 +176,9 @@ const calculateWeeklyOunces = (id, dataList) => {
   
   return weeklyHydrationInfo
 }
+
+
+// SLEEP DATA
 
 const sleepAmountByDay = (id, day, dataList) => {
   const usersDailySleepLog = dataList.sleepData
@@ -129,42 +225,6 @@ const calculateUserAvgSleepQuality = (id, dataList) => {
     return userAvgSleepQual.toFixed(2)
   }
 
-const breakDownToWeeklyStatsArray = (id, dataList, startDate) => {
-  const makeWeeklyArray = () => {
-    const todaysDate = getTodaysDate(id, dataList);
-    let dataTypeById
-
-    if (todaysDate.dataListType === 'hydration') {
-      dataTypeById = dataList.hydrationData.filter((entry) => entry.userID === id);
-    } else if (todaysDate.dataListType === 'sleep') {
-      dataTypeById = dataList.sleepData.filter((entry) => entry.userID === id)
-    } else if (todaysDate.dataListType === 'activity') {
-      dataTypeById = dataList.activityData.filter((entry) => entry.userID === id)
-    }
-    
-
-    const startDateEntry = dataTypeById.find((log) => log.date === startDate && todaysDate.date !== startDate);
-
-    if (startDateEntry) {
-      const entryPosition = dataTypeById.indexOf(startDateEntry);
-      const weeklyUserData = dataTypeById.slice(entryPosition, entryPosition + 7);
-      
-      return weeklyUserData;
-    }
-
-    const todaysDateEntry = dataTypeById.find((log) => log.date === startDate && todaysDate.date === startDate);
-    if (todaysDateEntry) {
-      const entryPosition = dataTypeById.indexOf(todaysDateEntry);
-      const weeklyUserData = dataTypeById.slice(entryPosition - 7, entryPosition);
-      return weeklyUserData;
-    }
-
-    return []; // Return an empty array if no matching entries are found
-  };
-
-  return makeWeeklyArray;
-};
-
 const getWeeklySleepQualityStats = (id, dataList, startDate) => {
   const currentUserWeeklySleepData = breakDownToWeeklyStatsArray(id, dataList, startDate)
   const weeklyUserData = currentUserWeeklySleepData()
@@ -178,7 +238,7 @@ const getWeeklySleepQualityStats = (id, dataList, startDate) => {
   return sleepQualityWeeklyStats
 }
 
-const getWeeklySleepStats = (id, dataList, startDate) => {
+const getWeeklySleepHoursStats = (id, dataList, startDate) => {
     let currentUserWeeklySleepData = breakDownToWeeklyStatsArray(id, dataList, startDate)
     let weeklyUserData = currentUserWeeklySleepData()
   
@@ -188,75 +248,38 @@ const getWeeklySleepStats = (id, dataList, startDate) => {
     return a
   }, {day: [], sleepHours: []})
 
-    return sleepHoursWeeklyStats
+  return sleepHoursWeeklyStats
   }
 
-const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
-  const userLog = dataList1.users
-  const userStrideData = userLog.find(log => id === log.id)
-  const userStride = userStrideData.strideLength
-
-  const activityLog = dataList2.activityData
-  const userStepData = activityLog.find(log => log.userID === id && log.date === day)
-  const userDailyStep = userStepData.numSteps
-  const walkedMiles = (userStride * userDailyStep)/5280
-  return walkedMiles.toFixed(2)
-}
-
-const calculateMinutesActive = (id, day, dataList) => {
-  const activityLog = dataList.activityData
-  const activeMinutes = activityLog.find(log => log.userID === id && log.date === day)
-  return activeMinutes.minutesActive
-}
-
-const checkIfStepGoalWasMade = (id, day, dataList1, dataList2) => {
-  const userLog = dataList1.users
-  const userData = userLog.find(log => id === log.id)
-  const userStepGoal = userData.dailyStepGoal
-
-  const activityLog = dataList2.activityData
-  const userStepData = activityLog.find(log => log.userID === id && log.date === day)
-  const userDailyStep = userStepData.numSteps
-  
-  if(userDailyStep >= userStepGoal) {
-    return true
-  }
-}
-
-const getDailySteps = (id, day, dataList) => {
-  const activityLog = dataList.activityData 
-  const dailySteps = activityLog.find(log => log.userID === id && log.date === day)
-
-  return dailySteps.numSteps
-}
-
-const getActiveMinutes = (id, day, dataList) => {
-  const activityLog = dataList.activityData 
-  const activeMinutes = activityLog.find(log => log.userID === id && log.
-date === day)
-
-  return activeMinutes.minutesActive
-}
 
 export {
+  // USER DATA
   getUserData,
-  getAvgSteps,
+  generateRandomUser,
+
+  // HELPER 
+  breakDownToWeeklyStatsArray,
+  getTodaysDate,
+  getRandomIndex,
+
+  // HYDRATION DATA
   getAvgDailyOunces,
   getOzByDay,
   calculateWeeklyOunces,
-  getRandomIndex,
-  generateRandomUser,
+
+  // SLEEP DATA
   sleepAmountByDay, 
   sleepQualityByDay,
-  calculateDailyMilesWalked,
   calculateUserAvgDailyHoursSlept,
   calculateUserAvgSleepQuality,
-  getWeeklySleepStats,
+  getWeeklySleepHoursStats,
+  getWeeklySleepQualityStats,
+
+  // ACTIVITY DATA
+  getAvgSteps,
   calculateMinutesActive,
   checkIfStepGoalWasMade,
-  getWeeklySleepQualityStats,
-  getTodaysDate,
   getDailySteps,
-  breakDownToWeeklyStatsArray,
-  getActiveMinutes
+  getActiveMinutes,
+  calculateDailyMilesWalked,
 }
