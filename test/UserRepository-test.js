@@ -1,7 +1,31 @@
 import { expect } from 'chai';
 
-import { getUserData, getAvgSteps, getAvgDailyOunces, getOzByDay, calculateWeeklyOunces, calculateUserAvgDailyHoursSlept, calculateUserAvgSleepQuality, calculateDailyMilesWalked, sleepAmountByDay, sleepQualityByDay, getWeeklySleepStats, calculateMinutesActive, checkIfStepGoalWasMade, getWeeklySleepQualityStats, getTodaysDate} from '../src/dataModel';
-import { sampleData, sampleDataHydration, weeklyDataSample, sampleActivityData, sampleSleepData } from '../src/data/sampleData';
+import { 
+  getUserData, 
+  getAvgSteps, 
+  getAvgDailyOunces, 
+  getOzByDay, 
+  calculateWeeklyOunces, 
+  calculateUserAvgDailyHoursSlept, 
+  calculateUserAvgSleepQuality, 
+  calculateDailyMilesWalked, 
+  sleepAmountByDay, 
+  sleepQualityByDay, 
+  getWeeklySleepStats, 
+  calculateMinutesActive, 
+  checkIfStepGoalWasMade, 
+  getWeeklySleepQualityStats, 
+  getTodaysDate, 
+  getDailySteps
+} from '../src/dataModel';
+
+import { 
+  sampleData, 
+  sampleDataHydration, 
+  weeklyDataSample, 
+  sampleActivityData, 
+  sampleSleepData 
+} from '../src/data/sampleData';
 
 describe('User Repository', () => {
 
@@ -126,21 +150,25 @@ describe('Activity', () => {
     expect(userTwo).to.equal(5.577272727272727)
   })
 
-  it('should return calculation of minutes active', () => {
-    
+  it('Should return calculation of minutes active', () => {
     const userOne = calculateMinutesActive(2, '2023/03/28', sampleActivityData)
-
     expect(userOne).to.equal(279)
   })
 
-  it('check if step goal was made', () => {
-    
+  it('Should check if step goal was made', () => {
     const userOne = checkIfStepGoalWasMade(2, '2023/03/28', sampleData, sampleActivityData)
-
     expect(userOne).to.equal(true)
   })
 
+  it('Should return daily step count for specific day', () => {
+    const userOne = getDailySteps(1, '2023/03/28', sampleActivityData)
+    const userTwo = getDailySteps(2, '2023/03/20' , sampleActivityData)
 
+    expect(userOne).to.be.a('number')
+    expect(userOne).to.equal(3801)
+    expect(userTwo).to.equal(11616)
+
+  })
 
 })
 

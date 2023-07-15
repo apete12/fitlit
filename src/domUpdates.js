@@ -13,6 +13,9 @@ import {
   dailyHydrationStats,
   weeklyHydrationStats,
   sleepStatsByDay,
+  dailyStepCount,
+  usersStepGoal,
+  weeklyStepCountGoal
   milesWalkedByDay,
 } from './scripts';
 
@@ -26,6 +29,7 @@ import {
   generateRandomUser,
   getTodaysDate,
   sleepAmountByDay,
+  getDailySteps
   calculateDailyMilesWalked,
 } from './dataModel';
 
@@ -55,11 +59,6 @@ const displayFriendList = (array) => {
   }).join(', ') 
   
   friendList.innerHTML = `<div>Friend List: ${friendsNames}</div>`
- }
-
-const displayAverageSteps = (array) => {
-  const avgSteps = getAvgSteps(array)
-  activityContainer.innerText = `${avgSteps}`
  }
 
 const displayDailyHydrationStats = (array) => {
@@ -94,10 +93,27 @@ const displayWeeklyHydrationStats = (array) => {
 }
 
 const displayTodaysSleepData = (dataList) => {
-  let todaysDate = getTodaysDate(currentUser.id, dataList)
-  const todaysSleepQuantity = sleepAmountByDay(currentUser.id, todaysDate, dataList)
+
+  let todaysDate = getTodaysDate(currentUser.id, dataList);
+  const todaysSleepQuantity = sleepAmountByDay(currentUser.id, todaysDate, dataList);
+
   sleepStatsByDay.innerHTML = ` 
   <div>Today, you slept ${todaysSleepQuantity} hours!</div>`
+}
+
+
+const displayAverageSteps = (array) => {
+  const avgSteps = getAvgSteps(array)
+  usersStepGoal.innerHTML = `All users step goal: ${avgSteps}`
+ }
+
+const displayDailySteps = (dataList) => {
+  let todaysDate = getTodaysDate(currentUser.id, dataList);
+  const todaysStepCount = getDailySteps(currentUser.id, todaysDate, dataList);
+
+  dailyStepCount.innerHTML = ` 
+  <div>Today, you've walked ${todaysStepCount} steps!</div>
+  `
 }
 
 const displayMilesWalkedByDay = (dataList1, dataList2) => {
@@ -115,5 +131,6 @@ export {
   displayDailyHydrationStats,
   displayWeeklyHydrationStats,
   displayTodaysSleepData,
+  displayDailySteps,
   displayMilesWalkedByDay
 }

@@ -14,6 +14,7 @@ import {
   displayFriendList,
   displayWeeklyHydrationStats,
   displayTodaysSleepData,
+  displayDailySteps
   displayMilesWalkedByDay,
 } from './domUpdates';
 
@@ -23,7 +24,7 @@ import {
   getAvgDailyOunces,
   getOzByDay,
   calculateWeeklyOunces,
-  generateRandomUser
+  generateRandomUser,
 } from './dataModel';
 
 import {
@@ -35,12 +36,15 @@ import {
 // Query Selectors:
 var userInfoContainer = document.querySelector('.user-info');
 var welcomeHeading = document.querySelector('.welcome-heading');
-var activityContainer = document.querySelector('.average-steps')
+var usersStepGoal = document.querySelector('.all-users-step-goal')
 var friendList = document.querySelector('.friend-list')
 var dailyHydrationStats = document.querySelector('.daily-hydration-stats')
 var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
 var sleepStatsByDay = document.querySelector('.sleep-stats')
-var milesWalkedByDay = document.querySelector('.average-steps')
+var dailyStepCount = document.querySelector('.daily-steps')
+var weeklyStepCountGoal = document.querySelector('.weekly-step-count-goal')
+var milesWalkedByDay = document.querySelector('.todays-miles-walked')
+
 
 // event listener:
 window.addEventListener('load', () => {
@@ -53,8 +57,8 @@ window.addEventListener('load', () => {
     displayDailyHydrationStats(results[1])
     displayWeeklyHydrationStats(results[1])
     displayTodaysSleepData(results[2])
+    displayDailySteps(results[3])
     displayMilesWalkedByDay(results[0], results[3])
-    
   })
   .catch(error => console.log('ERROR', error))
 })
@@ -62,12 +66,14 @@ window.addEventListener('load', () => {
 export {
   // query selectors:
   userInfoContainer,
-  activityContainer,
   welcomeHeading,
   friendList,
   dailyHydrationStats,
   weeklyHydrationStats,
   sleepStatsByDay,
+  dailyStepCount,
+  usersStepGoal,
+  weeklyStepCountGoal
   milesWalkedByDay
 }
 

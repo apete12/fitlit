@@ -21,9 +21,7 @@ const getTodaysDate = ((id, dataList) => {
 
   if (dataList.hydrationData) {
     today = dataList.hydrationData.filter(log => log.userID === id);
-    console.log('today: ', today)
     
-
   } else if (dataList.sleepData) {
     today = dataList.sleepData.filter(log => log.userID === id);
     
@@ -34,10 +32,8 @@ const getTodaysDate = ((id, dataList) => {
   }
 
   today = today[today.length - 1]
-  // console.log('today.date: ', today.date)
   return today.date
 });
-
 
 const getAvgSteps = (dataList) => {
 let sumOfSteps = dataList.users.reduce((sum, user) => {
@@ -101,7 +97,7 @@ const sleepQualityByDay = (id, day, dataList) => {
     }
 }
 
-  const calculateUserAvgDailyHoursSlept = (id, dataList) => {
+const calculateUserAvgDailyHoursSlept = (id, dataList) => {
     const usersDailySleepLog = dataList.sleepData
     let entries = []
     const userSleepStats = usersDailySleepLog.reduce((accum, userObj) => {
@@ -114,7 +110,7 @@ const sleepQualityByDay = (id, day, dataList) => {
     return userSleepStats / entries.length
   }
 
-  const calculateUserAvgSleepQuality = (id, dataList) => {
+const calculateUserAvgSleepQuality = (id, dataList) => {
     const usersDailySleepQualityLog = dataList.sleepData
     let entries = []
     const userSleepQualityStats = usersDailySleepQualityLog.reduce((accum, userObj) => {
@@ -154,7 +150,7 @@ const getWeeklySleepQualityStats = (id, dataList, startDate) => {
   return sleepQualityWeeklyStats
 }
 
-  const getWeeklySleepStats = (id, dataList, startDate) => {
+const getWeeklySleepStats = (id, dataList, startDate) => {
     const currentUserWeeklySleepData = breakDownToWeeklyStatsArray(id, dataList, startDate)
     const weeklyUserData = currentUserWeeklySleepData()
   
@@ -198,6 +194,13 @@ const checkIfStepGoalWasMade = (id, day, dataList1, dataList2) => {
   }
 }
 
+const getDailySteps = (id, day, dataList) => {
+  const activityLog = dataList.activityData 
+  const dailySteps = activityLog.find(log => log.userID === id && log.date === day)
+
+  return dailySteps.numSteps
+}
+
 export {
   getUserData,
   getAvgSteps,
@@ -216,4 +219,5 @@ export {
   checkIfStepGoalWasMade,
   getWeeklySleepQualityStats,
   getTodaysDate,
+  getDailySteps
 }
