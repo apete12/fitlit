@@ -19,6 +19,7 @@ import {
   weeklyStepCountGoal,
   milesWalkedByDay,
   weeklySleepStats,
+  dailyActiveMinutes
 } from './scripts';
 
 import {
@@ -37,6 +38,7 @@ import {
   getDailySteps,
   calculateDailyMilesWalked,
   breakDownToWeeklyStatsArray,
+  getActiveMinutes
 } from './dataModel';
 
 var currentUser
@@ -131,6 +133,16 @@ const displayDailySteps = (dataList) => {
   <div>Today, you've walked ${todaysStepCount} steps!</div>
   `
 }
+const displayDailyActiveMinutes = (dataList) => {
+  let todaysDate = getTodaysDate(currentUser.id, dataList);
+
+  const todaysActiveMin = getActiveMinutes(currentUser.id, todaysDate.date, dataList);
+
+  dailyActiveMinutes.innerHTML = `
+  <div>Today, you have ${todaysActiveMin} active minutes!</div>
+  `
+}
+
 
 const displayMilesWalkedByDay = (dataList1, dataList2) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList2)
@@ -188,5 +200,6 @@ export {
   displayAllTimeAvgSleepHoursAndQuality,
   displayDailySteps,
   displayMilesWalkedByDay,
-  displayWeeklySleepDayHours
+  displayWeeklySleepDayHours,
+  displayDailyActiveMinutes
 }

@@ -16,7 +16,8 @@ import {
   checkIfStepGoalWasMade, 
   getWeeklySleepQualityStats, 
   getTodaysDate, 
-  getDailySteps
+  getDailySteps,
+  getActiveMinutes
 } from '../src/dataModel';
 
 import { 
@@ -168,6 +169,14 @@ describe('Activity', () => {
     expect(userOne).to.equal(3801)
     expect(userTwo).to.equal(11616)
 
+  })
+
+  it('Should return active minutes for specific day', () => {
+    const userOne = getActiveMinutes(1, '2023/03/20', sampleActivityData)
+    const userTwo = getActiveMinutes(2, '2023/03/20' , sampleActivityData)
+    expect(userOne).to.be.a('number')
+    expect(userOne).to.equal(261)
+    expect(userTwo).to.equal(56)
   })
 
 })
