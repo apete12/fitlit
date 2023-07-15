@@ -230,6 +230,14 @@ const getDailySteps = (id, day, dataList) => {
   return dailySteps.numSteps
 }
 
+const getActiveMinutes = (id, day, dataList) => {
+  const activityLog = dataList.activityData 
+  const activeMinutes = activityLog.find(log => log.userID === id && log.
+date === day)
+
+  return activeMinutes.minutesActive
+}
+
 export {
   getUserData,
   getAvgSteps,
