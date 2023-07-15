@@ -39,34 +39,41 @@ import {
 // Query Selectors:
 var userInfoContainer = document.querySelector('.user-info');
 var welcomeHeading = document.querySelector('.welcome-heading');
-var usersStepGoal = document.querySelector('.all-users-step-goal')
 var friendList = document.querySelector('.friend-list')
+// hydration
 var dailyHydrationStats = document.querySelector('.daily-hydration-stats')
 var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
-var sleepStatsByDay = document.querySelector('.sleep-stats')
-var avgAllTimeSleepStats = document.querySelector('.avg-sleep-qual')
+// activity
+var usersStepGoal = document.querySelector('.all-users-step-goal')
 var dailyStepCount = document.querySelector('.daily-steps')
+var dailyActiveMinutes = document.querySelector('.daily-active-minutes')
 var weeklyStepCountGoal = document.querySelector('.weekly-step-count-goal')
 var milesWalkedByDay = document.querySelector('.todays-miles-walked')
+// sleep
 var weeklySleepStats = document.querySelector('.weekly-sleep')
-var dailyActiveMinutes = document.querySelector('.daily-active-minutes')
+var sleepStatsByDay = document.querySelector('.sleep-stats')
+var avgAllTimeSleepStats = document.querySelector('.avg-sleep-qual')
 
 // event listener:
 window.addEventListener('load', () => {
   Promise.all(promises)
   .then(results => {
     console.log(results)
+    // user
     displayRandomUser(results[0])
-    displayAverageSteps(results[0])
     displayFriendList(results[0])
-    displayDailyHydrationStats(results[1])
-    displayWeeklyHydrationStats(results[1])
-    displayTodaysSleepData(results[2])
-    displayAllTimeAvgSleepHoursAndQuality(results[2])
+    // activity
+    displayAverageSteps(results[0])
     displayDailySteps(results[3])
     displayMilesWalkedByDay(results[0], results[3])
-    displayWeeklySleepDayHours(results[2])
     displayDailyActiveMinutes(results[3])
+  //  hydration
+    displayDailyHydrationStats(results[1])
+    displayWeeklyHydrationStats(results[1])
+    // sleep
+    displayTodaysSleepData(results[2])
+    displayAllTimeAvgSleepHoursAndQuality(results[2])
+    displayWeeklySleepDayHours(results[2])
   })
   .catch(error => console.log('ERROR', error))
 })
