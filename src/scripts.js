@@ -14,6 +14,7 @@ import {
   displayFriendList,
   displayWeeklyHydrationStats,
   displayTodaysSleepData,
+  displayDailySteps
 } from './domUpdates';
 
 import {
@@ -22,7 +23,7 @@ import {
   getAvgDailyOunces,
   getOzByDay,
   calculateWeeklyOunces,
-  generateRandomUser
+  generateRandomUser,
 } from './dataModel';
 
 import {
@@ -39,6 +40,7 @@ var friendList = document.querySelector('.friend-list')
 var dailyHydrationStats = document.querySelector('.daily-hydration-stats')
 var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
 var sleepStatsByDay = document.querySelector('.sleep-stats')
+var dailyStepCount = document.querySelector('.average-steps')
 
 // event listener:
 window.addEventListener('load', () => {
@@ -49,9 +51,8 @@ window.addEventListener('load', () => {
     displayFriendList(results[0])
     displayDailyHydrationStats(results[1])
     displayWeeklyHydrationStats(results[1])
-    console.log('results[2]: ', results[2])
     displayTodaysSleepData(results[2])
-    
+    displayDailySteps(results[3])
   })
   .catch(error => console.log('ERROR', error))
 })
@@ -65,5 +66,6 @@ export {
   dailyHydrationStats,
   weeklyHydrationStats,
   sleepStatsByDay,
+  dailyStepCount
 }
 
