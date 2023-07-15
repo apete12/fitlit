@@ -17,8 +17,8 @@ import {
   displayAllTimeAvgSleepHoursAndQuality,
   displayDailySteps,
   displayMilesWalkedByDay,
-  displayWeeklySleepDayHours
-
+  displayWeeklySleepDayHours,
+  displayDailyActiveMinutes
 } from './domUpdates';
 
 import {
@@ -66,6 +66,7 @@ window.addEventListener('load', () => {
     displayDailySteps(results[3])
     displayMilesWalkedByDay(results[0], results[3])
     displayWeeklySleepDayHours(results[2])
+    displayDailyActiveMinutes(results[3])
   })
   .catch(error => console.log('ERROR', error))
 })

@@ -136,7 +136,7 @@ const displayDailySteps = (dataList) => {
 const displayDailyActiveMinutes = (dataList) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList);
 
-  const todaysActiveMin = getActiveMinutes(currentUser.id, todaysDate, dataList);
+  const todaysActiveMin = getActiveMinutes(currentUser.id, todaysDate.date, dataList);
 
   dailyActiveMinutes.innerHTML = `
   <div>Today, you have ${todaysActiveMin} active minutes!</div>
