@@ -111,7 +111,7 @@ const displayWeeklyHydrationStats = (array) => {
 const displayTodaysSleepData = (dataList) => {
 
   let todaysDate = getTodaysDate(currentUser.id, dataList);
-  const todaysSleepQuantity = sleepAmountByDay(currentUser.id, todaysDate, dataList);
+  const todaysSleepQuantity = sleepAmountByDay(currentUser.id, todaysDate.date, dataList);
 
   sleepStatsByDay.innerHTML = ` 
   <div>Today, you slept ${todaysSleepQuantity} hours!</div>`
@@ -160,13 +160,11 @@ const displayWeeklySleepHoursAndQuality = (dataList) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList);
 
   const weeklySleepQualStats = getWeeklySleepQualityStats(currentUser.id, dataList, todaysDate.date)
+  const weeklySleepHoursStats = getWeeklySleepStats(currentUser.id, dataList, todaysDate.date)
 
-  const weeklySleepStatsObject = getWeeklySleepStats(currentUser.id, dataList, todaysDate.date)
-  const formattedDay = weeklySleepStatsObject.day.map((day) => {
+  const formattedDay = weeklySleepHoursStats.day.map((day) => {
     return dayjs(day).format('ddd D')
   })
-  const weeklySleepHoursArray = getWeeklySleepStats(currentUser.id, dataList, todaysDate.date)
-
   weeklySleepStats.innerHTML = `
  <div class="last-week"> ${formattedDay[0]}</div>
  <div class="last-week"> ${formattedDay[1]}</div>
@@ -175,12 +173,12 @@ const displayWeeklySleepHoursAndQuality = (dataList) => {
  <div class="last-week"> ${formattedDay[4]}</div>
  <div class="last-week-last"> ${formattedDay[5]}</div>
 
- <div class="oz">${weeklySleepHoursArray.sleepHours[0]}oz</div>
- <div class="oz">${weeklySleepHoursArray.sleepHours[1]}oz</div>
- <div class="oz">${weeklySleepHoursArray.sleepHours[2]}oz</div>
- <div class="oz">${weeklySleepHoursArray.sleepHours[3]}oz</div>
- <div class="oz">${weeklySleepHoursArray.sleepHours[4]}oz</div>
- <div class="oz-last">${weeklySleepHoursArray.sleepHours[5]}oz</div>
+ <div class="oz">${weeklySleepHoursStats.sleepHours[0]}oz</div>
+ <div class="oz">${weeklySleepHoursStats.sleepHours[1]}oz</div>
+ <div class="oz">${weeklySleepHoursStats.sleepHours[2]}oz</div>
+ <div class="oz">${weeklySleepHoursStats.sleepHours[3]}oz</div>
+ <div class="oz">${weeklySleepHoursStats.sleepHours[4]}oz</div>
+ <div class="oz-last">${weeklySleepHoursStats.sleepHours[5]}oz</div>
 
  <div class="oz">${weeklySleepQualStats.sleepQuality[0]}oz</div>
 <div class="oz">${weeklySleepQualStats.sleepQuality[1]}oz</div>
