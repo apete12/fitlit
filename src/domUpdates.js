@@ -200,5 +200,6 @@ export {
   displayAllTimeAvgSleepHoursAndQuality,
   displayDailySteps,
   displayMilesWalkedByDay,
-  displayWeeklySleepDayHours
+  displayWeeklySleepDayHours,
+  displayDailyActiveMinutes
 }
