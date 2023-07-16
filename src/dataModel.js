@@ -83,59 +83,10 @@ let sumOfSteps = dataList.users.reduce((sum, user) => {
   sum += user.dailyStepGoal
   return sum
   }, 0)
-    return sumOfSteps / dataList.users.length
+  let averageStepGoalForAllUsers = sumOfSteps / dataList.users.length
+
+    return Number(averageStepGoalForAllUsers.toFixed(0))
 }
-
-//////////////////////// ACTIVITY ////////////////////////
-const getDailySteps = (id, day, dataList) => {
-  const activityLog = dataList.activityData 
-  const dailySteps = activityLog.find(log => log.userID === id && log.date === day)
-
-  return dailySteps.numSteps
-}
-
-const getActiveMinutes = (id, day, dataList) => {
-  const activityLog = dataList.activityData 
-  const activeMinutes = activityLog.find(log => log.userID === id && log.
-date === day)
-
-  return activeMinutes.minutesActive
-}
-
-const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
-  const userLog = dataList1.users
-  const userStrideData = userLog.find(log => id === log.id)
-  const userStride = userStrideData.strideLength
-
-  const activityLog = dataList2.activityData
-  const userStepData = activityLog.find(log => log.userID === id && log.date === day)
-  const userDailyStep = userStepData.numSteps
-  const walkedMiles = (userStride * userDailyStep)/5280
-  return walkedMiles.toFixed(2)
-}
-
-const calculateMinutesActive = (id, day, dataList) => {
-  const activityLog = dataList.activityData
-  const activeMinutes = activityLog.find(log => log.userID === id && log.date === day)
-  return activeMinutes.minutesActive
-}
-
-const checkIfStepGoalWasMade = (id, day, dataList1, dataList2) => {
-  const userLog = dataList1.users
-  const userData = userLog.find(log => id === log.id)
-  const userStepGoal = userData.dailyStepGoal
-
-  const activityLog = dataList2.activityData
-  const userStepData = activityLog.find(log => log.userID === id && log.date === day)
-  const userDailyStep = userStepData.numSteps
-
-  if(userDailyStep >= userStepGoal) {
-    return `<span role="img" aria-label="check" title="check">✔</span>`
-  } else {
-    return `<span role="img" aria-label="x" title="x">X</span>`
-  }
-}
-
 
 //////////////////////// HYDRATION ////////////////////////
 
@@ -151,7 +102,7 @@ const userHydrationStats = usersDailyHydrationLog.reduce((accum, userObj) => {
 }, 0)
 let average = userHydrationStats / numOfEntries.length
 
-return average.toFixed(0)
+return Number(average.toFixed(0))
 }
 
 const getOzByDay = (id, day, dataList) => {
@@ -208,8 +159,8 @@ const calculateUserAvgDailyHoursSlept = (id, dataList) => {
       }
       return accum
     }, 0)
-    let userAvgSleep = userSleepStats / entries.length
-    return userAvgSleep.toFixed(2)
+    let userAvgSleepHours = userSleepStats / entries.length
+    return Number(userAvgSleepHours.toFixed(2))
   }
 
 const calculateUserAvgSleepQuality = (id, dataList) => {
@@ -224,7 +175,7 @@ const calculateUserAvgSleepQuality = (id, dataList) => {
     }, 0)
     let userAvgSleepQual = userSleepQualityStats / entries.length
     
-    return userAvgSleepQual.toFixed(2)
+    return Number(userAvgSleepQual.toFixed(2))
   }
 
 const getWeeklySleepQualityStats = (id, dataList, startDate) => {
@@ -253,6 +204,53 @@ const getWeeklySleepHoursStats = (id, dataList, startDate) => {
   return sleepHoursWeeklyStats
   }
 
+//////////////////////// ACTIVITY ////////////////////////
+const getDailySteps = (id, day, dataList) => {
+  const activityLog = dataList.activityData 
+  const dailySteps = activityLog.find(log => log.userID === id && log.date === day)
+
+  return dailySteps.numSteps
+}
+
+const getActiveMinutes = (id, day, dataList) => {
+  const activityLog = dataList.activityData 
+  const activeMinutes = activityLog.find(log => log.userID === id && log.date === day)
+
+  return activeMinutes.minutesActive
+}
+
+const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
+  const userLog = dataList1.users
+  const userStrideData = userLog.find(log => id === log.id)
+  const userStride = userStrideData.strideLength
+
+  const activityLog = dataList2.activityData
+  const userStepData = activityLog.find(log => log.userID === id && log.date === day)
+  const userDailyStep = userStepData.numSteps
+  const walkedMiles = (userStride * userDailyStep)/5280
+  return Number(walkedMiles.toFixed(2))
+}
+
+
+const checkIfStepGoalWasMade = (id, day, dataList1, dataList2) => {
+  const userLog = dataList1.users
+  const userData = userLog.find(log => id === log.id)
+  const userStepGoal = userData.dailyStepGoal
+
+  const activityLog = dataList2.activityData
+  const userStepData = activityLog.find(log => log.userID === id && log.date === day)
+  const userDailyStep = userStepData.numSteps
+
+  if(userDailyStep >= userStepGoal) {
+    return `<span role="img" aria-label="check" title="check">✔</span>`
+  } else {
+    return `<span role="img" aria-label="x" title="x">X</span>`
+  }
+}
+
+
+
+
 
 
 export {
@@ -280,7 +278,6 @@ export {
 
   // ACTIVITY DATA
   getAvgSteps,
-  calculateMinutesActive,
   checkIfStepGoalWasMade,
   getDailySteps,
   getActiveMinutes,
