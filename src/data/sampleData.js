@@ -1,4 +1,5 @@
-const sampleData = { users: [
+////////////////////// USER REPOSITORY ////////////////////
+const sampleUserData = { users: [
   {
   "id": 1,
   "name": "Trystan Gorczany",
@@ -42,35 +43,9 @@ const sampleData = { users: [
   }]
 }
 
-  const sampleDataHydration = { hydrationData: [
-    {
-      "userID": 1,
-      "date": "2023/03/24",
-      "numOunces": 28
-    },
-    {
-      "userID": 2,
-      "date": "2023/03/24",
-      "numOunces": 35
-    },
-    {
-      "userID": 3,
-      "date": "2023/03/24",
-      "numOunces": 95
-    },
-    {
-      "userID": 1,
-      "date": "2023/06/10",
-      "numOunces": 74
-    },
-    {
-      "userID": 2,
-      "date": "2023/03/24",
-      "numOunces": 47
-    },
-  ]}
+////////////////////// HYDRATION REPOSITORY ////////////////////
 
-  const weeklyDataSample = {
+  const sampleHydrationData = {
     hydrationData: [
       {
         "userID": 1,
@@ -184,7 +159,7 @@ const sampleData = { users: [
       }
   ]}
 
-
+////////////////////// SLEEP REPOSITORY ////////////////////
   const sampleSleepData = { sleepData: [
     {
       userID: 1, 
@@ -305,7 +280,7 @@ const sampleData = { users: [
     },
   ]}
 
-
+////////////////////// ACTIVITY REPOSITORY ////////////////////
   const sampleActivityData = { activityData: [
     {userID: 1, 
     date: '2023/03/20', 
@@ -446,9 +421,8 @@ const sampleData = { users: [
 
 
   export {
-    sampleData,
-    sampleDataHydration,
-    weeklyDataSample,
+    sampleUserData,
+    sampleHydrationData,
     sampleActivityData,
     sampleSleepData
   }
