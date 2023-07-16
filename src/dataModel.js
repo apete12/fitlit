@@ -130,14 +130,11 @@ const checkIfStepGoalWasMade = (id, day, dataList1, dataList2) => {
   const activityLog = dataList2.activityData
   const userStepData = activityLog.find(log => log.userID === id && log.date === day)
   const userDailyStep = userStepData.numSteps
-  
-  console.log('stepGoal', userStepGoal)
-  console.log('dailyStep', userDailyStep)
 
   if(userDailyStep >= userStepGoal) {
-    return `<span role="img" aria-label="green-check" title="green-check">✔</span>`
+    return `<span role="img" aria-label="check" title="check">✔</span>`
   } else {
-    return `<span role="img" aria-label="red-x" title="red-x">X</span>`
+    return `<span role="img" aria-label="x" title="x">X</span>`
   }
 }
 
