@@ -216,8 +216,6 @@ const displayWeeklyStepCountGoalReached = (dataList1, dataList2) => {
   let currentUserWeeklySleepData = breakDownToWeeklyStatsArray(currentUser.id, dataList2, today.date)
   let weeklyUserDatathisone = currentUserWeeklySleepData()
 
-  console.log('dataArray', weeklyUserDatathisone)
-
 
   ///////////////////////// needs to go in dataModel file//////////////////////
   weeklyUserDatathisone.forEach((v) => {

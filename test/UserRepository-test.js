@@ -4,6 +4,7 @@ import {
   getRandomIndex,
   getUserData, 
   getAvgSteps, 
+  generateRandomUser,
   getAvgDailyOunces, 
   getOzByDay, 
   calculateWeeklyOunces, 
@@ -13,7 +14,6 @@ import {
   sleepAmountByDay, 
   sleepQualityByDay, 
   getWeeklySleepQualityStats, 
-  calculateMinutesActive, 
   checkIfStepGoalWasMade, 
   getTodaysDate, 
   getDailySteps,
@@ -23,19 +23,21 @@ import {
 } from '../src/dataModel';
 
 import { 
-  sampleData, 
-  sampleDataHydration, 
-  // weeklyDataSample, 
+  sampleUserData, 
+  sampleHydrationData, 
   sampleActivityData, 
   sampleSleepData 
 } from '../src/data/sampleData';
 
+////////////////////////////// USER ///////////////////////////////
 describe('User Repository', () => {
 
-  it('Should return user name by id', function () {
+  let currentUser
 
-    const userOne = getUserData(1, sampleData)
-    const userTwo = getUserData(2, sampleData)
+  it('Should return user info by ID', function () {
+
+    let userOne = getUserData(1, sampleUserData)
+    let userTwo = getUserData(2, sampleUserData)
 
     expect(userOne).to.be.an('object')
     expect(userTwo).to.be.an('object')
@@ -45,40 +47,67 @@ describe('User Repository', () => {
     expect(userTwo.dailyStepGoal).to.equal(9000)
   })
 
+  it('Should generate a random user and return user info', () => {
+
+    currentUser = generateRandomUser(sampleUserData)
+
+    expect(currentUser).to.be.an('object')
+    expect(currentUser.friends).to.be.an('array')
+    expect(currentUser.dailyStepGoal).to.be.a('number')
+  })
+
   it('Should return average step goal amongst all users', function() {
 
-    expect(getAvgSteps(sampleData)).to.be.a('number')
-    expect(getAvgSteps(sampleData)).to.equal(6333.333333333333)
+    let averageStepGoalForAllUsers = getAvgSteps(sampleUserData)
+    
+    expect(averageStepGoalForAllUsers).to.be.a('number')
+    expect(averageStepGoalForAllUsers).to.equal(6333)
   })
 })  
 
+////////////////////////////// HYDRATION ///////////////////////////////
 describe('Hydration Repository', function () {
+
+  let userOne, userTwo, userThree
+
+  beforeEach(() => {
+    userOne = 1
+    userTwo = 2
+    userThree = 3
+  })
+
   it('Should return average daily ounces for user', () => {
 
-    const user2Avg = getAvgDailyOunces(2, sampleDataHydration)
-    const user1Avg = getAvgDailyOunces(1, sampleDataHydration)
+    let user1Avg = getAvgDailyOunces(userOne, sampleHydrationData)
+    let user2Avg = getAvgDailyOunces(userTwo, sampleHydrationData)
 
-    expect(user2Avg).to.equal('63')
-    expect(user1Avg).to.equal('56')
+    expect(user1Avg).to.be.a('number')
+    expect(user2Avg).to.be.a('number')
+    expect(user1Avg).to.equal(56)
+    expect(user2Avg).to.equal(63)
+
   })
 
   it('Should return number of OZ for a specific day', () => {
 
-    const userOneMarch24OZ = getOzByDay(1, "2023/03/24", sampleDataHydration)
-    const userOneJune10OZ = getOzByDay(1, "2023/03/29", sampleDataHydration)
-    const userTwoMarch24OZ = getOzByDay(2, "2023/03/24", sampleDataHydration)
+    let testOneUserOne = getOzByDay(userOne, "2023/03/24", sampleHydrationData)
+    let testTwoUserOne = getOzByDay(userOne, "2023/03/29", sampleHydrationData)
+    let testThreeUserTwo = getOzByDay(userTwo, "2023/03/24", sampleHydrationData)
 
-    expect(userOneMarch24OZ).to.be.a('number')
-    expect(userOneJune10OZ).to.be.a('number')
-    expect(userTwoMarch24OZ).to.be.a('number')
-    expect(userOneMarch24OZ).to.equal(47)
-    expect(userOneJune10OZ).to.equal(49)
-    expect(userTwoMarch24OZ).to.equal(81)
+
+    expect(testOneUserOne).to.be.a('number')
+    expect(testTwoUserOne).to.be.a('number')
+    expect(testThreeUserTwo).to.be.a('number')
+    expect(testOneUserOne).to.equal(47)
+    expect(testTwoUserOne).to.equal(49)
+    expect(testThreeUserTwo).to.equal(81)
+
   })
 
   it('Should return an object with users weekly hydration stats', () => {
 
-    const user1Sample = calculateWeeklyOunces(1, sampleDataHydration)
+    let user1Sample = calculateWeeklyOunces(userOne, sampleHydrationData)
+    let user2Sample = calculateWeeklyOunces(userTwo, sampleHydrationData)
 
     expect(user1Sample).to.be.an('object')
     expect(user1Sample.ounces).to.be.an('array')
@@ -86,133 +115,199 @@ describe('Hydration Repository', function () {
     expect(user1Sample.ounces.length).to.equal(7)
     expect(user1Sample.ounces[0]).to.equal(47)
     expect(user1Sample.dates[0]).to.equal("2023/03/24")
+    expect(user2Sample).to.be.an('object')
+    expect(user2Sample.ounces).to.be.an('array')
+    expect(user2Sample.dates).to.be.an('array')
+    expect(user2Sample.ounces.length).to.equal(7)
+    expect(user2Sample.ounces[0]).to.equal(81)
+    expect(user2Sample.dates[0]).to.equal("2023/03/24")
+
   })
+
+  // ---------------------SHOULD WE KEEP THESE??????---------------------------- //
+  // SAD PATH?
+
+  // it('Should return NaN, Undefined, or empty if user does not exist', () => {
+
+  //   let testOne = getAvgDailyOunces(userThree, sampleHydrationData)
+  //   let testTwo = getOzByDay(userThree, "2023/03/24", sampleHydrationData)
+  //   let testThree = calculateWeeklyOunces(userThree, sampleHydrationData)
+
+  //   expect(testOne).to.equal('NaN')
+  //   expect(testTwo).to.equal(undefined)    
+  //   expect(testThree.ounces.length).to.equal(0)
+  //   expect(testThree.dates.length).to.equal(0)
+  // })
+//--------------------------------------------------------------------------------//
+
+
 });
 
+////////////////////////////// SLEEP ///////////////////////////////
 describe('Sleep Repository', () => {
 
-  it('should return amount of sleep for given day', function () {
+  let userOne, userTwo, userThree
 
-    const userOneSleepHoursByDay = sleepAmountByDay(1, '2023/03/21', sampleSleepData)
-    const userTwoSleepHoursByDay = sleepAmountByDay(2, '2023/03/22', sampleSleepData)
-
-    expect(userOneSleepHoursByDay).to.be.a('number')
-    expect(userOneSleepHoursByDay).to.equal(9.9)
-    expect(userTwoSleepHoursByDay).to.equal(4.2)
+  beforeEach(() => {
+    userOne = 1
+    userTwo = 2
+    userThree = 3
   })
 
-  it('should return sleep quality score for given day', function () {
+  it('Should return sleep hours for specific day', function () {
 
-    const userOneSleepQualityForDay = sleepQualityByDay(1, '2023/03/21', sampleSleepData)
-    const userTwoSleepQualityForDay = sleepQualityByDay(2, '2023/03/30', sampleSleepData)
+    let userOneSleepHours = sleepAmountByDay(userOne, '2023/03/21', sampleSleepData)
+    let userTwoSleepHours = sleepAmountByDay(userTwo, '2023/03/22', sampleSleepData)
+
+    expect(userOneSleepHours).to.be.a('number')
+    expect(userTwoSleepHours).to.be.a('number')
+    expect(userOneSleepHours).to.equal(9.9)
+    expect(userTwoSleepHours).to.equal(4.2)
+  })
+
+  it('Should return sleep quality for specific day', function () {
+
+    let userOneSleepQuality = sleepQualityByDay(userOne, '2023/03/21', sampleSleepData)
+    let userTwoSleepQuality = sleepQualityByDay(userTwo, '2023/03/27', sampleSleepData)
     
-    expect(userOneSleepQualityForDay).to.be.a('number')
-    expect(userOneSleepQualityForDay).to.equal(4.7)
-    expect(userTwoSleepQualityForDay).to.equal(4.7)
+    expect(userOneSleepQuality).to.be.a('number')
+    expect(userTwoSleepQuality).to.be.a('number')
+    expect(userOneSleepQuality).to.equal(4.7)
+    expect(userTwoSleepQuality).to.equal(1.6)
   })
 
-  it('Should be able to calculate the average daily hours of sleep', () => {
+  it('Should be able to calculate the average hours slept for all time', () => {
 
-    expect(calculateUserAvgDailyHoursSlept(1, sampleSleepData)).to.equal('7.61')
-    expect(calculateUserAvgDailyHoursSlept(2, sampleSleepData)).to.equal('6.13')
+    let userOneSleepAverage = calculateUserAvgDailyHoursSlept(userOne, sampleSleepData)
+    let userTwoSleepAverage = calculateUserAvgDailyHoursSlept(userTwo, sampleSleepData)
+
+    expect(userOneSleepAverage).to.be.a('number')
+    expect(userTwoSleepAverage).to.be.a('number')
+    expect(userOneSleepAverage).to.equal(7.61)
+    expect(userTwoSleepAverage).to.equal(6.13)
   })
 
-  it('Should be able to calculate the average sleep quality per day over all time', () => {
+  it('Should be able to calculate the average sleep quality for all time', () => {
 
-    expect(calculateUserAvgSleepQuality(1, sampleSleepData)).to.equal('3.16')
-    expect(calculateUserAvgSleepQuality(2, sampleSleepData)).to.equal('2.85')
+    let userOneSleepQualityAverage = calculateUserAvgSleepQuality(userOne, sampleSleepData)
+    let userTwoSleepQualityAverage = calculateUserAvgSleepQuality(userTwo, sampleSleepData)
+
+    expect(userOneSleepQualityAverage).to.be.a('number')
+    expect(userTwoSleepQualityAverage).to.be.a('number')
+    expect(userOneSleepQualityAverage).to.equal(3.16)
+    expect(userTwoSleepQualityAverage).to.equal(2.85)
   })
 
-  it('should return average sleep for 7 days with a given date', () => {
+  it('Should return sleep quality stats for a given week', () => {
 
-    const user1SleepAverage = getWeeklySleepHoursStats(1, sampleSleepData,'2023/03/22')
-    const user2SleepAverage = getWeeklySleepHoursStats(2, sampleSleepData, '2023/03/23')
-
-    expect(user1SleepAverage).to.be.an('object')
-    expect(user2SleepAverage.sleepHours).to.be.an('array')
-    expect(user1SleepAverage.sleepHours[2]).to.equal(9.6)
-  })
-
-  it('should return an object of sleep quality for a week', () => {
-
-    const userOneWeeklySleepQuality = getWeeklySleepQualityStats(2, sampleSleepData, '2023/03/22')
+    let userOneWeeklySleepQuality = getWeeklySleepQualityStats(userOne, sampleSleepData, '2023/03/22')
+    let userTwoWeeklySleepQuality = getWeeklySleepQualityStats(userTwo, sampleSleepData, '2023/03/22')
 
     expect(userOneWeeklySleepQuality).to.be.an('object')
-    expect(userOneWeeklySleepQuality.day).to.be.an('array')
-    expect(userOneWeeklySleepQuality.sleepQuality[2]).to.equal(3.5)
+    expect(userTwoWeeklySleepQuality).to.be.an('object')
+    expect(userOneWeeklySleepQuality.day.length).to.equal(7)
+    expect(userTwoWeeklySleepQuality.day.length).to.equal(7)
+    expect(userOneWeeklySleepQuality.sleepQuality[3]).to.equal(4.7)
+    expect(userTwoWeeklySleepQuality.sleepQuality[2]).to.equal(3.5)
   })
 
+  it('Should return sleep hour stats for a given week', () => {
+
+    let userOneWeeklySleepHours = getWeeklySleepHoursStats(userOne, sampleSleepData,'2023/03/22')
+    let userTwoWeeklySleepHours = getWeeklySleepHoursStats(userTwo, sampleSleepData, '2023/03/23')
+
+    expect(userOneWeeklySleepHours).to.be.an('object')
+    expect(userTwoWeeklySleepHours).to.be.an('object')
+    expect(userOneWeeklySleepHours.sleepHours.length).to.equal(7)
+    expect(userTwoWeeklySleepHours.sleepHours.length).to.equal(7)
+    expect(userOneWeeklySleepHours.sleepHours[2]).to.equal(9.6)
+    expect(userTwoWeeklySleepHours.sleepHours[4]).to.equal(9.2)
+  })
+
+  
 })
 
+////////////////////////////// ACTIVITY ///////////////////////////////
 describe('Activity Repository', () => {
+
+  let userOne, userTwo, userThree
+
+  beforeEach(() => {
+    userOne = 1
+    userTwo = 2
+    userThree = 3
+  })
+  
+  it('Should return daily step count for a given day', () => {
+    
+    let userOneStepCount = getDailySteps(userOne, '2023/03/28', sampleActivityData)
+    let userTwoStepCount = getDailySteps(userTwo, '2023/03/20' , sampleActivityData)
+    
+    expect(userOneStepCount).to.be.a('number')
+    expect(userTwoStepCount).to.be.a('number')
+    expect(userOneStepCount).to.equal(3801)
+    expect(userTwoStepCount).to.equal(11616)
+  })
+
+  it('Should return active minutes for a given day', () => {
+  
+    let userOneActiveMinutes = getActiveMinutes(userOne, '2023/03/20', sampleActivityData)
+    let userTwoActiveMinutes = getActiveMinutes(userTwo, '2023/03/20' , sampleActivityData)
+  
+    expect(userOneActiveMinutes).to.be.a('number')
+    expect(userTwoActiveMinutes).to.be.a('number')
+    expect(userOneActiveMinutes).to.equal(261)
+    expect(userTwoActiveMinutes).to.equal(56)
+  })
 
   it('Should return miles user walked in a day', () => {
 
-    const userOne = calculateDailyMilesWalked(2, '2023/03/28', sampleData, sampleActivityData)
-    const userTwo = calculateDailyMilesWalked(1, '2023/03/20', sampleData, sampleActivityData)
+    let userOneMilesWalked = calculateDailyMilesWalked(userTwo, '2023/03/28', sampleUserData, sampleActivityData)
+    let userTwoMilesWalked = calculateDailyMilesWalked(userOne, '2023/03/20', sampleUserData, sampleActivityData)
 
-    expect(userOne).to.be.a('string')
-    expect(userOne).to.equal('12.55')
-    expect(userTwo).to.equal('5.58')
+    expect(userOneMilesWalked).to.be.a('number')
+    expect(userTwoMilesWalked).to.be.a('number')
+    expect(userOneMilesWalked).to.equal(12.55)
+    expect(userTwoMilesWalked).to.equal(5.58)
   })
 
-  it('Should return calculation of minutes active', () => {
+  it('Should check if step goal was made for a given day', () => {
 
-    const userOne = calculateMinutesActive(2, '2023/03/28', sampleActivityData)
+    let userOneStepGoalCheck = checkIfStepGoalWasMade(userOne, '2023/03/28', sampleUserData, sampleActivityData)
+    let userTwoStepGoalCheck = checkIfStepGoalWasMade(userTwo, '2023/03/28', sampleUserData, sampleActivityData)
 
-    expect(userOne).to.equal(279)
+    expect(userOneStepGoalCheck).to.be.a('string')
+    expect(userTwoStepGoalCheck).to.be.a('string')
+    expect(userOneStepGoalCheck).to.equal(`<span role="img" aria-label="x" title="x">X</span>`)
+    expect(userTwoStepGoalCheck).to.equal(`<span role="img" aria-label="check" title="check">✔</span>`)
+    
   })
 
-  it('Should check if step goal was made', () => {
 
-    const userOne = checkIfStepGoalWasMade(2, '2023/03/28', sampleData, sampleActivityData)
-
-    expect(userOne).to.be.a('string')
-    expect(userOne).to.equal(`<span role="img" aria-label="check" title="check">✔</span>`)
-  })
-
-  it('Should return daily step count for specific day', () => {
-
-    const userOne = getDailySteps(1, '2023/03/28', sampleActivityData)
-    const userTwo = getDailySteps(2, '2023/03/20' , sampleActivityData)
-
-    expect(userOne).to.be.a('number')
-    expect(userOne).to.equal(3801)
-    expect(userTwo).to.equal(11616)
-  })
-
-  it('Should return active minutes for specific day', () => {
-
-    const userOne = getActiveMinutes(1, '2023/03/20', sampleActivityData)
-    const userTwo = getActiveMinutes(2, '2023/03/20' , sampleActivityData)
-
-    expect(userOne).to.be.a('number')
-    expect(userOne).to.equal(261)
-    expect(userTwo).to.equal(56)
-  })
 })
 
+////////////////////////////// HELPER ///////////////////////////////
 describe('Helper Functions', () => {
 
   let todaysDate, hydrationClosure, sleepClosure, activityClosure
 
   beforeEach(() => {
-    todaysDate = getTodaysDate(1, sampleDataHydration)
-    hydrationClosure = breakDownToWeeklyStatsArray(1, sampleDataHydration, todaysDate.date)
+    todaysDate = getTodaysDate(1, sampleHydrationData)
+    hydrationClosure = breakDownToWeeklyStatsArray(1, sampleHydrationData, todaysDate.date)
     sleepClosure = breakDownToWeeklyStatsArray(2, sampleSleepData, todaysDate.date)
     activityClosure = breakDownToWeeklyStatsArray(1, sampleActivityData, todaysDate.date)
   })
 
   it('Should return a random index position in users array', () => {
     
-    let randomUserIndex = getRandomIndex(sampleData)
+    let randomUserIndex = getRandomIndex(sampleUserData)
     
     expect(randomUserIndex).to.be.a('number')
   })
 
   it('Should return an object that has the most recent date from any dataset', () => {
 
-    let latestHydrationEntry = getTodaysDate(1, sampleDataHydration)
+    let latestHydrationEntry = getTodaysDate(1, sampleHydrationData)
     let latestSleepEntry = getTodaysDate(1, sampleSleepData)
     let latestActivityEntry = getTodaysDate(1, sampleActivityData)
 
