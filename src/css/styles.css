@@ -194,10 +194,12 @@ main {
 .oz {
   border-top: 1px solid #044553;
   border-right: 1px solid #044553;
+  text-align: center;
 }
 
 .oz-last {
   border-top: 1px solid #044553;
+  text-align: center;
 }
 
 .sleep, .activity, .hydration {
@@ -213,6 +215,19 @@ main {
 }
 
 .weekly-sleep-stats {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  position: inherit;
+  grid-gap: 0px;
+  padding: 0%;
+  border: 1px solid black;
+  grid-template-rows: auto auto;
+  align-items: center;
+  width: 95%;
+  font-size: 25px;
+}
+
+.weekly-step-count-goal {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   position: inherit;
