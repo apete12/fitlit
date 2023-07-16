@@ -22,9 +22,11 @@ import {
   milesWalkedByDay,
   dailyActiveMinutes,
   dailyStepCount,
+  weeklyStepCountGoal
 } from './scripts';
 
 import {
+  breakDownToWeeklyStatsArray,
   // USER DATA
   generateRandomUser,
   getTodaysDate,
@@ -46,7 +48,8 @@ import {
   getDailySteps,
   calculateDailyMilesWalked,
   getActiveMinutes,
-  getWeeklySleepQualityStats
+  getWeeklySleepQualityStats,
+  checkIfStepGoalWasMade
 } from './dataModel';
 
 var currentUser
@@ -207,6 +210,45 @@ const displayMilesWalkedByDay = (dataList1, dataList2) => {
 }
 
 
+const tryitOutstep = (dataList1, dataList2) => {
+  let today = getTodaysDate(currentUser.id, dataList2)
+
+  let currentUserWeeklySleepData = breakDownToWeeklyStatsArray(currentUser.id, dataList2, today.date)
+  let weeklyUserDatathisone = currentUserWeeklySleepData()
+
+  console.log('dataArray', weeklyUserDatathisone)
+
+  weeklyUserDatathisone.forEach((v) => {
+   v.goalReached = checkIfStepGoalWasMade(currentUser.id, v.date, dataList1, dataList2)
+
+  })
+
+  const formattedDay = weeklyUserDatathisone.map((day) => {
+    return dayjs(day.date).format('ddd D')
+  })
+
+  weeklyStepCountGoal.innerHTML = `
+  <div class="last-week"> ${formattedDay[0]}</div>
+  <div class="last-week"> ${formattedDay[1]}</div>
+  <div class="last-week"> ${formattedDay[2]}</div>
+  <div class="last-week"> ${formattedDay[3]}</div>
+  <div class="last-week"> ${formattedDay[4]}</div>
+  <div class="last-week-last"> ${formattedDay[5]}</div>
+  <div class="oz">${weeklyUserDatathisone[0].numSteps}</div>
+  <div class="oz">${weeklyUserDatathisone[1].numSteps}</div>
+  <div class="oz">${weeklyUserDatathisone[2].numSteps}</div>
+  <div class="oz">${weeklyUserDatathisone[3].numSteps}</div>
+  <div class="oz">${weeklyUserDatathisone[4].numSteps}</div>
+  <div class="oz-last">${weeklyUserDatathisone[5].numSteps}oz</div>
+  <div class="goal-reached">${weeklyUserDatathisone[0].goalReached}goal</div>
+  <div class="goal-reached">${weeklyUserDatathisone[1].goalReached}goal</div>
+  <div class="goal-reached">${weeklyUserDatathisone[2].goalReached}goal</div>
+  <div class="goal-reached">${weeklyUserDatathisone[3].goalReached}goal</div>
+  <div class="goal-reached">${weeklyUserDatathisone[4].goalReached}goal</div>
+  <div class="goal-reached">${weeklyUserDatathisone[5].goalReached}goal</div>
+  `
+}
+
 
 export {
   displayRandomUser,
@@ -219,5 +261,6 @@ export {
   displayDailySteps,
   displayMilesWalkedByDay,
   displayWeeklySleepHoursAndQuality,
-  displayDailyActiveMinutes
+  displayDailyActiveMinutes,
+  tryitOutstep
 }
