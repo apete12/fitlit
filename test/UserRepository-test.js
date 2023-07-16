@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 
 import { 
+  getRandomIndex,
   getUserData, 
   getAvgSteps, 
   getAvgDailyOunces, 
@@ -14,17 +15,17 @@ import {
   getWeeklySleepQualityStats, 
   calculateMinutesActive, 
   checkIfStepGoalWasMade, 
-
   getTodaysDate, 
   getDailySteps,
   getActiveMinutes,
-  getWeeklySleepHoursStats
+  getWeeklySleepHoursStats,
+  breakDownToWeeklyStatsArray
 } from '../src/dataModel';
 
 import { 
   sampleData, 
   sampleDataHydration, 
-  weeklyDataSample, 
+  // weeklyDataSample, 
   sampleActivityData, 
   sampleSleepData 
 } from '../src/data/sampleData';
@@ -49,33 +50,35 @@ describe('User Repository', () => {
     expect(getAvgSteps(sampleData)).to.be.a('number')
     expect(getAvgSteps(sampleData)).to.equal(6333.333333333333)
   })
+})  
 
+describe('Hydration Repository', function () {
   it('Should return average daily ounces for user', () => {
 
     const user2Avg = getAvgDailyOunces(2, sampleDataHydration)
     const user1Avg = getAvgDailyOunces(1, sampleDataHydration)
-    const user3Avg = getAvgDailyOunces(3, sampleDataHydration)
 
-    expect(user3Avg).to.be.a('number')
-    expect(user2Avg).to.equal(41)
-    expect(user1Avg).to.equal(51)
-    expect(user3Avg).to.equal(95)
+    expect(user2Avg).to.equal('63')
+    expect(user1Avg).to.equal('56')
   })
 
   it('Should return number of OZ for a specific day', () => {
 
     const userOneMarch24OZ = getOzByDay(1, "2023/03/24", sampleDataHydration)
-    const userOneJune10OZ = getOzByDay(1, "2023/06/10", sampleDataHydration)
-    const userTwoMarch24OZ = getOzByDay(1, "2023/03/24", sampleDataHydration)
+    const userOneJune10OZ = getOzByDay(1, "2023/03/29", sampleDataHydration)
+    const userTwoMarch24OZ = getOzByDay(2, "2023/03/24", sampleDataHydration)
 
-    expect(userOneMarch24OZ).to.equal(28)
-    expect(userOneJune10OZ).to.equal(74)
+    expect(userOneMarch24OZ).to.be.a('number')
+    expect(userOneJune10OZ).to.be.a('number')
     expect(userTwoMarch24OZ).to.be.a('number')
+    expect(userOneMarch24OZ).to.equal(47)
+    expect(userOneJune10OZ).to.equal(49)
+    expect(userTwoMarch24OZ).to.equal(81)
   })
 
   it('Should return an object with users weekly hydration stats', () => {
 
-    const user1Sample = calculateWeeklyOunces(1, weeklyDataSample)
+    const user1Sample = calculateWeeklyOunces(1, sampleDataHydration)
 
     expect(user1Sample).to.be.an('object')
     expect(user1Sample.ounces).to.be.an('array')
@@ -191,10 +194,58 @@ describe('Activity Repository', () => {
 
 describe('Helper Functions', () => {
 
-  it('Should return a date', () => {
+  let todaysDate, hydrationClosure, sleepClosure, activityClosure
 
-    const getHydration = getTodaysDate(1, sampleDataHydration)
-
-    expect(getHydration).to.be.an('object')
+  beforeEach(() => {
+    todaysDate = getTodaysDate(1, sampleDataHydration)
+    hydrationClosure = breakDownToWeeklyStatsArray(1, sampleDataHydration, todaysDate.date)
+    sleepClosure = breakDownToWeeklyStatsArray(2, sampleSleepData, todaysDate.date)
+    activityClosure = breakDownToWeeklyStatsArray(1, sampleActivityData, todaysDate.date)
   })
+
+  it('Should return a random index position in users array', () => {
+    
+    let randomUserIndex = getRandomIndex(sampleData)
+    
+    expect(randomUserIndex).to.be.a('number')
+  })
+
+  it('Should return an object that has the most recent date from any dataset', () => {
+
+    let latestHydrationEntry = getTodaysDate(1, sampleDataHydration)
+    let latestSleepEntry = getTodaysDate(1, sampleSleepData)
+    let latestActivityEntry = getTodaysDate(1, sampleActivityData)
+
+    expect(latestHydrationEntry).to.be.an('object')
+    expect(latestSleepEntry).to.be.an('object')
+    expect(latestActivityEntry).to.be.an('object')
+    expect(latestHydrationEntry.dataListType).to.equal('hydration')
+    expect(latestSleepEntry.dataListType).to.equal('sleep')
+    expect(latestActivityEntry.dataListType).to.equal('activity')
+    expect(latestHydrationEntry.date).to.equal('2023/03/30')
+    expect(latestSleepEntry.date).to.equal('2023/03/30')
+    expect(latestActivityEntry.date).to.equal('2023/03/30')
+  })
+
+  it('Should return a function', () => {
+
+    expect(hydrationClosure).to.be.a('function')
+    expect(sleepClosure).to.be.a('function')
+    expect(activityClosure).to.be.a('function')
+  })
+
+  it('Should return an entire week of data', () => {
+
+    expect(hydrationClosure()).to.be.an('array')
+    expect(sleepClosure()).to.be.an('array')
+    expect(activityClosure()).to.be.an('array')
+    expect(hydrationClosure()[0].numOunces).to.equal(74)
+    expect(sleepClosure()[3].hoursSlept).to.equal(4.2)
+    expect(activityClosure()[6].minutesActive).to.equal(168)
+    expect(hydrationClosure().length).to.equal(7)
+    expect(sleepClosure().length).to.equal(7)
+    expect(activityClosure().length).to.equal(7)
+
+  })
+
 })
