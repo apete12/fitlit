@@ -17,7 +17,7 @@ import {
   displayMilesWalkedByDay,
   displayWeeklySleepHoursAndQuality,
   displayDailyActiveMinutes,
-  tryitOutstep
+  displayWeeklyStepCountGoalReached
 } from './domUpdates';
 
 import {
@@ -55,7 +55,7 @@ window.addEventListener('load', () => {
     displayDailySteps(results[3])
     displayMilesWalkedByDay(results[0], results[3])
     displayDailyActiveMinutes(results[3])
-    tryitOutstep(results[0], results[3])
+    displayWeeklyStepCountGoalReached(results[0], results[3])
   //  hydration
     displayDailyHydrationStats(results[1])
     displayWeeklyHydrationStats(results[1])
