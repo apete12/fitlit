@@ -1,5 +1,5 @@
 ////////////////////// USER REPOSITORY ////////////////////
-const sampleData = { users: [
+const sampleUserData = { users: [
   {
   "id": 1,
   "name": "Trystan Gorczany",
@@ -45,7 +45,7 @@ const sampleData = { users: [
 
 ////////////////////// HYDRATION REPOSITORY ////////////////////
 
-  const sampleDataHydration = {
+  const sampleHydrationData = {
     hydrationData: [
       {
         "userID": 1,
@@ -421,8 +421,8 @@ const sampleData = { users: [
 
 
   export {
-    sampleData,
-    sampleDataHydration,
+    sampleUserData,
+    sampleHydrationData,
     sampleActivityData,
     sampleSleepData
   }
