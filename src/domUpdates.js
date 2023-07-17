@@ -1,23 +1,14 @@
 const dayjs = require('dayjs')
-//NOTE: Your DOM manipulation will occur in this file
 
 import { 
-  // query selectors:
-  // USER DATA
   userInfoContainer,
   welcomeHeading,
   friendList,
-
-  // HYDRATION DATA
   dailyHydrationStats,
   weeklyHydrationStats,
-
-  // SLEEP DATA
   sleepStatsByDay,
   avgAllTimeSleepStats,
   weeklySleepStats,
-
-  // ACTIVITY DATA
   usersStepGoal,
   milesWalkedByDay,
   dailyActiveMinutes,
@@ -25,35 +16,38 @@ import {
   weeklyStepCountGoal
 } from './scripts';
 
-import {
-  getStatsByWeek,
-  // USER DATA
-  generateRandomUser,
-  getTodaysDate,
-
-  // HYDRATION DATA
-  getOuncesByWeek,
-  getOuncesByDay,
-
-  // SLEEP DATA
-  getSleepAmountByDay,
-  getAvgSleepQuality,
-  getAvgHoursSlept,
-  getWeeklySleepHoursStats,
-
-  // ACTIVITY DATA
-  getUserData, 
-  getAvgSteps,
+import { 
+  getDailyMilesWalked, 
+  checkIfStepGoalWasMade, 
   getDailySteps,
-  getDailyMilesWalked,
   getActiveMinutes,
+} from './data-model/activity-data';
+
+import {
+  getTodaysDate,
+  getStatsByWeek
+} from '../src/data-model/helper-functions';
+
+import {
+  getUserData, 
+  getAvgSteps, 
+  generateRandomUser,
+  } from '../src/data-model/user-data';
+
+  import {
+    getOuncesByDay,
+    getOuncesByWeek,
+    } from '../src/data-model/hydration-data';
+
+import {
+  getAvgHoursSlept,
+  getAvgSleepQuality,
+  getSleepAmountByDay,
   getWeeklySleepQualityStats,
-  checkIfStepGoalWasMade
-} from './dataModel';
+  getWeeklySleepHoursStats
+} from '../src/data-model/sleep-data';
 
 var currentUser
-
-
 
 // USER INFO
 const displayRandomUser = (array) => {
@@ -74,8 +68,8 @@ const displayRandomUser = (array) => {
 }
 
 const displayFriendList = (array) => {
-  const friendsNames = currentUser.friends.map((id) => {
-    const userFriendDetails = getUserData(id, array)
+  let friendsNames = currentUser.friends.map((id) => {
+    let userFriendDetails = getUserData(id, array)
     return userFriendDetails.name
   }).join(', ') 
   
@@ -86,17 +80,17 @@ const displayFriendList = (array) => {
 
  // HYDRATION INFO
 const displayDailyHydrationStats = (array) => {
-  const todaysDate = getOuncesByWeek(currentUser.id, array)
-  const todaysOunces = getOuncesByDay(currentUser.id, todaysDate.dates[6], array)
+  let todaysDate = getOuncesByWeek(currentUser.id, array)
+  let todaysOunces = getOuncesByDay(currentUser.id, todaysDate.dates[6], array)
 
   dailyHydrationStats.innerHTML = ` 
 <div>Today, you've consumed<br> ${todaysOunces} ounces of water!<br></div>`
 }
 
 const displayWeeklyHydrationStats = (array) => {
-  const weeklyOzArray = getOuncesByWeek(currentUser.id, array)
-  const weeklyHydrationPerDay = weeklyOzArray.dates
-  const formattedDay = weeklyHydrationPerDay.map((day) => {
+  let weeklyOzArray = getOuncesByWeek(currentUser.id, array)
+  let weeklyHydrationPerDay = weeklyOzArray.dates
+  let formattedDay = weeklyHydrationPerDay.map((day) => {
     return dayjs(day).format('ddd D')
   }) 
   
@@ -131,8 +125,8 @@ const displayTodaysSleepData = (dataList) => {
 }
 
 const displayAllTimeAvgSleepHoursAndQuality = (dataList) => {
-  const avgSleepQuality = getAvgSleepQuality(currentUser.id, dataList)
-  const avgSleepHours = getAvgHoursSlept(currentUser.id, dataList)
+  let avgSleepQuality = getAvgSleepQuality(currentUser.id, dataList)
+  let avgSleepHours = getAvgHoursSlept(currentUser.id, dataList)
   
   avgAllTimeSleepStats.innerHTML = `<div>All-Time Avg Sleep Quality: ${avgSleepQuality}</div>
   <div>All-Time Avg Hours Slept: ${avgSleepHours}</div>`
@@ -141,10 +135,10 @@ const displayAllTimeAvgSleepHoursAndQuality = (dataList) => {
 const displayWeeklySleepHoursAndQuality = (dataList) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList);
 
-  const weeklySleepQualStats = getWeeklySleepQualityStats(currentUser.id, dataList, todaysDate.date)
-  const weeklySleepHoursStats = getWeeklySleepHoursStats(currentUser.id, dataList, todaysDate.date)
+  let weeklySleepQualStats = getWeeklySleepQualityStats(currentUser.id, dataList, todaysDate.date)
+  let weeklySleepHoursStats = getWeeklySleepHoursStats(currentUser.id, dataList, todaysDate.date)
 
-  const formattedDay = weeklySleepHoursStats.day.map((day) => {
+  let formattedDay = weeklySleepHoursStats.day.map((day) => {
     return dayjs(day).format('ddd D')
   })
   weeklySleepStats.innerHTML = `
@@ -175,17 +169,15 @@ const displayWeeklySleepHoursAndQuality = (dataList) => {
  `
 }
 
-
-
 // ACTIVITY INFO
 const displayAverageSteps = (array) => {
-  const avgSteps = getAvgSteps(array)
+  let avgSteps = getAvgSteps(array)
   usersStepGoal.innerHTML = `All users step goal: ${avgSteps}`
  }
 
 const displayDailySteps = (dataList) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList);
-  const todaysStepCount = getDailySteps(currentUser.id, todaysDate.date, dataList);
+  let todaysStepCount = getDailySteps(currentUser.id, todaysDate.date, dataList);
 
   dailyStepCount.innerHTML = ` 
   <div>Today, you've walked ${todaysStepCount} steps!</div>
@@ -193,7 +185,7 @@ const displayDailySteps = (dataList) => {
 }
 const displayDailyActiveMinutes = (dataList) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList);
-  const todaysActiveMin = getActiveMinutes(currentUser.id, todaysDate.date, dataList);
+  let todaysActiveMin = getActiveMinutes(currentUser.id, todaysDate.date, dataList);
 
   dailyActiveMinutes.innerHTML = `
   <div>Today, you have ${todaysActiveMin} active minutes!</div>
@@ -202,7 +194,7 @@ const displayDailyActiveMinutes = (dataList) => {
 
 const displayMilesWalkedByDay = (dataList1, dataList2) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList2)
-  const todaysMilesWalked = getDailyMilesWalked(currentUser.id, todaysDate.date, dataList1, dataList2)
+  let todaysMilesWalked = getDailyMilesWalked(currentUser.id, todaysDate.date, dataList1, dataList2)
 
   milesWalkedByDay.innerHTML = ` 
   <div>Today, you walked ${todaysMilesWalked} miles!</div>`
@@ -223,7 +215,7 @@ const displayWeeklyStepCountGoalReached = (dataList1, dataList2) => {
   })
   ////////////////////////////////////////////////////////////////////////////////
 
-  const formattedDay = weeklyUserDatathisone.map((day) => {
+  let formattedDay = weeklyUserDatathisone.map((day) => {
     return dayjs(day.date).format('ddd D')
   })
 
@@ -253,7 +245,6 @@ const displayWeeklyStepCountGoalReached = (dataList1, dataList2) => {
   <div class="oz-last">${weeklyUserDatathisone[6].goalReached}</div>
   `
 }
-
 
 export {
   displayRandomUser,

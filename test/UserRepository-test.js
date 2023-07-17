@@ -1,33 +1,54 @@
 import { expect } from 'chai';
 
 import { 
+  getDailyMilesWalked, 
+  checkIfStepGoalWasMade, 
+  getDailySteps,
+  getActiveMinutes,
+} from '../src/data-model/activity-data';
+
+import {
   getRandomIndex,
+  getTodaysDate,
+  getStatsByWeek
+} from '../src/data-model/helper-functions';
+
+import {
   getUserData, 
   getAvgSteps, 
   generateRandomUser,
-  getAvgDailyOunces, 
-  getOuncesByDay, 
-  getOuncesByWeek, 
-  getAvgHoursSlept, 
-  getAvgSleepQuality, 
-  getDailyMilesWalked, 
-  getSleepAmountByDay, 
-  getSleepQualityByDay, 
-  getWeeklySleepQualityStats, 
-  checkIfStepGoalWasMade, 
-  getTodaysDate, 
-  getDailySteps,
-  getActiveMinutes,
-  getWeeklySleepHoursStats,
-  getStatsByWeek,
-} from '../src/dataModel';
+  } from '../src/data-model/user-data';
+
+  import {
+    getAvgDailyOunces,
+    getOuncesByDay,
+    getOuncesByWeek,
+    } from '../src/data-model/hydration-data';
+
+import {
+  getAvgHoursSlept,
+  getAvgSleepQuality,
+  getSleepAmountByDay,
+  getSleepQualityByDay,
+  getWeeklySleepQualityStats,
+  getWeeklySleepHoursStats
+} from '../src/data-model/sleep-data';
 
 import { 
   sampleUserData, 
+} from '../src/sample-data/sampleUserData';
+
+import { 
   sampleHydrationData, 
+} from '../src/sample-data/sampleHydrationData';
+
+import { 
   sampleActivityData, 
-  sampleSleepData 
-} from '../src/data/sampleData';
+} from '../src/sample-data/sampleActivityData';
+
+import { 
+  sampleSleepData, 
+} from '../src/sample-data/sampleSleepData';
 
 ////////////////////////////// HELPER ///////////////////////////////
 describe('Helper Functions', () => {

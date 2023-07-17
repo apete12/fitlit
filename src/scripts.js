@@ -1,7 +1,3 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// Imports:
 import './css/styles.css'
 import './images/turing-logo.png';
 
@@ -68,7 +64,6 @@ window.addEventListener('load', () => {
 })
 
 export {
-  // query selectors:
   userInfoContainer,
   welcomeHeading,
   friendList,
