@@ -132,15 +132,21 @@ const displayTodaysSleepData = (dataList) => {
   const todaysSleepQuantity = getSleepAmountByDay(currentUser.id, todaysDate.date, dataList);
 
   sleepStatsByDay.innerHTML = ` 
-  <div>Today, you slept ${todaysSleepQuantity} hours!</div>`
+  <section>Today, you slept ${todaysSleepQuantity} hours!</section>`
 }
 
 const displayAllTimeAvgSleepHoursAndQuality = (dataList) => {
   let avgSleepQuality = getAvgSleepQuality(currentUser.id, dataList)
   let avgSleepHours = getAvgHoursSlept(currentUser.id, dataList)
   
-  avgAllTimeSleepStats.innerHTML = `<div>All-Time Avg Sleep Quality: ${avgSleepQuality}</div>
-  <div>All-Time Avg Hours Slept: ${avgSleepHours}</div>`
+  avgAllTimeSleepStats.innerHTML = `
+  <div class="all-time-sleep-quality-container">
+    <section>All-Time Avg Sleep Quality: ${avgSleepQuality}</section>
+  </div>
+  <div class="all-time-sleep-hours-container">
+    <section>All-Time Avg Hours Slept: ${avgSleepHours}</section>
+  </div>
+    `
 }
 
 const displayWeeklySleepHoursAndQuality = (dataList) => {
@@ -152,31 +158,34 @@ const displayWeeklySleepHoursAndQuality = (dataList) => {
   let formattedDay = weeklySleepHoursStats.day.map((day) => {
     return dayjs(day).format('ddd D')
   })
+  
   weeklySleepStats.innerHTML = `
- <div class="last-week"> ${formattedDay[0]}</div>
- <div class="last-week"> ${formattedDay[1]}</div>
- <div class="last-week"> ${formattedDay[2]}</div>
- <div class="last-week"> ${formattedDay[3]}</div>
- <div class="last-week"> ${formattedDay[4]}</div>
- <div class="last-week"> ${formattedDay[5]}</div>
- <div class="last-week-last"> ${formattedDay[6]}</div>
+    <section class="last-week date lables">Date</section>
+    <section class="last-week date"> ${formattedDay[0]}</section>
+    <section class="last-week date"> ${formattedDay[1]}</section>
+    <section class="last-week date"> ${formattedDay[2]}</section>
+    <section class="last-week date"> ${formattedDay[3]}</section>
+    <section class="last-week date"> ${formattedDay[4]}</section>
+    <section class="last-week date"> ${formattedDay[5]}</section>
+    <section class="last-week-last date"> ${formattedDay[6]}</section>
 
- <div class="oz">${weeklySleepHoursStats.sleepHours[0]} Hrs</div>
- <div class="oz">${weeklySleepHoursStats.sleepHours[1]} Hrs</div>
- <div class="oz">${weeklySleepHoursStats.sleepHours[2]} Hrs</div>
- <div class="oz">${weeklySleepHoursStats.sleepHours[3]} Hrs</div>
- <div class="oz">${weeklySleepHoursStats.sleepHours[4]} Hrs</div>
- <div class="oz">${weeklySleepHoursStats.sleepHours[5]} Hrs</div>
- <div class="oz-last">${weeklySleepHoursStats.sleepHours[6]} Hrs</div>
+    <section class="last-week date lables">Hours</section>
+    <section class="data">${weeklySleepHoursStats.sleepHours[0]}</section>
+    <section class="data">${weeklySleepHoursStats.sleepHours[1]}</section>
+    <section class="data">${weeklySleepHoursStats.sleepHours[2]}</section>
+    <section class="data">${weeklySleepHoursStats.sleepHours[3]}</section>
+    <section class="data">${weeklySleepHoursStats.sleepHours[4]}</section>
+    <section class="data">${weeklySleepHoursStats.sleepHours[5]}</section>
+    <section class="data-last data">${weeklySleepHoursStats.sleepHours[6]}</section>
 
- <div class="oz">${weeklySleepQualStats.sleepQuality[0]} Qlty</div>
-<div class="oz">${weeklySleepQualStats.sleepQuality[1]} Qlty</div>
-<div class="oz">${weeklySleepQualStats.sleepQuality[2]} Qlty</div>
-<div class="oz">${weeklySleepQualStats.sleepQuality[3]} Qlty</div>
-<div class="oz">${weeklySleepQualStats.sleepQuality[4]} Qlty</div>
-<div class="oz">${weeklySleepQualStats.sleepQuality[5]} Qlty</div>
-<div class="oz-last">${weeklySleepQualStats.sleepQuality[6]} Qlty</div>
- 
+    <section class="last-week date lables">Quality Rating</section>
+    <section class="data">${weeklySleepQualStats.sleepQuality[0]}</section>
+    <section class="data">${weeklySleepQualStats.sleepQuality[1]}</section>
+    <section class="data">${weeklySleepQualStats.sleepQuality[2]}</section>
+    <section class="data">${weeklySleepQualStats.sleepQuality[3]}</section>
+    <section class="data">${weeklySleepQualStats.sleepQuality[4]}</section>
+    <section class="data">${weeklySleepQualStats.sleepQuality[5]}</section>
+    <section class="data-last data">${weeklySleepQualStats.sleepQuality[6]}</section>
  `
 }
 
@@ -191,15 +200,16 @@ const displayDailySteps = (dataList) => {
   let todaysStepCount = getDailySteps(currentUser.id, todaysDate.date, dataList);
 
   dailyStepCount.innerHTML = ` 
-  <div>Today, you've walked ${todaysStepCount} steps!</div>
+  <section>you've walked ${todaysStepCount} steps!</section>
   `
 }
+
 const displayDailyActiveMinutes = (dataList) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList);
   let todaysActiveMin = getActiveMinutes(currentUser.id, todaysDate.date, dataList);
 
   dailyActiveMinutes.innerHTML = `
-  <div>Today, you have ${todaysActiveMin} active minutes!</div>
+  <section>you have ${todaysActiveMin} active minutes!</section>
   `
 }
 
@@ -208,7 +218,8 @@ const displayMilesWalkedByDay = (dataList1, dataList2) => {
   let todaysMilesWalked = getDailyMilesWalked(currentUser.id, todaysDate.date, dataList1, dataList2)
 
   milesWalkedByDay.innerHTML = ` 
-  <div>Today, you walked ${todaysMilesWalked} miles!</div>`
+  <section>you walked ${todaysMilesWalked} miles!</section>
+  `
 }
 
 
