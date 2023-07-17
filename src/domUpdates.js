@@ -242,30 +242,33 @@ const displayWeeklyStepCountGoalReached = (dataList1, dataList2) => {
   })
 
   weeklyStepCountGoal.innerHTML = `
-  <div class="last-week"> ${formattedDay[0]}</div>
-  <div class="last-week"> ${formattedDay[1]}</div>
-  <div class="last-week"> ${formattedDay[2]}</div>
-  <div class="last-week"> ${formattedDay[3]}</div>
-  <div class="last-week"> ${formattedDay[4]}</div>
-  <div class="last-week"> ${formattedDay[5]}</div>
-  <div class="last-week-last"> ${formattedDay[6]}</div>
+  <section class="last-week date lables">Date</section>
+  <section class="last-week date"> ${formattedDay[0]}</section>
+  <section class="last-week date"> ${formattedDay[1]}</section>
+  <section class="last-week date"> ${formattedDay[2]}</section>
+  <section class="last-week date"> ${formattedDay[3]}</section>
+  <section class="last-week date"> ${formattedDay[4]}</section>
+  <section class="last-week date"> ${formattedDay[5]}</section>
+  <section class="last-week-last date"> ${formattedDay[6]}</section>
 
-  <div class="oz">${weeklyUserDatathisone[0].numSteps}</div>
-  <div class="oz">${weeklyUserDatathisone[1].numSteps}</div>
-  <div class="oz">${weeklyUserDatathisone[2].numSteps}</div>
-  <div class="oz">${weeklyUserDatathisone[3].numSteps}</div>
-  <div class="oz">${weeklyUserDatathisone[4].numSteps}</div>
-  <div class="oz">${weeklyUserDatathisone[5].numSteps}</div>
-  <div class="oz-last">${weeklyUserDatathisone[6].numSteps}</div>
+  <section class="last-week date lables"># Steps</section>
+  <section class="oz data">${weeklyUserDatathisone[0].numSteps}</section>
+  <section class="oz data">${weeklyUserDatathisone[1].numSteps}</section>
+  <section class="oz data">${weeklyUserDatathisone[2].numSteps}</section>
+  <section class="oz data">${weeklyUserDatathisone[3].numSteps}</section>
+  <section class="oz data">${weeklyUserDatathisone[4].numSteps}</section>
+  <section class="oz data">${weeklyUserDatathisone[5].numSteps}</section>
+  <section class="data-last data">${weeklyUserDatathisone[6].numSteps}</section>
 
-  <div class="oz">${weeklyUserDatathisone[0].goalReached}</div>
-  <div class="oz">${weeklyUserDatathisone[1].goalReached}</div>
-  <div class="oz">${weeklyUserDatathisone[2].goalReached}</div>
-  <div class="oz">${weeklyUserDatathisone[3].goalReached}</div>
-  <div class="oz">${weeklyUserDatathisone[4].goalReached}</div>
-  <div class="oz">${weeklyUserDatathisone[5].goalReached}</div>
-  <div class="oz-last">${weeklyUserDatathisone[6].goalReached}</div>
-  `
+  <section class="last-week date lables">Step Goal Met?</section>
+  <section class="oz data">${weeklyUserDatathisone[0].goalReached}</section>
+  <section class="oz data">${weeklyUserDatathisone[1].goalReached}</section>
+  <section class="oz data">${weeklyUserDatathisone[2].goalReached}</section>
+  <section class="oz data">${weeklyUserDatathisone[3].goalReached}</section>
+  <section class="oz data">${weeklyUserDatathisone[4].goalReached}</section>
+  <section class="oz data">${weeklyUserDatathisone[5].goalReached}</section>
+  <section class="data-last data">${weeklyUserDatathisone[6].goalReached}</section>
+`
 }
 
 export {
