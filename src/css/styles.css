@@ -53,16 +53,12 @@ h1 {
   margin-left: 20px;
 }
 
-h2 {
-  font-size: 50px;
-  font-family: 'Abel', sans-serif;
-  color: white;
-  height: 100%;
-  width: 70%;
+.welcome-user {
+  height: 60%;
+  width: 50%;
   display: flex;
-  align-content: flex-end;
-  flex-wrap: wrap;
-  margin-top: 20px;
+  flex-direction: row;
+  justify-content: center;
 }
 
 main {
@@ -76,6 +72,28 @@ main {
   align-items: center;
 }
 
+h2 {
+  font-size: 50px;
+  font-family: 'Abel', sans-serif;
+  color: white;
+  height: 100%;
+  width: 70%;
+  display: flex;
+  align-content: flex-end;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.h3-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  background-color:  rgba(225, 225, 225, 0.462);
+}
+
+
 .user-data-container {
   display: flex;
   width: 100%;
@@ -83,15 +101,6 @@ main {
   justify-content: space-around;
   align-items: center;
   margin-top: 40px;
-}
-
-
-.welcome-user {
-  height: 60%;
-  width: 50%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
 }
 
 .personal-info-container {
@@ -201,7 +210,7 @@ main {
   align-items: center;
   width: 100vw;
   height: 100vh;
-  margin-top: 20px;
+  margin-top: 30px;
   margin-bottom: 20px;
 }
 
@@ -213,8 +222,8 @@ main {
   flex-direction: column;
   font-family: 'Abel', sans-serif;
   font-size: 25px; 
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 25px;
+  margin-bottom: 25px;
   border-radius: 20px;
   box-shadow: 10px 5px 5px #044553
 }
@@ -228,20 +237,9 @@ main {
   flex-direction: column;
   font-family: 'Abel', sans-serif;
   font-size: 25px; 
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   border-radius: 20px;
   box-shadow: 10px 5px 5px #044553;
-}
-
-.h3-container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-.daily-water-sentences {
-  padding-bottom: 30px;
-  padding-left: 10px;
 }
 
 .health-stats-activity-sentences, .health-stats-sleep-stats-sentences {
@@ -261,7 +259,10 @@ main {
   width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
+}
 
+.today-container, .daily-water-sentences {
+  margin-top: 10px;
 }
 
 .all-time-sleep-stats-container {
@@ -284,6 +285,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .calendar-top {
