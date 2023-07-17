@@ -1,4 +1,4 @@
-const dayjs = require('dayjs')
+const dayjs = require('dayjs');
 
 import { 
   userInfoContainer,
@@ -13,7 +13,8 @@ import {
   milesWalkedByDay,
   dailyActiveMinutes,
   dailyStepCount,
-  weeklyStepCountGoal
+  weeklyStepCountGoal,
+  gateInfo,
 } from './scripts';
 
 import { 
@@ -32,22 +33,22 @@ import {
   getUserData, 
   getAvgSteps, 
   generateRandomUser,
-  } from '../src/data-model/user-data';
+} from '../src/data-model/user-data';
 
-  import {
-    getOuncesByDay,
-    getOuncesByWeek,
-    } from '../src/data-model/hydration-data';
+import {
+  getOuncesByDay,
+  getOuncesByWeek,
+} from '../src/data-model/hydration-data';
 
 import {
   getAvgHoursSlept,
   getAvgSleepQuality,
   getSleepAmountByDay,
   getWeeklySleepQualityStats,
-  getWeeklySleepHoursStats
+  getWeeklySleepHoursStats,
 } from '../src/data-model/sleep-data';
 
-var currentUser
+var currentUser;
 
 // USER INFO
 const displayRandomUser = (array) => {
@@ -58,13 +59,19 @@ const displayRandomUser = (array) => {
   welcomeHeading.innerText = `Welcome ${firstNameOnly[0]}!`
 
   userInfoContainer.innerHTML = ` 
-    <div>User ID: ${currentUser.id}</div>
-    <div>Name: ${currentUser.name}</div>
-    <div>Address: ${currentUser.address}</div>
-    <div>Email: ${currentUser.email}</div>
-    <div>Stride Length: ${currentUser.strideLength}</div>
-    <div>Daily Step Goal: ${currentUser.dailyStepGoal}</div>
+    <section>User ID: ${currentUser.id}</section>
+    <section>Name: ${currentUser.name}</section>
+    <section>Address: ${currentUser.address}</section>
+    <section>Email: ${currentUser.email}</section>
   `
+  gateInfo.innerHTML = `
+    <div class="stride-length-container">
+      <section>Stride Length: ${currentUser.strideLength}</section>
+    </div>
+    <div class="daily-step-goal-container">
+      <section>Daily Step Goal: ${currentUser.dailyStepGoal}</section>
+    </div>
+    `
 }
 
 const displayFriendList = (array) => {
@@ -73,18 +80,19 @@ const displayFriendList = (array) => {
     return userFriendDetails.name
   }).join(', ') 
   
-  friendList.innerHTML = `<div>Friend List: ${friendsNames}</div>`
- }
+  friendList.innerHTML = `
+    <section>${friendsNames}</section>
+    `
+}
 
-
-
- // HYDRATION INFO
+// HYDRATION INFO
 const displayDailyHydrationStats = (array) => {
   let todaysDate = getOuncesByWeek(currentUser.id, array)
   let todaysOunces = getOuncesByDay(currentUser.id, todaysDate.dates[6], array)
-
+  
   dailyHydrationStats.innerHTML = ` 
-<div>Today, you've consumed<br> ${todaysOunces} ounces of water!<br></div>`
+    <section class="daily-water-sentences">Today, you've consumed ${todaysOunces} ounces of water!</section>
+    `
 }
 
 const displayWeeklyHydrationStats = (array) => {
@@ -94,101 +102,113 @@ const displayWeeklyHydrationStats = (array) => {
     return dayjs(day).format('ddd D')
   }) 
   
- weeklyHydrationStats.innerHTML = `
- <div class="last-week"> ${formattedDay[0]}</div>
- <div class="last-week"> ${formattedDay[1]}</div>
- <div class="last-week"> ${formattedDay[2]}</div>
- <div class="last-week"> ${formattedDay[3]}</div>
- <div class="last-week"> ${formattedDay[4]}</div>
- <div class="last-week"> ${formattedDay[5]}</div>
- <div class="last-week-last"> ${formattedDay[6]}</div>
- <div class="oz">${weeklyOzArray.ounces[0]}oz</div>
- <div class="oz">${weeklyOzArray.ounces[1]}oz</div>
- <div class="oz">${weeklyOzArray.ounces[2]}oz</div>
- <div class="oz">${weeklyOzArray.ounces[3]}oz</div>
- <div class="oz">${weeklyOzArray.ounces[4]}oz</div>
- <div class="oz">${weeklyOzArray.ounces[5]}oz</div>
- <div class="oz-last">${weeklyOzArray.ounces[6]}oz</div>
+  weeklyHydrationStats.innerHTML = `
+    <section class="last-week date labels">Date</section>
+    <section class="last-week date"> ${formattedDay[0]}</section>
+    <section class="last-week date"> ${formattedDay[1]}</section>
+    <section class="last-week date"> ${formattedDay[2]}</section>
+    <section class="last-week date"> ${formattedDay[3]}</section>
+    <section class="last-week date"> ${formattedDay[4]}</section>
+    <section class="last-week date"> ${formattedDay[5]}</section>
+    <section class="last-week-last date"> ${formattedDay[6]}</section>
+    <section class="last-week date labels round">Oz.</section>
+    <section class="data">${weeklyOzArray.ounces[0]}</section>
+    <section class="data">${weeklyOzArray.ounces[1]}</section>
+    <section class="data">${weeklyOzArray.ounces[2]}</section>
+    <section class="data">${weeklyOzArray.ounces[3]}</section>
+    <section class="data">${weeklyOzArray.ounces[4]}</section>
+    <section class="data">${weeklyOzArray.ounces[5]}</section>
+    <section class="data-last data">${weeklyOzArray.ounces[6]}oz</section>
  `
 }
 
-
-
- // SLEEP INFO
+// SLEEP INFO
 const displayTodaysSleepData = (dataList) => {
-
-  let todaysDate = getTodaysDate(currentUser.id, dataList);
-  const todaysSleepQuantity = getSleepAmountByDay(currentUser.id, todaysDate.date, dataList);
+  let todaysDate = getTodaysDate(currentUser.id, dataList)
+  const todaysSleepQuantity = getSleepAmountByDay(currentUser.id, todaysDate.date, dataList)
 
   sleepStatsByDay.innerHTML = ` 
-  <div>Today, you slept ${todaysSleepQuantity} hours!</div>`
+    <section>Today, you slept ${todaysSleepQuantity} hours!</section>
+  `
 }
 
 const displayAllTimeAvgSleepHoursAndQuality = (dataList) => {
   let avgSleepQuality = getAvgSleepQuality(currentUser.id, dataList)
   let avgSleepHours = getAvgHoursSlept(currentUser.id, dataList)
   
-  avgAllTimeSleepStats.innerHTML = `<div>All-Time Avg Sleep Quality: ${avgSleepQuality}</div>
-  <div>All-Time Avg Hours Slept: ${avgSleepHours}</div>`
+  avgAllTimeSleepStats.innerHTML = `
+    <div class="all-time-sleep-quality-container">
+      <section>All-Time Avg Sleep Quality: ${avgSleepQuality}</section>
+    </div>
+    <div class="all-time-sleep-hours-container">
+      <section>All-Time Avg Hours Slept: ${avgSleepHours}</section>
+    </div>
+  `
 }
 
 const displayWeeklySleepHoursAndQuality = (dataList) => {
   let todaysDate = getTodaysDate(currentUser.id, dataList);
-
   let weeklySleepQualStats = getWeeklySleepQualityStats(currentUser.id, dataList, todaysDate.date)
   let weeklySleepHoursStats = getWeeklySleepHoursStats(currentUser.id, dataList, todaysDate.date)
-
+  
   let formattedDay = weeklySleepHoursStats.day.map((day) => {
     return dayjs(day).format('ddd D')
   })
+  
   weeklySleepStats.innerHTML = `
- <div class="last-week"> ${formattedDay[0]}</div>
- <div class="last-week"> ${formattedDay[1]}</div>
- <div class="last-week"> ${formattedDay[2]}</div>
- <div class="last-week"> ${formattedDay[3]}</div>
- <div class="last-week"> ${formattedDay[4]}</div>
- <div class="last-week"> ${formattedDay[5]}</div>
- <div class="last-week-last"> ${formattedDay[6]}</div>
+    <section class="last-week date lables">Date</section>
+    <section class="last-week date"> ${formattedDay[0]}</section>
+    <section class="last-week date"> ${formattedDay[1]}</section>
+    <section class="last-week date"> ${formattedDay[2]}</section>
+    <section class="last-week date"> ${formattedDay[3]}</section>
+    <section class="last-week date"> ${formattedDay[4]}</section>
+    <section class="last-week date"> ${formattedDay[5]}</section>
+    <section class="last-week-last date"> ${formattedDay[6]}</section>
 
- <div class="oz">${weeklySleepHoursStats.sleepHours[0]} Hrs</div>
- <div class="oz">${weeklySleepHoursStats.sleepHours[1]} Hrs</div>
- <div class="oz">${weeklySleepHoursStats.sleepHours[2]} Hrs</div>
- <div class="oz">${weeklySleepHoursStats.sleepHours[3]} Hrs</div>
- <div class="oz">${weeklySleepHoursStats.sleepHours[4]} Hrs</div>
- <div class="oz">${weeklySleepHoursStats.sleepHours[5]} Hrs</div>
- <div class="oz-last">${weeklySleepHoursStats.sleepHours[6]} Hrs</div>
+    <section class="last-week date lables">Hours</section>
+    <section class="data">${weeklySleepHoursStats.sleepHours[0]}</section>
+    <section class="data">${weeklySleepHoursStats.sleepHours[1]}</section>
+    <section class="data">${weeklySleepHoursStats.sleepHours[2]}</section>
+    <section class="data">${weeklySleepHoursStats.sleepHours[3]}</section>
+    <section class="data">${weeklySleepHoursStats.sleepHours[4]}</section>
+    <section class="data">${weeklySleepHoursStats.sleepHours[5]}</section>
+    <section class="data-last data">${weeklySleepHoursStats.sleepHours[6]}</section>
 
- <div class="oz">${weeklySleepQualStats.sleepQuality[0]} Qlty</div>
-<div class="oz">${weeklySleepQualStats.sleepQuality[1]} Qlty</div>
-<div class="oz">${weeklySleepQualStats.sleepQuality[2]} Qlty</div>
-<div class="oz">${weeklySleepQualStats.sleepQuality[3]} Qlty</div>
-<div class="oz">${weeklySleepQualStats.sleepQuality[4]} Qlty</div>
-<div class="oz">${weeklySleepQualStats.sleepQuality[5]} Qlty</div>
-<div class="oz-last">${weeklySleepQualStats.sleepQuality[6]} Qlty</div>
- 
+    <section class="last-week date lables">Quality Rating</section>
+    <section class="data">${weeklySleepQualStats.sleepQuality[0]}</section>
+    <section class="data">${weeklySleepQualStats.sleepQuality[1]}</section>
+    <section class="data">${weeklySleepQualStats.sleepQuality[2]}</section>
+    <section class="data">${weeklySleepQualStats.sleepQuality[3]}</section>
+    <section class="data">${weeklySleepQualStats.sleepQuality[4]}</section>
+    <section class="data">${weeklySleepQualStats.sleepQuality[5]}</section>
+    <section class="data-last data">${weeklySleepQualStats.sleepQuality[6]}</section>
  `
 }
 
 // ACTIVITY INFO
 const displayAverageSteps = (array) => {
   let avgSteps = getAvgSteps(array)
-  usersStepGoal.innerHTML = `All users step goal: ${avgSteps}`
+
+  usersStepGoal.innerHTML = `
+    All users step goal: ${avgSteps}
+  `
  }
 
 const displayDailySteps = (dataList) => {
-  let todaysDate = getTodaysDate(currentUser.id, dataList);
-  let todaysStepCount = getDailySteps(currentUser.id, todaysDate.date, dataList);
+  let todaysDate = getTodaysDate(currentUser.id, dataList)
+  let todaysStepCount = getDailySteps(currentUser.id, todaysDate.date, dataList)
 
   dailyStepCount.innerHTML = ` 
-  <div>Today, you've walked ${todaysStepCount} steps!</div>
+    <section>you've walked ${todaysStepCount} steps!</section>
   `
 }
+
 const displayDailyActiveMinutes = (dataList) => {
-  let todaysDate = getTodaysDate(currentUser.id, dataList);
-  let todaysActiveMin = getActiveMinutes(currentUser.id, todaysDate.date, dataList);
+  let todaysDate = getTodaysDate(currentUser.id, dataList)
+  let todaysActiveMin = getActiveMinutes(currentUser.id, todaysDate.date, dataList)
 
   dailyActiveMinutes.innerHTML = `
-  <div>Today, you have ${todaysActiveMin} active minutes!</div>
+    <section>you have ${todaysActiveMin} active minutes!</section>
   `
 }
 
@@ -197,52 +217,50 @@ const displayMilesWalkedByDay = (dataList1, dataList2) => {
   let todaysMilesWalked = getDailyMilesWalked(currentUser.id, todaysDate.date, dataList1, dataList2)
 
   milesWalkedByDay.innerHTML = ` 
-  <div>Today, you walked ${todaysMilesWalked} miles!</div>`
+    <section>you walked ${todaysMilesWalked} miles!</section>
+  `
 }
-
 
 const displayWeeklyStepCountGoalReached = (dataList1, dataList2) => {
   let today = getTodaysDate(currentUser.id, dataList2)
-
   let currentUserWeeklySleepData = getStatsByWeek(currentUser.id, dataList2, today.date)
   let weeklyUserDatathisone = currentUserWeeklySleepData()
 
-
-  ///////////////////////// needs to go in dataModel file//////////////////////
   weeklyUserDatathisone.forEach((v) => {
    v.goalReached = checkIfStepGoalWasMade(currentUser.id, v.date, dataList1, dataList2)
-
   })
-  ////////////////////////////////////////////////////////////////////////////////
 
   let formattedDay = weeklyUserDatathisone.map((day) => {
     return dayjs(day.date).format('ddd D')
   })
 
   weeklyStepCountGoal.innerHTML = `
-  <div class="last-week"> ${formattedDay[0]}</div>
-  <div class="last-week"> ${formattedDay[1]}</div>
-  <div class="last-week"> ${formattedDay[2]}</div>
-  <div class="last-week"> ${formattedDay[3]}</div>
-  <div class="last-week"> ${formattedDay[4]}</div>
-  <div class="last-week"> ${formattedDay[5]}</div>
-  <div class="last-week-last"> ${formattedDay[6]}</div>
+    <section class="last-week date lables">Date</section>
+    <section class="last-week date"> ${formattedDay[0]}</section>
+    <section class="last-week date"> ${formattedDay[1]}</section>
+    <section class="last-week date"> ${formattedDay[2]}</section>
+    <section class="last-week date"> ${formattedDay[3]}</section>
+    <section class="last-week date"> ${formattedDay[4]}</section>
+    <section class="last-week date"> ${formattedDay[5]}</section>
+    <section class="last-week-last date"> ${formattedDay[6]}</section>
 
-  <div class="oz">${weeklyUserDatathisone[0].numSteps}</div>
-  <div class="oz">${weeklyUserDatathisone[1].numSteps}</div>
-  <div class="oz">${weeklyUserDatathisone[2].numSteps}</div>
-  <div class="oz">${weeklyUserDatathisone[3].numSteps}</div>
-  <div class="oz">${weeklyUserDatathisone[4].numSteps}</div>
-  <div class="oz">${weeklyUserDatathisone[5].numSteps}</div>
-  <div class="oz-last">${weeklyUserDatathisone[6].numSteps}</div>
+    <section class="last-week date lables"># Steps</section>
+    <section class="data">${weeklyUserDatathisone[0].numSteps}</section>
+    <section class="data">${weeklyUserDatathisone[1].numSteps}</section>
+    <section class="data">${weeklyUserDatathisone[2].numSteps}</section>
+    <section class="data">${weeklyUserDatathisone[3].numSteps}</section>
+    <section class="data">${weeklyUserDatathisone[4].numSteps}</section>
+    <section class="data">${weeklyUserDatathisone[5].numSteps}</section>
+    <section class="data-last data">${weeklyUserDatathisone[6].numSteps}</section>
 
-  <div class="oz">${weeklyUserDatathisone[0].goalReached}</div>
-  <div class="oz">${weeklyUserDatathisone[1].goalReached}</div>
-  <div class="oz">${weeklyUserDatathisone[2].goalReached}</div>
-  <div class="oz">${weeklyUserDatathisone[3].goalReached}</div>
-  <div class="oz">${weeklyUserDatathisone[4].goalReached}</div>
-  <div class="oz">${weeklyUserDatathisone[5].goalReached}</div>
-  <div class="oz-last">${weeklyUserDatathisone[6].goalReached}</div>
+    <section class="last-week date lables">Step Goal Met?</section>
+    <section class="data">${weeklyUserDatathisone[0].goalReached}</section>
+    <section class="data">${weeklyUserDatathisone[1].goalReached}</section>
+    <section class="data">${weeklyUserDatathisone[2].goalReached}</section>
+    <section class="data">${weeklyUserDatathisone[3].goalReached}</section>
+    <section class="data">${weeklyUserDatathisone[4].goalReached}</section>
+    <section class="data">${weeklyUserDatathisone[5].goalReached}</section>
+    <section class="data-last data">${weeklyUserDatathisone[6].goalReached}</section>
   `
 }
 

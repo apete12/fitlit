@@ -1,7 +1,3 @@
-/* *{ */
-  /* border: 1px solid #b4d2d3 */
-/* } */
-
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -18,6 +14,7 @@ body {
 img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
+  margin-right: 20px;
 }
 
 input, button, textarea, select {
@@ -40,10 +37,9 @@ body, html {
 
 .nav-bar {
   background-color: #044553;
-  margin: 0px;
-  height: 15%;
+  height: 20%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 h1 {
@@ -55,7 +51,25 @@ h1 {
   display: flex;
   justify-content: space-around;
   margin-left: 20px;
-  margin-bottom: 20px;
+}
+
+.welcome-user {
+  height: 60%;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+main {
+  display: flex;
+  width: 100%;
+  height: 80%;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  overflow: scroll visible;
+  justify-content: center;
+  align-items: center;
 }
 
 h2 {
@@ -70,185 +84,248 @@ h2 {
   margin-top: 20px;
 }
 
-main {
+.h3-container {
   display: flex;
-  height: 85%;
-  width: 100%;
-  flex-direction: row-reverse;
-  flex-wrap: wrap;
-}
-
-.welcome {
-  display: flex;
-  width: 100%;
-  justify-content: space-evenly;
   align-items: center;
-}
-
-.welcome-user {
-  height: 70%;
-  width: 50%;
-  display: flex;
-  flex-direction: row;
-}
-
-.personal-info {
-  height: 75%;
-  width: 50%;
-  display: flex;
   flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  background-color:  rgba(225, 225, 225, 0.462);
+}
+
+.user-data-container {
+  display: flex;
+  width: 100%;
+  height: 50%;
   justify-content: space-around;
   align-items: center;
+  margin-top: 40px;
+}
+
+.personal-info-container {
+  height: 100%;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   font-family: 'Abel', sans-serif;
-  font-size: 25px;
+  font-size: 20px;
+  border: solid 2px #044553;
+  background: rgba(225, 225, 225, 0.462);
+  border-radius: 20px;
+  box-shadow: 10px 5px 5px #044553;
+}
+
+.movement-info-container{
+  height: 100%;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Abel', sans-serif;
+  font-size: 20px;
+  border: solid 2px #044553;
+  background: rgba(225, 225, 225, 0.462);
+  border-radius: 20px;
+  box-shadow: 10px 5px 5px #044553;
+}
+
+.friends-container{
+  height: 100%;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Abel', sans-serif;
+  font-size: 20px;
+  border: solid 2px #044553;
+  background: rgba(225, 225, 225, 0.462);
+  border-radius: 20px;
+  box-shadow: 10px 5px 5px #044553;
+
 }
 
 .user-info {
-  height: 60%;
-  width: 95%;
-}
-
-.motivation {
-  height: 20%;
-  width: 95%;
-}
-
-.friends {
-  height: 75%;
-  width: 30%;
-  font-family: 'Abel', sans-serif;
-  font-size: 25px; 
-}
-
-.cards {
   display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  align-content: space-around;
-  justify-content: space-around;
-}
-
-.hydration {
-  height: 90%;
-  width: 30%;
-  border: solid 10px #044553;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  font-family: 'Abel', sans-serif;
-  font-size: 25px; 
+  justify-content: center;
+  height: 100%;
+  width: 90%;
+  margin-bottom: 15px;
 }
+
+.gate-info-container, .all-users-step-goal-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 90%;
+}
+
+.stride-length-container, .daily-step-goal-container {
+   display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+} 
 
 .friend-list {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 90%;
+}
+
+.user-info-title, .movement-info-title, .friend-list-title {
+  font-family: 'Abel', oswald;
+  font-size: 25px;
+  margin-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #57b9bc80;
+  border-radius: 20px;
+}
+
+.movement-info-quote, .user-info-quote, .friends-list-quote {
+  margin-bottom: 10px;
+  font-family: 'bebas neue';
+  margin-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #57b9bc80;
+  border-radius: 20px;
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.hydration-container {
+  height: 40vh;
+  width: 90vw;
+  border: solid 5px #044553;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Abel', sans-serif;
+  font-size: 25px; 
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border-radius: 20px;
+  box-shadow: 10px 5px 5px #044553
+}
+
+.sleep-container, .activity-container {
+  height: 55vh;
+  width: 90vw;
+  border: solid 5px #044553;
+  display: flex;
   align-items: center;
   flex-direction: column;
   font-family: 'Abel', sans-serif;
   font-size: 25px; 
+  margin-bottom: 25px;
+  border-radius: 20px;
+  box-shadow: 10px 5px 5px #044553;
 }
 
-.hydration {
-  height: 90%;
-  width: 30%;
-  text-align: center;
+.health-stats-activity-sentences, .health-stats-sleep-stats-sentences {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.health-stats-hydration-sentences {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.today-container, .daily-water-sentences {
+  margin-top: 10px;
+}
+
+.all-time-sleep-stats-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.all-time-sleep-quality-container, .all-time-sleep-hours-container{
+  display: flex;
+  
+}
+
+.daily-steps-container, .daily-active-min-container, .daily-miles-container {
+  display: flex;
 }
 
 .grid-calendar {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .calendar-top {
   width: 95%;
-  height: 25%;
   display: grid;
   align-items: center;
+  justify-content: center;
   color: white;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: bold;
-  padding: 0px;
-  margin: 0px;
+  padding: 5px;
+  margin: 5px;
   background-color: #044553;
+  border-radius : 10px;
 }
 
-.weekly-hydration-stats {
+.weekly-hydration-stats, .weekly-step-count-goal, .weekly-sleep-stats {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   position: inherit;
   grid-gap: 0px;
-  padding: 0%;
-  border: 1px solid black;
+  border: 3px solid #044553;
   grid-template-rows: auto auto;
   align-items: center;
   width: 95%;
-  font-size: 25px;
 }
 
-.last-week {
-  border-right: 1px solid #044553;
-}
-
-.oz {
+.data {
   border-top: 1px solid #044553;
   border-right: 1px solid #044553;
   text-align: center;
+  font-size: 25px;
 }
 
-.oz-last {
+.lables, .date {
+  color: white;
+  background-color: #044553;
+  text-align: center;
+  font-size: 25px;
+}
+
+.data-last {
   border-top: 1px solid #044553;
   text-align: center;
-}
-
-.sleep, .activity, .hydration {
-  height: 90%;
-  width: 32%;
-  border: solid 10px #044553;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-  font-family: 'Abel', sans-serif;
-  font-size: 25px; 
-}
-
-.weekly-sleep-stats {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  position: inherit;
-  grid-gap: 0px;
-  padding: 0%;
-  border: 1px solid black;
-  grid-template-rows: auto auto;
-  align-items: center;
-  width: 95%;
-  font-size: 25px;
-}
-
-.weekly-step-count-goal {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  position: inherit;
-  grid-gap: 0px;
-  padding: 0%;
-  border: 1px solid black;
-  grid-template-rows: auto auto;
-  align-items: center;
-  width: 95%;
-  font-size: 25px;
-}
-
-.last-week {
-  border-right: 1px solid #044553;
-}
-
-.oz {
-  border-top: 1px solid #044553;
-  border-right: 1px solid #044553;
-}
-
-.oz-last {
-  border-top: 1px solid #044553;
 }

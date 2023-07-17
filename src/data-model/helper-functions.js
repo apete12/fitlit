@@ -1,4 +1,3 @@
-//////////////////////// HELPER FUNCTIONS ////////////////////////
 const getRandomIndex = (dataList) => {
   return Math.floor(Math.random() * dataList.users.length);
 }
@@ -14,7 +13,7 @@ const getTodaysDate = ((id, dataList) => {
     today.date = dataList.sleepData.filter(log => log.userID === id);
     today.dataListType = 'sleep'
     
-  } else if(dataList.activityData) {
+  } else if (dataList.activityData) {
     today.date = dataList.activityData.filter(log => log.userID === id);
     today.dataListType = 'activity'
   } else if (today.date === null) {
@@ -24,8 +23,7 @@ const getTodaysDate = ((id, dataList) => {
   today.date = today.date[today.date.length - 1].date
   
   return today
-});
-
+})
 
 const getStatsByWeek = (id, dataList, startDate) => {
 
@@ -55,11 +53,12 @@ const getStatsByWeek = (id, dataList, startDate) => {
       let weeklyUserData = dataTypeById.slice(entryPosition - 7, entryPosition);
       return weeklyUserData;
     }
+
     return [];
-  };
+  }
   
   return makeWeeklyArray;
-};
+}
 
 export {
     getStatsByWeek,
