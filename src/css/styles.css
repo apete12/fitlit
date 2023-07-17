@@ -93,7 +93,6 @@ h2 {
   background-color:  rgba(225, 225, 225, 0.462);
 }
 
-
 .user-data-container {
   display: flex;
   width: 100%;
@@ -250,7 +249,6 @@ h2 {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
 
 .health-stats-hydration-sentences {
   display: flex;
