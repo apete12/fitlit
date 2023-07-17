@@ -58,13 +58,20 @@ const displayRandomUser = (array) => {
   welcomeHeading.innerText = `Welcome ${firstNameOnly[0]}!`
 
   userInfoContainer.innerHTML = ` 
-    <div>User ID: ${currentUser.id}</div>
-    <div>Name: ${currentUser.name}</div>
-    <div>Address: ${currentUser.address}</div>
-    <div>Email: ${currentUser.email}</div>
-    <div>Stride Length: ${currentUser.strideLength}</div>
-    <div>Daily Step Goal: ${currentUser.dailyStepGoal}</div>
+    <section>User ID: ${currentUser.id}</section>
+    <section>Name: ${currentUser.name}</section>
+    <section>Address: ${currentUser.address}</section>
+    <section>Email: ${currentUser.email}</section>
   `
+
+  gateInfo.innerHTML = `
+    <div class="stride-length-container">
+      <section>Stride Length: ${currentUser.strideLength}</section>
+    </div>
+    <div class="daily-step-goal-container">
+      <section>Daily Step Goal: ${currentUser.dailyStepGoal}</section>
+    </div>
+    `
 }
 
 const displayFriendList = (array) => {
@@ -73,18 +80,20 @@ const displayFriendList = (array) => {
     return userFriendDetails.name
   }).join(', ') 
   
-  friendList.innerHTML = `<div>Friend List: ${friendsNames}</div>`
- }
-
+  friendList.innerHTML = `
+    <section>${friendsNames}</section>
+    `
+}
 
 
  // HYDRATION INFO
 const displayDailyHydrationStats = (array) => {
   let todaysDate = getOuncesByWeek(currentUser.id, array)
   let todaysOunces = getOuncesByDay(currentUser.id, todaysDate.dates[6], array)
-
+  
   dailyHydrationStats.innerHTML = ` 
-<div>Today, you've consumed<br> ${todaysOunces} ounces of water!<br></div>`
+    <section class="daily-water-sentences">Today, you've consumed ${todaysOunces} ounces of water!</section>
+    `
 }
 
 const displayWeeklyHydrationStats = (array) => {
@@ -94,21 +103,23 @@ const displayWeeklyHydrationStats = (array) => {
     return dayjs(day).format('ddd D')
   }) 
   
- weeklyHydrationStats.innerHTML = `
- <div class="last-week"> ${formattedDay[0]}</div>
- <div class="last-week"> ${formattedDay[1]}</div>
- <div class="last-week"> ${formattedDay[2]}</div>
- <div class="last-week"> ${formattedDay[3]}</div>
- <div class="last-week"> ${formattedDay[4]}</div>
- <div class="last-week"> ${formattedDay[5]}</div>
- <div class="last-week-last"> ${formattedDay[6]}</div>
- <div class="oz">${weeklyOzArray.ounces[0]}oz</div>
- <div class="oz">${weeklyOzArray.ounces[1]}oz</div>
- <div class="oz">${weeklyOzArray.ounces[2]}oz</div>
- <div class="oz">${weeklyOzArray.ounces[3]}oz</div>
- <div class="oz">${weeklyOzArray.ounces[4]}oz</div>
- <div class="oz">${weeklyOzArray.ounces[5]}oz</div>
- <div class="oz-last">${weeklyOzArray.ounces[6]}oz</div>
+  weeklyHydrationStats.innerHTML = `
+    <section class="last-week date labels">Date</section>
+    <section class="last-week date"> ${formattedDay[0]}</section>
+    <section class="last-week date"> ${formattedDay[1]}</section>
+    <section class="last-week date"> ${formattedDay[2]}</section>
+    <section class="last-week date"> ${formattedDay[3]}</section>
+    <section class="last-week date"> ${formattedDay[4]}</section>
+    <section class="last-week date"> ${formattedDay[5]}</section>
+    <section class="last-week-last date"> ${formattedDay[6]}</section>
+    <section class="last-week date labels round">Oz.</section>
+    <section class="data">${weeklyOzArray.ounces[0]}</section>
+    <section class="data">${weeklyOzArray.ounces[1]}</section>
+    <section class="data">${weeklyOzArray.ounces[2]}</section>
+    <section class="data">${weeklyOzArray.ounces[3]}</section>
+    <section class="data">${weeklyOzArray.ounces[4]}</section>
+    <section class="data">${weeklyOzArray.ounces[5]}</section>
+    <section class="data-last data">${weeklyOzArray.ounces[6]}oz</section>
  `
 }
 

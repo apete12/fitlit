@@ -1,5 +1,7 @@
+// Imports:
 import './css/styles.css'
-import './images/turing-logo.png';
+import './images/a-step-in-the-right-direction.jpg'
+import './images/water-drops.png'
 
 import { 
   displayRandomUser, 
@@ -36,8 +38,8 @@ var weeklyStepCountGoal = document.querySelector('.weekly-step-count-goal')
 var milesWalkedByDay = document.querySelector('.todays-miles-walked')
 // sleep
 var weeklySleepStats = document.querySelector('.weekly-sleep-stats')
-var sleepStatsByDay = document.querySelector('.sleep-stats')
-var avgAllTimeSleepStats = document.querySelector('.avg-sleep-qual')
+// var sleepStatsByDay = document.querySelector('.today-sleep-stats')
+// var avgAllTimeSleepStats = document.querySelector('.all-time-sleep-stats')
 
 // event listener:
 window.addEventListener('load', () => {
@@ -76,6 +78,8 @@ export {
   weeklyStepCountGoal,
   milesWalkedByDay,
   weeklySleepStats,
-  dailyActiveMinutes
+  dailyActiveMinutes,
+  // dailyActiveMinutes,
+  // gateInfo
 }
 
