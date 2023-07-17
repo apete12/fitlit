@@ -26,7 +26,7 @@ import {
 } from './scripts';
 
 import {
-  breakDownToWeeklyStatsArray,
+  getStatsByWeek,
   // USER DATA
   generateRandomUser,
   getTodaysDate,
@@ -213,7 +213,7 @@ const displayMilesWalkedByDay = (dataList1, dataList2) => {
 const displayWeeklyStepCountGoalReached = (dataList1, dataList2) => {
   let today = getTodaysDate(currentUser.id, dataList2)
 
-  let currentUserWeeklySleepData = breakDownToWeeklyStatsArray(currentUser.id, dataList2, today.date)
+  let currentUserWeeklySleepData = getStatsByWeek(currentUser.id, dataList2, today.date)
   let weeklyUserDatathisone = currentUserWeeklySleepData()
 
 
