@@ -19,7 +19,7 @@ import {
   getDailySteps,
   getActiveMinutes,
   getWeeklySleepHoursStats,
-  breakDownToWeeklyStatsArray
+  getStatsByWeek
 } from '../src/dataModel';
 
 import { 
@@ -32,18 +32,18 @@ import {
 ////////////////////////////// HELPER ///////////////////////////////
 describe('Helper Functions', () => {
 
-  let todaysDate, hydrationClosure, sleepClosure, activityClosure, emptyUserDataList, userOne, userTwo, userThree, emptyHydrationDataList
+  let todaysDate, hydrationClosure, sleepClosure, activityClosure, emptyUserDataList, userOne, userTwo, userThree, emptyDataList
 
   beforeEach(() => {
     userOne = 1
     userTwo = 2
     userThree = 3
-    todaysDate = getTodaysDate(1, sampleHydrationData)
-    hydrationClosure = breakDownToWeeklyStatsArray(1, sampleHydrationData, todaysDate.date)
-    sleepClosure = breakDownToWeeklyStatsArray(2, sampleSleepData, todaysDate.date)
-    activityClosure = breakDownToWeeklyStatsArray(1, sampleActivityData, todaysDate.date)
     emptyUserDataList = {users: []}
-    emptyHydrationDataList = {hydrationData: [{userID: 1, date: null, numOunces: null}]}
+    emptyDataList = {}
+    todaysDate = getTodaysDate(1, sampleHydrationData)
+    hydrationClosure = getStatsByWeek(1, sampleHydrationData, todaysDate.date)
+    sleepClosure = getStatsByWeek(2, sampleSleepData, todaysDate.date)
+    activityClosure = getStatsByWeek(1, sampleActivityData, todaysDate.date)
   })
 
   it('Should return a random index position in users array', () => {
@@ -63,7 +63,7 @@ describe('Helper Functions', () => {
   it('Should return an object that has the most recent date from any dataset', () => {
 
     let latestHydrationEntry = getTodaysDate(userOne, sampleHydrationData)
-    let latestSleepEntry = getTodaysDate(userOne, sampleSleepData)
+    let latestSleepEntry = getTodaysDate(userTwo, sampleSleepData)
     let latestActivityEntry = getTodaysDate(userOne, sampleActivityData)
 
     expect(latestHydrationEntry).to.be.an('object')
@@ -77,14 +77,11 @@ describe('Helper Functions', () => {
     expect(latestActivityEntry.date).to.equal('2023/03/30')
   })
 
-  it('Should', () => {
-    // let noUserHydrationEntry = getTodaysDate(userThree, sampleHydrationData)
-    // let noUserSleepEntry = getTodaysDate(userThree, sampleSleepData)
-    // let noUserActivityEntry = getTodaysDate(userThree, sampleActivityData)
-    let emptyHydrationDataListTest = getTodaysDate(userOne, emptyHydrationDataList)
+  it('Should return Invalid Argument if dataList is empty', () => {
 
-    // expect(noUserHydrationEntry).to.equal(undefined)
-    expect(emptyHydrationDataListTest.date).to.equal(null)
+    let emptyHydrationDataListTest = getTodaysDate(userOne, emptyDataList)
+
+    expect(emptyHydrationDataListTest).to.equal('Invalid Argument')
   })
 
   it('Should return a function', () => {
@@ -105,8 +102,13 @@ describe('Helper Functions', () => {
     expect(hydrationClosure().length).to.equal(7)
     expect(sleepClosure().length).to.equal(7)
     expect(activityClosure().length).to.equal(7)
+  })
 
+  it('Should return Invalid Argument if empty dataList is passed in', () => {
 
+    let nullClosure = getStatsByWeek(1, emptyDataList, todaysDate.date)
+
+    expect(nullClosure()).to.equal('Invalid Argument')
   })
 
 })
@@ -114,7 +116,11 @@ describe('Helper Functions', () => {
 ////////////////////////////// USER ///////////////////////////////
 describe('User Repository', () => {
 
-  let currentUser
+  let currentUser, invalidDataList, invalidDataListTest
+
+  beforeEach (() => {
+    invalidDataList = {users: [{}]}
+  })
 
   it('Should return user info by ID', function () {
 
@@ -129,13 +135,27 @@ describe('User Repository', () => {
     expect(userTwo.dailyStepGoal).to.equal(9000)
   })
 
-  it('Should generate a random user and return user info', () => {
+  it('Should return Invalid User if user does not exist', () => {
+
+    let invalidUser = getUserData(6, sampleUserData)
+
+    expect(invalidUser).to.equal('Invalid User')
+  })
+
+  it('Should return a random user and return user info', () => {
 
     currentUser = generateRandomUser(sampleUserData)
 
     expect(currentUser).to.be.an('object')
     expect(currentUser.friends).to.be.an('array')
     expect(currentUser.dailyStepGoal).to.be.a('number')
+  })
+
+  it('Should return an empty array if an empty dataList is passed in', () => {
+
+    invalidDataListTest = generateRandomUser(invalidDataList)
+
+    expect(invalidDataListTest).to.equal('No Users Found')
   })
 
   it('Should return average step goal amongst all users', function() {
@@ -145,12 +165,19 @@ describe('User Repository', () => {
     expect(averageStepGoalForAllUsers).to.be.a('number')
     expect(averageStepGoalForAllUsers).to.equal(6333)
   })
+
+  it('Should return NaN if dataList is empty', () => {
+    invalidDataListTest = getAvgSteps(invalidDataList)
+
+    expect(invalidDataListTest).to.deep.equal(NaN)
+  })
+
 })  
 
 ////////////////////////////// HYDRATION ///////////////////////////////
 describe('Hydration Repository', function () {
 
-  let userOne, userTwo, userThree
+  let userOne, userTwo, userThree, invalidUserEntry
 
   beforeEach(() => {
     userOne = 1
@@ -170,65 +197,70 @@ describe('Hydration Repository', function () {
 
   })
 
+  it('Should return NaN if user does not exist', () => {
+
+    invalidUserEntry = getAvgDailyOunces(userThree, sampleHydrationData)
+
+    expect(invalidUserEntry).to.deep.equal(NaN)
+  })
+
   it('Should return number of OZ for a specific day', () => {
 
-    let testOneUserOne = getOzByDay(userOne, "2023/03/24", sampleHydrationData)
-    let testTwoUserOne = getOzByDay(userOne, "2023/03/29", sampleHydrationData)
-    let testThreeUserTwo = getOzByDay(userTwo, "2023/03/24", sampleHydrationData)
+    let userOneOz = getOzByDay(userOne, "2023/03/24", sampleHydrationData)
+    let userTwoOz = getOzByDay(userOne, "2023/03/29", sampleHydrationData)
+    let userThreeOz = getOzByDay(userTwo, "2023/03/24", sampleHydrationData)
 
 
-    expect(testOneUserOne).to.be.a('number')
-    expect(testTwoUserOne).to.be.a('number')
-    expect(testThreeUserTwo).to.be.a('number')
-    expect(testOneUserOne).to.equal(47)
-    expect(testTwoUserOne).to.equal(49)
-    expect(testThreeUserTwo).to.equal(81)
+    expect(userOneOz).to.be.a('number')
+    expect(userTwoOz).to.be.a('number')
+    expect(userThreeOz).to.be.a('number')
+    expect(userOneOz).to.equal(47)
+    expect(userTwoOz).to.equal(49)
+    expect(userThreeOz).to.equal(81)
 
+  })
+
+  it('Should return Undefined if user does not exist', () => {
+    invalidUserEntry = getOzByDay(userThree, "2023/03/24", sampleHydrationData)
+
+    expect(invalidUserEntry).to.deep.equal(undefined)
   })
 
   it('Should return an object with users weekly hydration stats', () => {
 
-    let user1Sample = calculateWeeklyOunces(userOne, sampleHydrationData)
-    let user2Sample = calculateWeeklyOunces(userTwo, sampleHydrationData)
+    let userOneWeeklyOz = calculateWeeklyOunces(userOne, sampleHydrationData)
+    let userTwoWeeklyOz = calculateWeeklyOunces(userTwo, sampleHydrationData)
 
-    expect(user1Sample).to.be.an('object')
-    expect(user1Sample.ounces).to.be.an('array')
-    expect(user1Sample.dates).to.be.an('array')
-    expect(user1Sample.ounces.length).to.equal(7)
-    expect(user1Sample.ounces[0]).to.equal(47)
-    expect(user1Sample.dates[0]).to.equal("2023/03/24")
-    expect(user2Sample).to.be.an('object')
-    expect(user2Sample.ounces).to.be.an('array')
-    expect(user2Sample.dates).to.be.an('array')
-    expect(user2Sample.ounces.length).to.equal(7)
-    expect(user2Sample.ounces[0]).to.equal(81)
-    expect(user2Sample.dates[0]).to.equal("2023/03/24")
+    expect(userOneWeeklyOz).to.be.an('object')
+    expect(userOneWeeklyOz.ounces).to.be.an('array')
+    expect(userOneWeeklyOz.dates).to.be.an('array')
+    expect(userOneWeeklyOz.ounces.length).to.equal(7)
+    expect(userOneWeeklyOz.ounces[0]).to.equal(47)
+    expect(userOneWeeklyOz.dates[0]).to.equal("2023/03/24")
+    expect(userTwoWeeklyOz).to.be.an('object')
+    expect(userTwoWeeklyOz.ounces).to.be.an('array')
+    expect(userTwoWeeklyOz.dates).to.be.an('array')
+    expect(userTwoWeeklyOz.ounces.length).to.equal(7)
+    expect(userTwoWeeklyOz.ounces[0]).to.equal(81)
+    expect(userTwoWeeklyOz.dates[0]).to.equal("2023/03/24")
 
   })
 
-  // ---------------------SHOULD WE KEEP THESE??????---------------------------- //
-  // SAD PATH?
+  it('Should return an empty object with empty keys if user does not exist', () => {
 
-  it('Should return NaN, Undefined, or empty if user does not exist', () => {
-
-    let testOne = getAvgDailyOunces(userThree, sampleHydrationData)
-    let testTwo = getOzByDay(userThree, "2023/03/24", sampleHydrationData)
-    let testThree = calculateWeeklyOunces(userThree, sampleHydrationData)
-
-    expect(testOne).to.deep.equal(NaN)
-    expect(testTwo).to.equal(undefined)    
-    expect(testThree.ounces.length).to.equal(0)
-    expect(testThree.dates.length).to.equal(0)
+    invalidUserEntry = calculateWeeklyOunces(userThree, sampleHydrationData)
+  
+    expect(invalidUserEntry).to.be.an('object')
+    expect(invalidUserEntry.ounces.length).to.equal(0)
+    expect(invalidUserEntry.dates.length).to.equal(0)
   })
-// --------------------------------------------------------------------------------//
-
 
 });
 
 ////////////////////////////// SLEEP ///////////////////////////////
 describe('Sleep Repository', () => {
 
-  let userOne, userTwo, userThree
+  let userOne, userTwo, userThree, invalidUserEntry, invalidDateEntry
 
   beforeEach(() => {
     userOne = 1
@@ -247,6 +279,13 @@ describe('Sleep Repository', () => {
     expect(userTwoSleepHours).to.equal(4.2)
   })
 
+  it('Should return undefined if user is not found', () => {
+    
+    invalidUserEntry = sleepAmountByDay(userThree, '2023/03/21', sampleSleepData)
+
+    expect(invalidUserEntry).to.equal(undefined)
+  })
+
   it('Should return sleep quality for specific day', function () {
 
     let userOneSleepQuality = sleepQualityByDay(userOne, '2023/03/21', sampleSleepData)
@@ -258,7 +297,14 @@ describe('Sleep Repository', () => {
     expect(userTwoSleepQuality).to.equal(1.6)
   })
 
-  it('Should be able to calculate the average hours slept for all time', () => {
+  it('Should return undefined if user is not found ', () => {
+    
+    invalidUserEntry = sleepQualityByDay(userThree, '2023/03/21', sampleSleepData)
+
+    expect(invalidUserEntry).to.deep.equal(undefined)
+  })
+
+  it('Should return the average hours slept for all time', () => {
 
     let userOneSleepAverage = calculateUserAvgDailyHoursSlept(userOne, sampleSleepData)
     let userTwoSleepAverage = calculateUserAvgDailyHoursSlept(userTwo, sampleSleepData)
@@ -269,7 +315,14 @@ describe('Sleep Repository', () => {
     expect(userTwoSleepAverage).to.equal(6.13)
   })
 
-  it('Should be able to calculate the average sleep quality for all time', () => {
+  it('Should return NaN if user is not found', () => {
+
+    invalidUserEntry = calculateUserAvgDailyHoursSlept(userThree, sampleSleepData)
+
+    expect(invalidUserEntry).to.deep.equal(NaN)
+  })
+
+  it('Should return the average sleep quality for all time', () => {
 
     let userOneSleepQualityAverage = calculateUserAvgSleepQuality(userOne, sampleSleepData)
     let userTwoSleepQualityAverage = calculateUserAvgSleepQuality(userTwo, sampleSleepData)
@@ -278,6 +331,13 @@ describe('Sleep Repository', () => {
     expect(userTwoSleepQualityAverage).to.be.a('number')
     expect(userOneSleepQualityAverage).to.equal(3.16)
     expect(userTwoSleepQualityAverage).to.equal(2.85)
+  })
+
+  it('Should return NaN if user is not found', () => {
+    
+    invalidUserEntry = calculateUserAvgSleepQuality(userThree, sampleSleepData) 
+
+    expect(invalidUserEntry).to.deep.equal(NaN)
   })
 
   it('Should return sleep quality stats for a given week', () => {
@@ -293,6 +353,13 @@ describe('Sleep Repository', () => {
     expect(userTwoWeeklySleepQuality.sleepQuality[2]).to.equal(3.5)
   })
 
+  it('Should return an object with no data if date does not exist', () => {
+    
+    invalidUserEntry = getWeeklySleepQualityStats(userOne, sampleSleepData, '2024/03/22')
+
+    expect(invalidUserEntry).to.deep.equal({ day: [], sleepQuality: [] })
+  })
+
   it('Should return sleep hour stats for a given week', () => {
 
     let userOneWeeklySleepHours = getWeeklySleepHoursStats(userOne, sampleSleepData,'2023/03/22')
@@ -305,14 +372,20 @@ describe('Sleep Repository', () => {
     expect(userOneWeeklySleepHours.sleepHours[2]).to.equal(9.6)
     expect(userTwoWeeklySleepHours.sleepHours[4]).to.equal(9.2)
   })
-
   
+  it('Should return an object with no data if date does not exist', () => {
+    
+    invalidDateEntry = getWeeklySleepHoursStats(userOne, sampleSleepData, '2024/03/22')
+
+    expect(invalidDateEntry).to.deep.equal({ day: [], sleepHours: [] })
+  })
+
 })
 
 ////////////////////////////// ACTIVITY ///////////////////////////////
 describe('Activity Repository', () => {
 
-  let userOne, userTwo, userThree
+  let userOne, userTwo, userThree, invalidUserEntry, invalidDateEntry
 
   beforeEach(() => {
     userOne = 1
@@ -331,6 +404,15 @@ describe('Activity Repository', () => {
     expect(userTwoStepCount).to.equal(11616)
   })
 
+  it('Should return No Entry Found if user or date date does not exist ', () => {
+    
+    invalidUserEntry = getDailySteps(userThree, '2023/03/22', sampleActivityData)
+    invalidDateEntry = getDailySteps(userOne, '2024/03/22', sampleActivityData)
+
+    expect(invalidUserEntry).to.equal('No Entry Found')
+    expect(invalidDateEntry).to.equal('No Entry Found')
+  })
+
   it('Should return active minutes for a given day', () => {
   
     let userOneActiveMinutes = getActiveMinutes(userOne, '2023/03/20', sampleActivityData)
@@ -340,6 +422,15 @@ describe('Activity Repository', () => {
     expect(userTwoActiveMinutes).to.be.a('number')
     expect(userOneActiveMinutes).to.equal(261)
     expect(userTwoActiveMinutes).to.equal(56)
+  })
+
+  it('Should return No Entry Found if user or date does not exist ', () => {
+    
+    invalidUserEntry = getActiveMinutes(userThree, '2023/03/20' , sampleActivityData)
+    invalidDateEntry = getActiveMinutes(userOne, '2024/03/20' , sampleActivityData)
+
+    expect(invalidUserEntry).to.equal('No Entry Found')
+    expect(invalidDateEntry).to.equal('No Entry Found')
   })
 
   it('Should return miles user walked in a day', () => {
@@ -353,7 +444,16 @@ describe('Activity Repository', () => {
     expect(userTwoMilesWalked).to.equal(5.58)
   })
 
-  it('Should check if step goal was made for a given day', () => {
+  it('Should return No Entry Found if user or date does not exist', () => {
+    
+    invalidUserEntry = calculateDailyMilesWalked(userThree, '2023/03/28', sampleUserData, sampleActivityData)
+    invalidDateEntry = calculateDailyMilesWalked(userOne, '2024/03/20', sampleUserData, sampleActivityData)
+
+    expect(invalidUserEntry).to.equal('No Entry Found')
+    expect(invalidDateEntry).to.equal('No Entry Found')
+  })
+
+  it('Should return appropriate HTML if step goal was made for a given day', () => {
 
     let userOneStepGoalCheck = checkIfStepGoalWasMade(userOne, '2023/03/28', sampleUserData, sampleActivityData)
     let userTwoStepGoalCheck = checkIfStepGoalWasMade(userTwo, '2023/03/28', sampleUserData, sampleActivityData)
@@ -365,5 +465,13 @@ describe('Activity Repository', () => {
     
   })
 
+  it('Should return Invalid Argument when user or date does not exist', () => {
+    
+    invalidUserEntry = checkIfStepGoalWasMade(userThree, '2023/03/28', sampleUserData, sampleActivityData)
+    invalidDateEntry = checkIfStepGoalWasMade(userTwo, '2024/03/28', sampleUserData, sampleActivityData)
+
+    expect(invalidUserEntry).to.equal('Invalid Argument')
+    expect(invalidDateEntry).to.equal('Invalid Argument')
+  })
 
 })
