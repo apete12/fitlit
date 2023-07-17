@@ -1,7 +1,5 @@
-// Imports:
 import './css/styles.css'
 import './images/a-step-in-the-right-direction.jpg'
-// import './images/water-drops.png'
 
 import { 
   displayRandomUser, 
@@ -42,7 +40,7 @@ var weeklySleepStats = document.querySelector('.weekly-sleep-stats')
 var sleepStatsByDay = document.querySelector('.today-sleep-stats')
 var avgAllTimeSleepStats = document.querySelector('.all-time-sleep-stats')
 
-// event listener:
+// Event listener:
 window.addEventListener('load', () => {
   Promise.all(promises)
   .then(results => {

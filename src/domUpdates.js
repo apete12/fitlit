@@ -64,7 +64,6 @@ const displayRandomUser = (array) => {
     <section>Address: ${currentUser.address}</section>
     <section>Email: ${currentUser.email}</section>
   `
-
   gateInfo.innerHTML = `
     <div class="stride-length-container">
       <section>Stride Length: ${currentUser.strideLength}</section>
@@ -86,8 +85,7 @@ const displayFriendList = (array) => {
     `
 }
 
-
- // HYDRATION INFO
+// HYDRATION INFO
 const displayDailyHydrationStats = (array) => {
   let todaysDate = getOuncesByWeek(currentUser.id, array)
   let todaysOunces = getOuncesByDay(currentUser.id, todaysDate.dates[6], array)
