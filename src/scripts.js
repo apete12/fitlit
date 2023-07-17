@@ -1,7 +1,7 @@
 // Imports:
 import './css/styles.css'
 import './images/a-step-in-the-right-direction.jpg'
-import './images/water-drops.png'
+// import './images/water-drops.png'
 
 import { 
   displayRandomUser, 
@@ -27,6 +27,7 @@ import {
 var userInfoContainer = document.querySelector('.user-info');
 var welcomeHeading = document.querySelector('.welcome-heading');
 var friendList = document.querySelector('.friend-list')
+var gateInfo = document.querySelector('.gate-info')
 // hydration
 var dailyHydrationStats = document.querySelector('.daily-hydration-stats')
 var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
@@ -38,8 +39,8 @@ var weeklyStepCountGoal = document.querySelector('.weekly-step-count-goal')
 var milesWalkedByDay = document.querySelector('.todays-miles-walked')
 // sleep
 var weeklySleepStats = document.querySelector('.weekly-sleep-stats')
-// var sleepStatsByDay = document.querySelector('.today-sleep-stats')
-// var avgAllTimeSleepStats = document.querySelector('.all-time-sleep-stats')
+var sleepStatsByDay = document.querySelector('.today-sleep-stats')
+var avgAllTimeSleepStats = document.querySelector('.all-time-sleep-stats')
 
 // event listener:
 window.addEventListener('load', () => {
@@ -79,7 +80,6 @@ export {
   milesWalkedByDay,
   weeklySleepStats,
   dailyActiveMinutes,
-  // dailyActiveMinutes,
-  // gateInfo
+  gateInfo
 }
 

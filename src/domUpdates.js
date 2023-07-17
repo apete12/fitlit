@@ -13,7 +13,8 @@ import {
   milesWalkedByDay,
   dailyActiveMinutes,
   dailyStepCount,
-  weeklyStepCountGoal
+  weeklyStepCountGoal,
+  gateInfo
 } from './scripts';
 
 import { 
