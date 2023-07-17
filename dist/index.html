@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <title>Fitlit</title>
@@ -14,15 +14,28 @@
       <!-- <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px"> -->
     </article>
     <main>
-      <div class="welcome">
-          <div class="personal-info">
-            <div class="user-info"></div>
-            <div class="motivation"></div>
-          </div>
-          <div class="friends">
-            <section class = "friend-list"></section>
-          </div>
+      <div class="user-data-container">
+        <div class="personal-info-container">
+          <section class="user-info-title">Account Details:</section>
+          <section class="user-info"></section>
+          <section class="user-info-quote">You've got this!</section>
         </div>
+        <div class="movement-info-container">
+          <section class="movement-info-title">Movement Data:</section>
+          <div class="gate-info-container"> 
+            <section class="gate-info"></section>
+          </div>
+          <div class="all-users-step-goal-container"> 
+            <section class="all-users-step-goal"></section>
+          </div>
+          <section class="movement-info-quote">Have you met your step goal today?</section>
+        </div>
+        <div class="friends-container">
+          <section class="friend-list-title">Friends:</section>
+          <section class="friend-list"></section>
+          <section class="friends-list-quote">Friends who sweat together, stay together!</section>
+        </div>
+      </div>
       <div class="cards">
         <div class="hydration">
           <h3>Hydration</h3>
@@ -32,25 +45,60 @@
             <section class="weekly-hydration-stats"></section>
           </div>
         </div>
-        <div class="sleep">
-          <h3>Sleep</h3>
-            <section class="sleep-stats"></section>
-            <section class="avg-sleep-qual"></section>
-            <section class="weekly-sleep"></section>
-            <div class="grid-calendar">
-              <div class="calendar-top">Snapshot of your last few days:</div>
-              <section class="weekly-sleep-stats"></section>
+        <div class="hydration-container">
+          <div class = "heading-image-container">
+            <div class="tiny-image-container">
+              <!-- <img class="tiny-image" src="images/water-drops.png" alt="water drops"> -->
             </div>
-        </div>
-        <div class="activity">
-          <h3>Activity</h3>
-          <section class= "daily-steps"></section>
-          <section class= "daily-active-minutes"></section>
-          <section class= "all-users-step-goal"></section>
-          <section class= "todays-miles-walked"></section>
-          <section class= "weekly-step-section"></section>
+            <div class = "h3-container">
+              <h3>Hydration</h3>
+            </div>
+          </div>
+          <div class="health-stats-hydration-sentences">
+            <section class="daily-hydration-stats"></section>
+          </div>
           <div class="grid-calendar">
-            <div class="calendar-top">Snapshot of your last few days:</div>
+            <section class="calendar-top">WEEKLY HYDRATION STATS:</section>
+            <section class="weekly-hydration-stats"></section>
+          </div>
+        </div>
+        <div class="sleep-container">
+          <div class = "h3-container">
+            <h3>Sleep</h3>
+          </div>
+          <div class="health-stats-sleep-stats-sentences">
+            <div class="today-container">
+              <section class="today-sleep-stats"></section>
+            </div>
+          </div>
+          <div class="grid-calendar">
+            <section class="calendar-top">WEEKLY SLEEP STATS:</section>
+            <section class="weekly-sleep-stats"></section>
+          </div>
+          <div class="all-time-sleep-container">
+            <section class="all-time-sleep-stats"></section>
+          </div>
+        </div>
+        <div class="activity-container">
+          <div class = "h3-container">
+            <h3>Activity</h3>
+          </div>
+          <div class="today-container">
+            <section>Today...</section>
+          </div>
+          <div class="health-stats-activity-sentences">
+            <div class="daily-steps-container">
+              <section class= "daily-steps"></section>
+            </div>
+            <div class="daily-active-min-container">
+              <section class= "daily-active-minutes"></section>
+            </div>
+            <div class="daily-miles-container"> 
+              <section class= "todays-miles-walked"></section>
+            </div>
+          </div>
+          <div class="grid-calendar">
+            <section class="calendar-top">WEEKLY ACTIVITY STATS:</section>
             <section class="weekly-step-count-goal"></section>
           </div>
         </div>
