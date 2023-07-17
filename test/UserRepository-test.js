@@ -6,20 +6,20 @@ import {
   getAvgSteps, 
   generateRandomUser,
   getAvgDailyOunces, 
-  getOzByDay, 
-  calculateWeeklyOunces, 
-  calculateUserAvgDailyHoursSlept, 
-  calculateUserAvgSleepQuality, 
-  calculateDailyMilesWalked, 
-  sleepAmountByDay, 
-  sleepQualityByDay, 
+  getOuncesByDay, 
+  getOuncesByWeek, 
+  getAvgHoursSlept, 
+  getAvgSleepQuality, 
+  getDailyMilesWalked, 
+  getSleepAmountByDay, 
+  getSleepQualityByDay, 
   getWeeklySleepQualityStats, 
   checkIfStepGoalWasMade, 
   getTodaysDate, 
   getDailySteps,
   getActiveMinutes,
   getWeeklySleepHoursStats,
-  getStatsByWeek
+  getStatsByWeek,
 } from '../src/dataModel';
 
 import { 
@@ -206,9 +206,9 @@ describe('Hydration Repository', function () {
 
   it('Should return number of OZ for a specific day', () => {
 
-    let userOneOz = getOzByDay(userOne, "2023/03/24", sampleHydrationData)
-    let userTwoOz = getOzByDay(userOne, "2023/03/29", sampleHydrationData)
-    let userThreeOz = getOzByDay(userTwo, "2023/03/24", sampleHydrationData)
+    let userOneOz = getOuncesByDay(userOne, "2023/03/24", sampleHydrationData)
+    let userTwoOz = getOuncesByDay(userOne, "2023/03/29", sampleHydrationData)
+    let userThreeOz = getOuncesByDay(userTwo, "2023/03/24", sampleHydrationData)
 
 
     expect(userOneOz).to.be.a('number')
@@ -221,15 +221,15 @@ describe('Hydration Repository', function () {
   })
 
   it('Should return Undefined if user does not exist', () => {
-    invalidUserEntry = getOzByDay(userThree, "2023/03/24", sampleHydrationData)
+    invalidUserEntry = getOuncesByDay(userThree, "2023/03/24", sampleHydrationData)
 
     expect(invalidUserEntry).to.deep.equal(undefined)
   })
 
   it('Should return an object with users weekly hydration stats', () => {
 
-    let userOneWeeklyOz = calculateWeeklyOunces(userOne, sampleHydrationData)
-    let userTwoWeeklyOz = calculateWeeklyOunces(userTwo, sampleHydrationData)
+    let userOneWeeklyOz = getOuncesByWeek(userOne, sampleHydrationData)
+    let userTwoWeeklyOz = getOuncesByWeek(userTwo, sampleHydrationData)
 
     expect(userOneWeeklyOz).to.be.an('object')
     expect(userOneWeeklyOz.ounces).to.be.an('array')
@@ -248,7 +248,7 @@ describe('Hydration Repository', function () {
 
   it('Should return an empty object with empty keys if user does not exist', () => {
 
-    invalidUserEntry = calculateWeeklyOunces(userThree, sampleHydrationData)
+    invalidUserEntry = getOuncesByWeek(userThree, sampleHydrationData)
   
     expect(invalidUserEntry).to.be.an('object')
     expect(invalidUserEntry.ounces.length).to.equal(0)
@@ -270,8 +270,8 @@ describe('Sleep Repository', () => {
 
   it('Should return sleep hours for specific day', function () {
 
-    let userOneSleepHours = sleepAmountByDay(userOne, '2023/03/21', sampleSleepData)
-    let userTwoSleepHours = sleepAmountByDay(userTwo, '2023/03/22', sampleSleepData)
+    let userOneSleepHours = getSleepAmountByDay(userOne, '2023/03/21', sampleSleepData)
+    let userTwoSleepHours = getSleepAmountByDay(userTwo, '2023/03/22', sampleSleepData)
 
     expect(userOneSleepHours).to.be.a('number')
     expect(userTwoSleepHours).to.be.a('number')
@@ -281,15 +281,15 @@ describe('Sleep Repository', () => {
 
   it('Should return undefined if user is not found', () => {
     
-    invalidUserEntry = sleepAmountByDay(userThree, '2023/03/21', sampleSleepData)
+    invalidUserEntry = getSleepAmountByDay(userThree, '2023/03/21', sampleSleepData)
 
     expect(invalidUserEntry).to.equal(undefined)
   })
 
   it('Should return sleep quality for specific day', function () {
 
-    let userOneSleepQuality = sleepQualityByDay(userOne, '2023/03/21', sampleSleepData)
-    let userTwoSleepQuality = sleepQualityByDay(userTwo, '2023/03/27', sampleSleepData)
+    let userOneSleepQuality = getSleepQualityByDay(userOne, '2023/03/21', sampleSleepData)
+    let userTwoSleepQuality = getSleepQualityByDay(userTwo, '2023/03/27', sampleSleepData)
     
     expect(userOneSleepQuality).to.be.a('number')
     expect(userTwoSleepQuality).to.be.a('number')
@@ -299,15 +299,15 @@ describe('Sleep Repository', () => {
 
   it('Should return undefined if user is not found ', () => {
     
-    invalidUserEntry = sleepQualityByDay(userThree, '2023/03/21', sampleSleepData)
+    invalidUserEntry = getSleepQualityByDay(userThree, '2023/03/21', sampleSleepData)
 
     expect(invalidUserEntry).to.deep.equal(undefined)
   })
 
   it('Should return the average hours slept for all time', () => {
 
-    let userOneSleepAverage = calculateUserAvgDailyHoursSlept(userOne, sampleSleepData)
-    let userTwoSleepAverage = calculateUserAvgDailyHoursSlept(userTwo, sampleSleepData)
+    let userOneSleepAverage = getAvgHoursSlept(userOne, sampleSleepData)
+    let userTwoSleepAverage = getAvgHoursSlept(userTwo, sampleSleepData)
 
     expect(userOneSleepAverage).to.be.a('number')
     expect(userTwoSleepAverage).to.be.a('number')
@@ -317,15 +317,15 @@ describe('Sleep Repository', () => {
 
   it('Should return NaN if user is not found', () => {
 
-    invalidUserEntry = calculateUserAvgDailyHoursSlept(userThree, sampleSleepData)
+    invalidUserEntry = getAvgHoursSlept(userThree, sampleSleepData)
 
     expect(invalidUserEntry).to.deep.equal(NaN)
   })
 
   it('Should return the average sleep quality for all time', () => {
 
-    let userOneSleepQualityAverage = calculateUserAvgSleepQuality(userOne, sampleSleepData)
-    let userTwoSleepQualityAverage = calculateUserAvgSleepQuality(userTwo, sampleSleepData)
+    let userOneSleepQualityAverage = getAvgSleepQuality(userOne, sampleSleepData)
+    let userTwoSleepQualityAverage = getAvgSleepQuality(userTwo, sampleSleepData)
 
     expect(userOneSleepQualityAverage).to.be.a('number')
     expect(userTwoSleepQualityAverage).to.be.a('number')
@@ -335,7 +335,7 @@ describe('Sleep Repository', () => {
 
   it('Should return NaN if user is not found', () => {
     
-    invalidUserEntry = calculateUserAvgSleepQuality(userThree, sampleSleepData) 
+    invalidUserEntry = getAvgSleepQuality(userThree, sampleSleepData) 
 
     expect(invalidUserEntry).to.deep.equal(NaN)
   })
@@ -435,8 +435,8 @@ describe('Activity Repository', () => {
 
   it('Should return miles user walked in a day', () => {
 
-    let userOneMilesWalked = calculateDailyMilesWalked(userTwo, '2023/03/28', sampleUserData, sampleActivityData)
-    let userTwoMilesWalked = calculateDailyMilesWalked(userOne, '2023/03/20', sampleUserData, sampleActivityData)
+    let userOneMilesWalked = getDailyMilesWalked(userTwo, '2023/03/28', sampleUserData, sampleActivityData)
+    let userTwoMilesWalked = getDailyMilesWalked(userOne, '2023/03/20', sampleUserData, sampleActivityData)
 
     expect(userOneMilesWalked).to.be.a('number')
     expect(userTwoMilesWalked).to.be.a('number')
@@ -446,8 +446,8 @@ describe('Activity Repository', () => {
 
   it('Should return No Entry Found if user or date does not exist', () => {
     
-    invalidUserEntry = calculateDailyMilesWalked(userThree, '2023/03/28', sampleUserData, sampleActivityData)
-    invalidDateEntry = calculateDailyMilesWalked(userOne, '2024/03/20', sampleUserData, sampleActivityData)
+    invalidUserEntry = getDailyMilesWalked(userThree, '2023/03/28', sampleUserData, sampleActivityData)
+    invalidDateEntry = getDailyMilesWalked(userOne, '2024/03/20', sampleUserData, sampleActivityData)
 
     expect(invalidUserEntry).to.equal('No Entry Found')
     expect(invalidDateEntry).to.equal('No Entry Found')

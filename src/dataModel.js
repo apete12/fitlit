@@ -1,8 +1,6 @@
 
 //////////////////////// GLOBAL VARIABLE ////////////////////////
-var currentUser = {
-
-}
+let currentUser
 
 //////////////////////// HELPER FUNCTIONS ////////////////////////
 const getRandomIndex = (dataList) => {
@@ -117,7 +115,7 @@ let average = userHydrationStats / numOfEntries.length
 return Number(average.toFixed(0))
 }
 
-const getOzByDay = (id, day, dataList) => {
+const getOuncesByDay = (id, day, dataList) => {
   const usersDailyHydrationLog = dataList.hydrationData
   const usersDailyOz = usersDailyHydrationLog.find(log => log.userID === id && log.date === day)
   if(usersDailyOz) {
@@ -125,7 +123,7 @@ const getOzByDay = (id, day, dataList) => {
     }
 }
 
-const calculateWeeklyOunces = (id, dataList) => {
+const getOuncesByWeek = (id, dataList) => {
   const usersDailyHydrationLog = dataList.hydrationData
   let userWaterEntries = usersDailyHydrationLog.filter((entry) => {
     return entry.userID === id
@@ -145,7 +143,7 @@ const calculateWeeklyOunces = (id, dataList) => {
 
 //////////////////////// SLEEP ////////////////////////
 
-const sleepAmountByDay = (id, day, dataList) => {
+const getSleepAmountByDay = (id, day, dataList) => {
   const usersDailySleepLog = dataList.sleepData
   const usersDailySleepAmount = usersDailySleepLog.find(log => log.userID === id && log.date === day)
   if(usersDailySleepAmount) {
@@ -153,7 +151,7 @@ const sleepAmountByDay = (id, day, dataList) => {
   }
 }
 
-const sleepQualityByDay = (id, day, dataList) => {
+const getSleepQualityByDay = (id, day, dataList) => {
   const usersDailySleepLog = dataList.sleepData
   const usersDailySleepQuality = usersDailySleepLog.find(log => log.userID === id && log.date === day)
     if(usersDailySleepQuality) {
@@ -161,7 +159,7 @@ const sleepQualityByDay = (id, day, dataList) => {
     }
 }
 
-const calculateUserAvgDailyHoursSlept = (id, dataList) => {
+const getAvgHoursSlept = (id, dataList) => {
     const usersDailySleepLog = dataList.sleepData
     let entries = []
     const userSleepStats = usersDailySleepLog.reduce((accum, userObj) => {
@@ -175,7 +173,7 @@ const calculateUserAvgDailyHoursSlept = (id, dataList) => {
     return Number(userAvgSleepHours.toFixed(2))
   }
 
-const calculateUserAvgSleepQuality = (id, dataList) => {
+const getAvgSleepQuality = (id, dataList) => {
     const usersDailySleepQualityLog = dataList.sleepData
     let entries = []
     const userSleepQualityStats = usersDailySleepQualityLog.reduce((accum, userObj) => {
@@ -237,7 +235,7 @@ const getActiveMinutes = (id, day, dataList) => {
   }
 }
 
-const calculateDailyMilesWalked = (id, day, dataList1, dataList2) => {
+const getDailyMilesWalked = (id, day, dataList1, dataList2) => {
   const userLog = dataList1.users
   const userStrideData = userLog.find(log => id === log.id)
   const userStride = userStrideData.strideLength
@@ -292,14 +290,14 @@ export {
 
   // HYDRATION DATA
   getAvgDailyOunces,
-  getOzByDay,
-  calculateWeeklyOunces,
+  getOuncesByDay,
+  getOuncesByWeek,
 
   // SLEEP DATA
-  sleepAmountByDay, 
-  sleepQualityByDay,
-  calculateUserAvgDailyHoursSlept,
-  calculateUserAvgSleepQuality,
+  getSleepAmountByDay, 
+  getSleepQualityByDay,
+  getAvgHoursSlept,
+  getAvgSleepQuality,
   getWeeklySleepHoursStats,
   getWeeklySleepQualityStats,
 
@@ -308,5 +306,5 @@ export {
   checkIfStepGoalWasMade,
   getDailySteps,
   getActiveMinutes,
-  calculateDailyMilesWalked,
+  getDailyMilesWalked,
 }
