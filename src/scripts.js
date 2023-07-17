@@ -38,7 +38,7 @@ var milesWalkedByDay = document.querySelector('.todays-miles-walked')
 // sleep
 var weeklySleepStats = document.querySelector('.weekly-sleep-stats')
 var sleepStatsByDay = document.querySelector('.today-sleep-stats')
-var avgAllTimeSleepStats = document.querySelector('.all-time-sleep-stats')
+var avgAllTimeSleepStats = document.querySelector('.all-time-sleep-stats-container')
 
 // Event listener:
 window.addEventListener('load', () => {
