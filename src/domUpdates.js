@@ -118,7 +118,7 @@ const displayWeeklyHydrationStats = (array) => {
     <section class="data">${weeklyOzArray.ounces[3]}</section>
     <section class="data">${weeklyOzArray.ounces[4]}</section>
     <section class="data">${weeklyOzArray.ounces[5]}</section>
-    <section class="data-last data">${weeklyOzArray.ounces[6]}oz</section>
+    <section class="data-last data">${weeklyOzArray.ounces[6]}</section>
  `
 }
 
