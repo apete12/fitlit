@@ -1,78 +1,46 @@
 # FitLit Starter Kit
 
-The details of this project are outline in [this project spec](http://frontend.turing.io/projects/fitlit.html).
+## Abstract
+FitLit revolutionizes the way you track your wellness journey! Behold the ultimate visual activity tracker, where style and sophistication meet data logging. With a captivating interface and seamless user experience, this remarkable app empowers you on your path to unparalleled health and vitality. Brace yourself for a mind-blowing summary of your activities, hydration, and sleep data that sparks inspiration and fuels your desire for a healthier, happier you. Here at FitLit, every step is a step in the right direction.
 
-## Setup
+## Installation Instructions
+- git clone this repo to your local machine
+- cd into that directory
+- run npm install
+- run npm start in your terminal to view the app in your browser
 
-1. Within your group, decide on **one** person to have the project repository (repo) on their GitHub account. Then, that person should *fork* this repo - on the top right corner of this page, click the **Fork** button.
-1. Both memebers of the group should clone down the _forked_ repo. Since you don't want to name your project "activity-tracker-starter", you can use an optional argument when you run git clone (you replace the [...] with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` to install project dependencies.
-1. Run `npm start` in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page).  `Control + C` is the command to stop running the local server.  Closing the terminal without stopping the server first could allow the server to continue to run in the background and cause problems. This command is not specific to Webpack; make note of it for future use.   
-1. Make sure both members of your team are collaborators on the forked repo.  
-1. Do not run `npm audit fix --force`.  This will update to the latest version of packages.  We need to be using `webpack-dev-server@3.11.2` which is not the latest version.  If you start to run into Webpack errors, first check that all group members are using the correct version.  
+## Preview of App
+- put gif here when done
 
-## Testing
+## Context
+We completed this project from week 2 to week 4 in Mod 2 of the Front End development program at Turing School of Software & Design. We are a 4 group of front-end developers who worked together remotely via zoom to complete this application. Approximately 80 hours was spent on this project between team members. 
 
-Mocha and chai are already set up, with a boilerplate test for you..
+We used HTML, CSS and JavaScript written in the code editor VS Code with Webpack installed. GitHub was used to store, manage, and collaborate on code so that we could all work on our local machines. We also utilized a shared GitHub project board to keep track of issues.
 
+We wrote our HTML with the smallest skeleton possible. CSS rules are written in order of the HTML skeleton. JavaScript functions were split into different files for easy readability. Testing was implemented with the Mocha framework and Chai library. 
 
-## Data Model
+## Contributors
+- [Scotty Brown](https://github.com/Scotty-Brown) - 2305 FE Mod 2 student at Turing School for Software and Design
+- [Prissilla Escobar](https://github.com/prissilla-escobar) - 2305 FE Mod 2 student at Turing School for Software and Design
+- [Alexandra Peterson](https://github.com/apete12) - 2305 FE Mod 2 student at Turing School for Software and Design
+- [Adrian Zabolitzki](https://github.com/ganuza) - 2305 FE Mod 2 student at Turing School for Software and Design
 
-**Users**
+## Learning Goals
+- Understand the use of Webpack
+- Implement fetch API for accessing the data
+- Write tests for data model functions
+- Create a project that is easily readable with separate files that store functions for DOM manipulation, data model, helper, api calls and scripts
 
-```
-[
-  {
-    "id": [number],
-    "name": [string],
-    "address": [string],
-    "email": [string],
-    "strideLength": [number - feet],
-    "dailyStepGoal": [number - steps],
-    "friends": [array - one-way connection to other user(s)]
-  },
-  ...more user data
-]
-```
+## Wins + Challenges
+- A challenge that we encountered immediately upon starting the project was navigating where to put each different type of code, specifically in terms of importing/exporting variables and functions. This project ended with about 13 files across 3 different directories, and learning how to import/export data from each file was a challenge. We also had difficulty with separating all DOM functions and variables from our data model functions, which consistently produced a document error in the terminal. After research and seeking out mentor support, we learned how and why DOM and data model functions should exist across different files to avoid errors. 
+- A challenge we encountered was utilizing promises and fetch calls in order to make network requests and manipulate data. We aimed to incorporate DRY JS that followed SRP, and navigating these principles was a challenge for 4 fetch requests. We overcame this challenge by researching promise.all() and seeking support from mentors. Ultimately, we implemented these concepts effectively, efficiently, and with understanding of the functionality. 
+- We used webpack for the first time to bundle ESM and common JS which helped us understand the necessity and functionality.
 
-**Activity**
+## Future Features
+- User login added
+- User will see if their step count, hydration consumption, activity or sleep is below average
+- User can choose a different color gradient for the app
+- User will be able to input and store log entries
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numSteps": [number - steps],
-    "minutesActive": [number - minutes],
-    "flightsOfStairs": [number - flights]
-  },
-  ...more activity data
-]
-```
-
-**Hydration**
-
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numOunces": [number - ounces]
-  },
-  ...more hydration data
-]
-```
-
-**Sleep**
-
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "hoursSlept": [number - hours],
-    "sleepQuality": [number - unitless]
-  },
-  ...more sleep data
-]
-```
+## Resources
+Josh Comeau's custom [CSS Reset](https://www.joshwcomeau.com/css/custom-css-reset/) is being used to ensure that the app is more clean and will lead to a better user experience.
