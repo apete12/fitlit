@@ -10,7 +10,7 @@ FitLit revolutionizes the way you track your wellness journey! Behold the ultima
 - run npm start in your terminal to view the app in your browser
 
 ## Preview of App
-- put gif here when done
+[](https://media.giphy.com/media/jDkpjC6KrIeqh4Mpxi/giphy.gif)
 
 ## Context
 We completed this project from week 2 to week 4 in Mod 2 of the Front End development program at Turing School of Software & Design. We are a 4 group of front-end developers who worked together remotely via zoom to complete this application. Approximately 80 hours was spent on this project between team members. 
@@ -43,4 +43,4 @@ We wrote our HTML with the smallest skeleton possible. CSS rules are written in 
 - User will be able to input and store log entries
 
 ## Resources
-Josh Comeau's custom [CSS Reset](https://www.joshwcomeau.com/css/custom-css-reset/) is being used to ensure that the app is more clean and will lead to a better user experience.
+Josh Comeau's custom [CSS Reset](https://www.joshwcomeau.com/css/custom-css-reset/) is being used to ensure that the app is more clean and will lead to a better user experience.     
