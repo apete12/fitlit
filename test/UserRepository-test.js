@@ -5,6 +5,7 @@ import {
   checkIfStepGoalWasMade, 
   getDailySteps,
   getActiveMinutes,
+  getUserActivtyLog
 } from '../src/data-model/activity-data';
 
 import {
@@ -371,6 +372,14 @@ describe('Activity Repository', () => {
     userOne = 1
     userTwo = 2
     userThree = 3
+  })
+
+  it('Should return user activity log entry for a given day', () => {
+    let userOneActivityLog = getUserActivtyLog(userOne, '2023/03/28', sampleActivityData)
+
+    expect(userOneActivityLog.userID).to.be.a('number')
+    expect(userOneActivityLog.date).to.equal('2023/03/28')
+    expect(userOneActivityLog.userID).to.equal(1)
   })
   
   it('Should return daily step count for a given day', () => {
