@@ -1,23 +1,6 @@
 const dayjs = require('dayjs');
 
 import { 
-  userInfoContainer,
-  welcomeHeading,
-  friendList,
-  dailyHydrationStats,
-  weeklyHydrationStats,
-  sleepStatsByDay,
-  avgAllTimeSleepStats,
-  weeklySleepStats,
-  usersStepGoal,
-  milesWalkedByDay,
-  dailyActiveMinutes,
-  dailyStepCount,
-  weeklyStepCountGoal,
-  gateInfo,
-} from './scripts';
-
-import { 
   getDailyMilesWalked, 
   checkIfStepGoalWasMade, 
   getDailySteps,
@@ -49,6 +32,26 @@ import {
 } from '../src/data-model/sleep-data';
 
 var currentUser;
+
+// Query Selectors:
+// users
+var userInfoContainer = document.querySelector('.user-info');
+var welcomeHeading = document.querySelector('.welcome-heading');
+var friendList = document.querySelector('.friend-list')
+var gateInfo = document.querySelector('.gate-info')
+// hydration
+var dailyHydrationStats = document.querySelector('.daily-hydration-stats')
+var weeklyHydrationStats = document.querySelector('.weekly-hydration-stats')
+// activity
+var usersStepGoal = document.querySelector('.all-users-step-goal')
+var dailyStepCount = document.querySelector('.daily-steps')
+var dailyActiveMinutes = document.querySelector('.daily-active-minutes')
+var weeklyStepCountGoal = document.querySelector('.weekly-step-count-goal')
+var milesWalkedByDay = document.querySelector('.todays-miles-walked')
+// sleep
+var weeklySleepStats = document.querySelector('.weekly-sleep-stats')
+var sleepStatsByDay = document.querySelector('.today-sleep-stats')
+var avgAllTimeSleepStats = document.querySelector('.all-time-sleep-stats-container')
 
 // USER INFO
 const displayRandomUser = (array) => {
