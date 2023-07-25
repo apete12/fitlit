@@ -62,4 +62,3 @@ describe('User Repository', () => {
     expect(invalidDataListTest).to.deep.equal(NaN)
   })
 })  
-
