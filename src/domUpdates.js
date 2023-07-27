@@ -316,5 +316,5 @@ export {
   displayDailyActiveMinutes,
   displayWeeklyStepCountGoalReached,
   activityForm,
-  activityButton
+  activityButton,
 }

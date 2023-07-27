@@ -2,7 +2,7 @@ import {
     getRandomIndex,
 } from '../data-model/helper-functions';
 
-let currentUser
+let currentUser;
 
 const getUserData = ((userId, dataList) => {
   let filteredById = dataList.users.find(user => user.id === userId);
@@ -17,7 +17,7 @@ const generateRandomUser = (array) => {
   let randomUserIndex = getRandomIndex(array)
   let userDataInfo = getUserData(randomUserIndex + 1, array)
   currentUser = userDataInfo
-  
+
   if (currentUser === "Invalid User") {
     return 'No Users Found'
   } else {

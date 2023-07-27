@@ -4,7 +4,6 @@ const getUserActivtyLog = (id, day, dataList) => {
   return userActivityEntry
 }
 
-
 const getDailySteps = (id, day, dataList) => {
   let userActivityEntry = getUserActivtyLog(id, day, dataList)
   if (!userActivityEntry) {
@@ -57,10 +56,35 @@ const checkIfStepGoalWasMade = (id, day, dataList1, dataList2) => {
   }
 }
 
+
+
+const getInputData = () => { //invoke in postActivityData apiCalls function
+  e.preventDefault(); //prevent form from refreshing 
+
+  const flightsOfStairs = document.getElementById("input-stairs").value
+  const minutesActive = document.getElementById("input-minutes").value
+  const numSteps = document.getElementById("input-steps").value
+
+  newActivityData = {
+    userID: id, //currentuser.id
+    date: day, //date.now()
+    flightsOfStairs: flightsOfStairs,
+    minutesActive: minutesActive,
+    numSteps: numSteps
+  }
+
+  return newActivityData
+}
+
+
+
+
+
 export {
   checkIfStepGoalWasMade,
   getDailySteps,
   getActiveMinutes,
   getDailyMilesWalked,
   getUserActivtyLog,
+  getInputData
 }
