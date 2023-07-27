@@ -279,5 +279,6 @@ export {
   displayMilesWalkedByDay,
   displayWeeklySleepHoursAndQuality,
   displayDailyActiveMinutes,
-  displayWeeklyStepCountGoalReached
+  displayWeeklyStepCountGoalReached,
+  currentUser
 }
