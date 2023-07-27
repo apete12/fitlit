@@ -29,16 +29,19 @@ const getStatsByWeek = (id, dataList, startDate) => {
 
   const makeWeeklyArray = () => {
     let todaysDate = getTodaysDate(id, dataList);
+    let dataListType = todaysDate.dataListType
     let dataTypeById
-    
-    if (todaysDate.dataListType === 'hydration') {
-      dataTypeById = dataList.hydrationData.filter((entry) => entry.userID === id);
-    } else if (todaysDate.dataListType === 'sleep') {
-      dataTypeById = dataList.sleepData.filter((entry) => entry.userID === id)
-    } else if (todaysDate.dataListType === 'activity') {
-      dataTypeById = dataList.activityData.filter((entry) => entry.userID === id)
-    } else {
-      return 'Invalid Argument'
+
+    switch (dataListType) {
+      case 'hydration':
+      case 'sleep':
+      case 'activity': {
+        dataTypeById = dataList[dataListType + 'Data'].filter((entry) => entry.userID === id)
+        break
+      }
+      default: {
+        return 'Invalid Argument'
+      }
     }
 
     let startDateEntry = dataTypeById.find((log) => log.date === startDate && todaysDate.date !== startDate);
