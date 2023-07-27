@@ -86,11 +86,24 @@ h2 {
 
 .h3-container {
   display: flex;
+  justify-content: space-around;
   align-items: center;
-  flex-direction: column;
   width: 100%;
   margin-top: 10px;
   background-color:  rgba(225, 225, 225, 0.462);
+}
+
+.data-button {
+  display: flex;
+}
+
+.new-activity-data, .activity-notes {
+  background-color: rgba(87, 185, 188, 0.5019607843);
+  border: 1px solid #044553;
+  width: 12%;
+  font-size: 20px;
+  border-radius: 66px;
+  height: 75%;
 }
 
 .user-data-container {
@@ -279,6 +292,31 @@ h2 {
   display: flex;
 }
 
+.activity-form {
+  display:flex;
+  font-family: 'Abel', sans-serif;
+  font-size: 20px;
+  opacity: .5;
+}
+
+.daily-steps-self-input, .daily-active-mins-self-input, .daily-stairs-flights-self-input {
+  margin-right: 15px;
+  font-family: 'Abel', sans-serif;
+  font-weight: bold;
+}
+
+input, label {
+  border-radius: 8px;
+  font-family: 'Abel', sans-serif;
+}
+
+button:hover, .submit-button:hover {
+  font-family: 'Abel', sans-serif;
+  color:#044553;
+  border: 3px solid #57b8bc;
+  opacity: 1;
+}
+
 .grid-calendar {
   display: flex;
   flex-wrap: wrap;
@@ -328,4 +366,8 @@ h2 {
 .data-last {
   border-top: 1px solid #044553;
   text-align: center;
+}
+
+.hidden {
+  display: none !important;
 }
