@@ -13,7 +13,9 @@ import {
   displayMilesWalkedByDay,
   displayWeeklySleepHoursAndQuality,
   displayDailyActiveMinutes,
-  displayWeeklyStepCountGoalReached
+  displayWeeklyStepCountGoalReached,
+  activityForm,
+  activityButton
 } from './domUpdates';
 
 import {
@@ -42,4 +44,11 @@ window.addEventListener('load', () => {
     displayWeeklySleepHoursAndQuality(results[2])
   })
   .catch(error => console.log('ERROR', error))
+})
+
+activityButton.addEventListener('click', () => {
+  activityForm()
+})
+
+form.addEventListener('sumbit', () => {
 })
