@@ -52,6 +52,11 @@ var milesWalkedByDay = document.querySelector('.todays-miles-walked')
 var weeklySleepStats = document.querySelector('.weekly-sleep-stats')
 var sleepStatsByDay = document.querySelector('.today-sleep-stats')
 var avgAllTimeSleepStats = document.querySelector('.all-time-sleep-stats-container')
+var activityStatsDiv = document.querySelector('.health-stats-activity-sentences')
+var activityButton = document.querySelector('.new-activity-data')
+var dailyStepsContainer = document.querySelector('.daily-steps-container')
+var dailyActiveMinContainer = document.querySelector('.daily-active-min-container')
+var dailyMilesContainer = document.querySelector('.daily-miles-container')
 
 // USER INFO
 const displayRandomUser = (array) => {
@@ -189,6 +194,10 @@ const displayWeeklySleepHoursAndQuality = (dataList) => {
 }
 
 // ACTIVITY INFO
+// activityButton.addEventListener('click', activityForm())
+
+
+
 const displayAverageSteps = (array) => {
   let avgSteps = getAvgSteps(array)
 
@@ -267,6 +276,32 @@ const displayWeeklyStepCountGoalReached = (dataList1, dataList2) => {
   `
 }
 
+// activityButton.addEventListener('click', activityForm())
+
+const activityForm = () => {
+  dailyStepsContainer.classList.add('hidden')
+  dailyActiveMinContainer.classList.add('hidden')
+  dailyMilesContainer.classList.add('hidden')
+  activityStatsDiv.innerHTML = ''
+
+  activityStatsDiv.innerHTML += `
+  <form class="activity-form">
+    <div class="daily-steps-self-input">
+      <label for="daily-steps-input">Steps</label>
+      <input type="number" name="daily-steps-input" value="0" min="0" max = "100000">
+    </div>
+    <div class="daily-active-mins-self-input">
+      <label for="daily-active-mins-input">Minutes</label>
+      <input type="number" name="daily-active-mins-input" value="0" min="0" max="300">
+    </div>
+    <div class="daily-stairs-flights-self-input"> 
+      <label for="daily-stairs-flights-input">Flights</label>
+      <input type="number" name="daily-stairs-flights-input" value="0" min="0" max="500">
+    </div>
+    <input class="submit-button" type="submit" value="Submit">
+  </form>`
+}
+
 export {
   displayRandomUser,
   displayAverageSteps,
@@ -280,5 +315,6 @@ export {
   displayWeeklySleepHoursAndQuality,
   displayDailyActiveMinutes,
   displayWeeklyStepCountGoalReached,
-  currentUser
+  activityForm,
+  activityButton,
 }

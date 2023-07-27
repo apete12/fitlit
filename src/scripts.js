@@ -13,7 +13,9 @@ import {
   displayMilesWalkedByDay,
   displayWeeklySleepHoursAndQuality,
   displayDailyActiveMinutes,
-  displayWeeklyStepCountGoalReached
+  displayWeeklyStepCountGoalReached,
+  activityForm,
+  activityButton
 } from './domUpdates';
 
 import {
@@ -83,12 +85,6 @@ window.addEventListener('load', () => {
   // fetchActivity() // might need to split up functions?
 // })
 
-// 
-// 
-// 
-
-
-
-
-
-
+activityButton.addEventListener('click', () => {
+  activityForm()
+})
