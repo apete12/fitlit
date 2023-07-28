@@ -59,8 +59,8 @@ var dailyActiveMinContainer = document.querySelector('.daily-active-min-containe
 var dailyMilesContainer = document.querySelector('.daily-miles-container')
 
 // USER INFO
-const displayRandomUser = (array) => {
-  currentUser = generateRandomUser(array)
+const displayRandomUser = (currentUser) => {
+  // currentUser = generateRandomUser(array)
   let wholeName = currentUser.name
   let firstNameOnly = wholeName.split(' ')
 
@@ -82,9 +82,9 @@ const displayRandomUser = (array) => {
     `
 }
 
-const displayFriendList = (array) => {
-  let friendsNames = currentUser.friends.map((id) => {
-    let userFriendDetails = getUserData(id, array)
+const displayFriendList = (dataModel) => {
+  let friendsNames = dataModel.currentUser.friends.map((id) => {
+    let userFriendDetails = getUserData(id, dataModel.user)
     return userFriendDetails.name
   }).join(', ') 
   
@@ -94,17 +94,17 @@ const displayFriendList = (array) => {
 }
 
 // HYDRATION INFO
-const displayDailyHydrationStats = (array) => {
-  let todaysDate = getOuncesByWeek(currentUser.id, array)
-  let todaysOunces = getOuncesByDay(currentUser.id, todaysDate.dates[6], array)
+const displayDailyHydrationStats = (dataModel) => {
+  let todaysDate = getOuncesByWeek(dataModel.currentUser.id, dataModel.hydration)
+  let todaysOunces = getOuncesByDay(dataModel.currentUser.id, todaysDate.dates[6], dataModel.hydration)
   
   dailyHydrationStats.innerHTML = ` 
     <section class="daily-water-sentences">Today, you've consumed ${todaysOunces} ounces of water!</section>
     `
 }
 
-const displayWeeklyHydrationStats = (array) => {
-  let weeklyOzArray = getOuncesByWeek(currentUser.id, array)
+const displayWeeklyHydrationStats = (dataModel) => {
+  let weeklyOzArray = getOuncesByWeek(dataModel.currentUser.id, dataModel.hydration)
   let weeklyHydrationPerDay = weeklyOzArray.dates
   let formattedDay = weeklyHydrationPerDay.map((day) => {
     return dayjs(day).format('ddd D')
@@ -131,18 +131,18 @@ const displayWeeklyHydrationStats = (array) => {
 }
 
 // SLEEP INFO
-const displayTodaysSleepData = (dataList) => {
-  let todaysDate = getTodaysDate(currentUser.id, dataList)
-  const todaysSleepQuantity = getSleepAmountByDay(currentUser.id, todaysDate.date, dataList)
+const displayTodaysSleepData = (dataModel, dataList) => {
+  let todaysDate = getTodaysDate(dataModel.currentUser.id, dataModel.sleep)
+  const todaysSleepQuantity = getSleepAmountByDay(dataModel.currentUser.id, todaysDate.date, dataModel.sleep)
 
   sleepStatsByDay.innerHTML = ` 
     <section>Today, you slept ${todaysSleepQuantity} hours!</section>
   `
 }
 
-const displayAllTimeAvgSleepHoursAndQuality = (dataList) => {
-  let avgSleepQuality = getAvgSleepQuality(currentUser.id, dataList)
-  let avgSleepHours = getAvgHoursSlept(currentUser.id, dataList)
+const displayAllTimeAvgSleepHoursAndQuality = (dataModel) => {
+  let avgSleepQuality = getAvgSleepQuality(dataModel.currentUser.id, dataModel.sleep)
+  let avgSleepHours = getAvgHoursSlept(dataModel.currentUser.id, dataModel.sleep)
   
   avgAllTimeSleepStats.innerHTML = `
     <div class="all-time-sleep-quality-container">
@@ -154,10 +154,10 @@ const displayAllTimeAvgSleepHoursAndQuality = (dataList) => {
   `
 }
 
-const displayWeeklySleepHoursAndQuality = (dataList) => {
-  let todaysDate = getTodaysDate(currentUser.id, dataList);
-  let weeklySleepQualStats = getWeeklySleepQualityStats(currentUser.id, dataList, todaysDate.date)
-  let weeklySleepHoursStats = getWeeklySleepHoursStats(currentUser.id, dataList, todaysDate.date)
+const displayWeeklySleepHoursAndQuality = (dataModel) => {
+  let todaysDate = getTodaysDate(dataModel.currentUser.id, dataModel.sleep);
+  let weeklySleepQualStats = getWeeklySleepQualityStats(dataModel.currentUser.id, dataModel.sleep, todaysDate.date)
+  let weeklySleepHoursStats = getWeeklySleepHoursStats(dataModel.currentUser.id, dataModel.sleep, todaysDate.date)
   
   let formattedDay = weeklySleepHoursStats.day.map((day) => {
     return dayjs(day).format('ddd D')
@@ -206,41 +206,43 @@ const displayAverageSteps = (array) => {
   `
  }
 
-const displayDailySteps = (dataList) => {
-  let todaysDate = getTodaysDate(currentUser.id, dataList)
-  let todaysStepCount = getDailySteps(currentUser.id, todaysDate.date, dataList)
-
+const displayDailySteps = (dataModel) => {
+  let todaysDate = getTodaysDate(dataModel.currentUser.id, dataModel.activity)
+  let todaysStepCount = getDailySteps(dataModel.currentUser.id, todaysDate.date, dataModel.activity)
+  // dailyStepCount.innerHTML = ''
   dailyStepCount.innerHTML = ` 
     <section>you've walked ${todaysStepCount} steps!</section>
   `
 }
 
-const displayDailyActiveMinutes = (dataList) => {
-  let todaysDate = getTodaysDate(currentUser.id, dataList)
-  let todaysActiveMin = getActiveMinutes(currentUser.id, todaysDate.date, dataList)
-
+const displayDailyActiveMinutes = (dataModel) => {
+  let todaysDate = getTodaysDate(dataModel.currentUser.id, dataModel.activity)
+  let todaysActiveMin = getActiveMinutes(dataModel.currentUser.id, todaysDate.date, dataModel.activity)
+// dailyActiveMinutes.innerHTML = ''
   dailyActiveMinutes.innerHTML = `
     <section>you have ${todaysActiveMin} active minutes!</section>
   `
 }
 
-const displayMilesWalkedByDay = (dataList1, dataList2) => {
-  let todaysDate = getTodaysDate(currentUser.id, dataList2)
-  let todaysMilesWalked = getDailyMilesWalked(currentUser.id, todaysDate.date, dataList1, dataList2)
-
+const displayMilesWalkedByDay = (dataModel) => {
+  let todaysDate = getTodaysDate(dataModel.currentUser.id, dataModel.activity)
+  let todaysMilesWalked = getDailyMilesWalked(dataModel.currentUser.id, todaysDate.date, dataModel.user, dataModel.activity)
+// milesWalkedByDay.innerHTML = ''
   milesWalkedByDay.innerHTML = ` 
     <section>you walked ${todaysMilesWalked} miles!</section>
   `
 }
 
-const displayWeeklyStepCountGoalReached = (dataList1, dataList2) => {
-  let today = getTodaysDate(currentUser.id, dataList2)
-  let currentUserWeeklySleepData = getStatsByWeek(currentUser.id, dataList2, today.date)
+const displayWeeklyStepCountGoalReached = (dataModel) => {
+  let today = getTodaysDate(dataModel.currentUser.id, dataModel.activity)
+  let currentUserWeeklySleepData = getStatsByWeek(dataModel.currentUser.id, dataModel.activity, today.date)
   let weeklyUserDatathisone = currentUserWeeklySleepData()
 
   weeklyUserDatathisone.forEach((v) => {
-   v.goalReached = checkIfStepGoalWasMade(currentUser.id, v.date, dataList1, dataList2)
+   v.goalReached = checkIfStepGoalWasMade(dataModel.currentUser.id, v.date, dataModel.user, dataModel.activity)
   })
+
+  console.log(weeklyUserDatathisone)
 
   let formattedDay = weeklyUserDatathisone.map((day) => {
     return dayjs(day.date).format('ddd D')
@@ -284,22 +286,42 @@ const activityForm = () => {
   dailyMilesContainer.classList.add('hidden')
   activityStatsDiv.innerHTML = ''
 
+
   activityStatsDiv.innerHTML += `
-  <form class="activity-form">
+  <form id='activity-form' class="activity-form">
     <div class="daily-steps-self-input">
       <label for="daily-steps-input">Steps</label>
-      <input type="number" name="daily-steps-input" value="0" min="0" max = "100000">
+      <input id='input-steps' type="number" name="daily-steps-input" value="0" min="0" max = "100000">
     </div>
     <div class="daily-active-mins-self-input">
       <label for="daily-active-mins-input">Minutes</label>
-      <input type="number" name="daily-active-mins-input" value="0" min="0" max="300">
+      <input id='input-minutes' type="number" name="daily-active-mins-input" value="0" min="0" max="300">
     </div>
     <div class="daily-stairs-flights-self-input"> 
       <label for="daily-stairs-flights-input">Flights</label>
-      <input type="number" name="daily-stairs-flights-input" value="0" min="0" max="500">
+      <input id='input-stairs' type="number" name="daily-stairs-flights-input" value="0" min="0" max="500">
     </div>
-    <input class="submit-button" type="submit" value="Submit">
+    <input id='activity-details-submit' class="submit-button" type="submit" value="Submit">
   </form>`
+}
+
+const renderPageLoad = (dataModel) => {
+  // user
+displayRandomUser(dataModel.currentUser)
+displayFriendList(dataModel)
+// activity
+displayAverageSteps(dataModel.user)
+displayDailySteps(dataModel)
+displayMilesWalkedByDay(dataModel)
+displayDailyActiveMinutes(dataModel)
+displayWeeklyStepCountGoalReached(dataModel)
+//  hydration
+displayDailyHydrationStats(dataModel)
+displayWeeklyHydrationStats(dataModel)
+// sleep
+displayTodaysSleepData(dataModel)
+displayAllTimeAvgSleepHoursAndQuality(dataModel)
+displayWeeklySleepHoursAndQuality(dataModel)
 }
 
 export {
@@ -317,4 +339,5 @@ export {
   displayWeeklyStepCountGoalReached,
   activityForm,
   activityButton,
+  renderPageLoad
 }
