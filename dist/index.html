@@ -7,8 +7,10 @@
   </head>
   <body>
     <article class="nav-bar">
-      <h1>FitLit</h1>
-      <img src="images/a-step-in-the-right-direction.jpg" alt="a step in the right direction logo">
+      <div class="logo-container">
+        <img src="images/a-step-in-the-right-direction.png" alt="a step in the right direction logo">
+        <h1>FitLit</h1>
+      </div>
       <div class="welcome-user">
         <h2 class="welcome-heading">Welcome</h2>
       </div>
@@ -71,18 +73,20 @@
           </div>
           <form id='activity-form' class="activity-form">
             <div class="daily-steps-self-input">
-              <label for="daily-steps-input">Steps</label>
-              <input id='input-steps' type="number" name="daily-steps-input" value="0" min="0" max = "100000">
+              <label label="daily-steps-input" for="daily-steps-input">Steps</label>
+              <input id="daily-steps-input" label="daily-steps-input" type="number" name="daily-steps-input" value="0" min="0" max = "100000">
             </div>
             <div class="daily-active-mins-self-input">
-              <label for="daily-active-mins-input">Minutes</label>
-              <input id='input-minutes' type="number" name="daily-active-mins-input" value="0" min="0" max="300">
+              <label label="daily-mins-input" for="daily-active-mins-input">Minutes</label>
+              <input id="daily-active-mins-input" label="daily-mins-input" type="number" name="daily-active-mins-input" value="0" min="0" max="300">
             </div>
             <div class="daily-stairs-flights-self-input"> 
-              <label for="daily-stairs-flights-input">Flights</label>
-              <input id='input-stairs' type="number" name="daily-stairs-flights-input" value="0" min="0" max="500">
+              <label label="daily-flights-input" for="daily-stairs-flights-input">Flights</label>
+              <input id="daily-stairs-flights-input" label="daily-flights-input" type="number" name="daily-stairs-flights-input" value="0" min="0" max="500">
             </div>
-            <input id='activity-details-submit' class="submit-button" type="submit" value="Submit">
+            <div class="submit-button-container">
+              <input id='activity-details-submit' class="ubmit-button" type="submit" value="Submit">
+            </div>
           </form>
           <div class="today-container">
             <section>Today...</section>
@@ -103,21 +107,28 @@
             <section class="weekly-step-count-goal"></section>
           </div>
           <div class="activity-notes-display">
-            <div class="activity-notes-container">
+            <div class="form-container">
               <form name="enter-activity-notes" class="activity-notes-form">
-                <div class="activity-notes-self-input">
-                  <label for="activity-notes-input"></label>
-                  <input type="text" name="activity-notes-input" placeholder="Activity">
+                <div class="activity-type-container"> 
+                  <div class="activity-type-label-container">
+                    <label label="activity-type-input" for="activity-notes-type-id">Activity Type:</label>
+                  </div>
+                  <div class="activity-type-input-container">
+                    <input type="text" label="activity-type-input" id="activity-notes-type-id" name="activity-notes-input" placeholder="Activity">
+                  </div>
                 </div>
-                <div class="activity-description-self-input">
-                  <label for="activity-details-input"></label>
-                  <textarea class="activity-description" name="activity-description" placeholder="Enter Activity Notes" rows="2" cols="25"></textarea>
+                <div class="notes-container"> 
+                  <div class="activity-notes-label-container">
+                    <label label="activity-notes-input" for="activity-notes-desc-id">Activity Notes:</label>
+                  </div>
+                  <div class="activity-notes-input-container">
+                    <textarea label="activity-notes-input" class="activity-description" id="activity-notes-desc-id" name="activity-description" placeholder="Enter Activity Notes" rows="2" cols="25"></textarea>
+                  </div>
                 </div>
-                <input id="activity-notes-submit" class="submit-button" type="submit" value="Submit">
+                <input id="activity-notes-submit" class="note-submit-button" type="submit" value="Submit">
               </form>
             </div>
             <div class="display-notes-container"> 
-            </div>
           </div>
         </div>
       </div>
