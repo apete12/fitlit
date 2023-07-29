@@ -396,3 +396,8 @@ button:hover, .submit-button:hover {
 .hidden {
   display: none !important;
 }
+
+.replacement-form-image {
+  width: 50%;
+  opacity: 30%;
+}
