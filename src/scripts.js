@@ -1,5 +1,5 @@
 import './css/styles.css'
-import './images/a-step-in-the-right-direction.jpg'
+import './images/a-step-in-the-right-direction.png'
 
 import { 
   renderPageLoad,
