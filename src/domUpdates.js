@@ -52,15 +52,10 @@ var milesWalkedByDay = document.querySelector('.todays-miles-walked')
 var weeklySleepStats = document.querySelector('.weekly-sleep-stats')
 var sleepStatsByDay = document.querySelector('.today-sleep-stats')
 var avgAllTimeSleepStats = document.querySelector('.all-time-sleep-stats-container')
-var activityStatsDiv = document.querySelector('.health-stats-activity-sentences')
 var activityButton = document.querySelector('.new-activity-data')
-var dailyStepsContainer = document.querySelector('.daily-steps-container')
-var dailyActiveMinContainer = document.querySelector('.daily-active-min-container')
-var dailyMilesContainer = document.querySelector('.daily-miles-container')
 
 // USER INFO
 const displayRandomUser = (currentUser) => {
-  // currentUser = generateRandomUser(array)
   let wholeName = currentUser.name
   let firstNameOnly = wholeName.split(' ')
 
@@ -194,9 +189,6 @@ const displayWeeklySleepHoursAndQuality = (dataModel) => {
 }
 
 // ACTIVITY INFO
-// activityButton.addEventListener('click', activityForm())
-
-
 
 const displayAverageSteps = (array) => {
   let avgSteps = getAvgSteps(array)
@@ -209,7 +201,6 @@ const displayAverageSteps = (array) => {
 const displayDailySteps = (dataModel) => {
   let todaysDate = getTodaysDate(dataModel.currentUser.id, dataModel.activity)
   let todaysStepCount = getDailySteps(dataModel.currentUser.id, todaysDate.date, dataModel.activity)
-  // dailyStepCount.innerHTML = ''
   dailyStepCount.innerHTML = ` 
     <section>you've walked ${todaysStepCount} steps!</section>
   `
@@ -218,7 +209,6 @@ const displayDailySteps = (dataModel) => {
 const displayDailyActiveMinutes = (dataModel) => {
   let todaysDate = getTodaysDate(dataModel.currentUser.id, dataModel.activity)
   let todaysActiveMin = getActiveMinutes(dataModel.currentUser.id, todaysDate.date, dataModel.activity)
-// dailyActiveMinutes.innerHTML = ''
   dailyActiveMinutes.innerHTML = `
     <section>you have ${todaysActiveMin} active minutes!</section>
   `
@@ -227,7 +217,6 @@ const displayDailyActiveMinutes = (dataModel) => {
 const displayMilesWalkedByDay = (dataModel) => {
   let todaysDate = getTodaysDate(dataModel.currentUser.id, dataModel.activity)
   let todaysMilesWalked = getDailyMilesWalked(dataModel.currentUser.id, todaysDate.date, dataModel.user, dataModel.activity)
-// milesWalkedByDay.innerHTML = ''
   milesWalkedByDay.innerHTML = ` 
     <section>you walked ${todaysMilesWalked} miles!</section>
   `
@@ -278,50 +267,22 @@ const displayWeeklyStepCountGoalReached = (dataModel) => {
   `
 }
 
-// activityButton.addEventListener('click', activityForm())
-
-const activityForm = () => {
-  dailyStepsContainer.classList.add('hidden')
-  dailyActiveMinContainer.classList.add('hidden')
-  dailyMilesContainer.classList.add('hidden')
-  activityStatsDiv.innerHTML = ''
-
-
-  activityStatsDiv.innerHTML += `
-  <form id='activity-form' class="activity-form">
-    <div class="daily-steps-self-input">
-      <label for="daily-steps-input">Steps</label>
-      <input id='input-steps' type="number" name="daily-steps-input" value="0" min="0" max = "100000">
-    </div>
-    <div class="daily-active-mins-self-input">
-      <label for="daily-active-mins-input">Minutes</label>
-      <input id='input-minutes' type="number" name="daily-active-mins-input" value="0" min="0" max="300">
-    </div>
-    <div class="daily-stairs-flights-self-input"> 
-      <label for="daily-stairs-flights-input">Flights</label>
-      <input id='input-stairs' type="number" name="daily-stairs-flights-input" value="0" min="0" max="500">
-    </div>
-    <input id='activity-details-submit' class="submit-button" type="submit" value="Submit">
-  </form>`
-}
-
 const renderPageLoad = (dataModel) => {
-  // user
 displayRandomUser(dataModel.currentUser)
 displayFriendList(dataModel)
-// activity
-displayAverageSteps(dataModel.user)
-displayDailySteps(dataModel)
-displayMilesWalkedByDay(dataModel)
-displayDailyActiveMinutes(dataModel)
-displayWeeklyStepCountGoalReached(dataModel)
-//  hydration
 displayDailyHydrationStats(dataModel)
 displayWeeklyHydrationStats(dataModel)
-// sleep
 displayTodaysSleepData(dataModel)
 displayAllTimeAvgSleepHoursAndQuality(dataModel)
 displayWeeklySleepHoursAndQuality(dataModel)
+}
+
+const renderActivityData = (dataModel) => {
+  displayAverageSteps(dataModel.user)
+  displayDailySteps(dataModel)
+  displayMilesWalkedByDay(dataModel)
+  displayDailyActiveMinutes(dataModel)
+  displayWeeklyStepCountGoalReached(dataModel)
 }
 
 export {
@@ -337,7 +298,7 @@ export {
   displayWeeklySleepHoursAndQuality,
   displayDailyActiveMinutes,
   displayWeeklyStepCountGoalReached,
-  activityForm,
   activityButton,
-  renderPageLoad
+  renderPageLoad,
+  renderActivityData
 }
