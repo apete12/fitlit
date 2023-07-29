@@ -3,7 +3,8 @@ import './images/a-step-in-the-right-direction.jpg'
 
 import { 
   renderPageLoad,
-  renderActivityData
+  renderActivityData,
+  activityNotesButton
 } from './domUpdates';
 
 import {
@@ -18,6 +19,9 @@ import { generateRandomUser } from './data-model/user-data';
 var dailyStepsContainer = document.querySelector('.daily-steps-container')
 var dailyActiveMinContainer = document.querySelector('.daily-active-min-container')
 var dailyMilesContainer = document.querySelector('.daily-miles-container')
+var activityNotes = document.querySelector('.display-notes-container')
+var activityForm = document.getElementById('activity-notes-id')
+
 
 let dataModel = {}
 
@@ -91,4 +95,40 @@ const postActivityData = (newActivityData) => {
   })
 }
 
-              
+activityNotesButton.addEventListener('click', () => {
+  // console.log('HERE:  Hello')
+  
+  let activityNotesType = document.getElementById('activity-notes-type-id').value
+  let activityNotesDesc = document.getElementById('activity-notes-desc-id').value
+
+  // const notesObject = {
+  //   activityType: activityNotesType,
+  //   activityNotes: activityNotesDesc,
+  // }
+
+
+
+  let notesObject = {
+    activityType: [],
+    activityNotes: []
+  }
+
+  notesObject.activityType.push(activityNotesType)  
+  notesObject.activityNotes.push(activityNotesDesc)
+
+  window.localStorage.setItem(dataModel.currentUser.id, JSON.stringify(notesObject))
+  renderActivityNotes()
+
+  
+
+  activityForm.reset()
+})
+
+
+const renderActivityNotes = () => {
+ 
+  // let keys = Object.keys(localStorage)
+  // console.log('keys: ', keys)
+  const user = JSON.parse(localStorage.getItem(`${dataModel.currentUser.id}`))
+  activityNotes.innerText = `Notes: \n ${user.activityType}: ${user.activityNotes}`
+}
