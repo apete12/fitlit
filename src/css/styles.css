@@ -254,6 +254,9 @@ h2 {
   box-shadow: 10px 5px 5px #044553;
 }
 
+.activity-container {
+  height: 65vh;
+}
 .health-stats-activity-sentences, .health-stats-sleep-stats-sentences {
   display: flex;
   flex-direction: row;
@@ -297,6 +300,29 @@ h2 {
   font-family: 'Abel', sans-serif;
   font-size: 20px;
   opacity: .5;
+}
+
+.activity-notes-display{
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin-top: 15px;
+}
+
+.activity-notes-container {
+  border: 1px solid blue;
+  display: flex;
+  justify-content: center;
+  width: 35%;
+  
+
+}
+
+.display-notes-container {
+  border: 1px solid green;
+  display: flex;
+  width: 35%;
 }
 
 .daily-steps-self-input, .daily-active-mins-self-input, .daily-stairs-flights-self-input {
