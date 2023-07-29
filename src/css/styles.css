@@ -255,7 +255,7 @@ h2 {
 }
 
 .activity-container {
-  height: 65vh;
+  height: 85vh;
 }
 .health-stats-activity-sentences, .health-stats-sleep-stats-sentences {
   display: flex;
@@ -300,10 +300,11 @@ h2 {
   font-family: 'Abel', sans-serif;
   font-size: 20px;
   opacity: .5;
+  margin-top: 15px;
 }
 
 .activity-notes-display{
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   justify-content: space-between;
   width: 90%;
@@ -311,16 +312,14 @@ h2 {
 }
 
 .activity-notes-container {
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
   width: 35%;
-  
-
 }
 
 .display-notes-container {
-  border: 1px solid green;
+  /* border: 1px solid green; */
   display: flex;
   width: 35%;
 }

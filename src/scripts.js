@@ -2,30 +2,17 @@ import './css/styles.css'
 import './images/a-step-in-the-right-direction.jpg'
 
 import { 
-  displayRandomUser, 
-  displayAverageSteps,
-  displayDailyHydrationStats,
-  displayFriendList,
-  displayWeeklyHydrationStats,
-  displayTodaysSleepData,
-  displayAllTimeAvgSleepHoursAndQuality,
-  displayDailySteps,
-  displayMilesWalkedByDay,
-  displayWeeklySleepHoursAndQuality,
-  displayDailyActiveMinutes,
-  displayWeeklyStepCountGoalReached,
-  activityForm,
-  activityButton,
-  renderPageLoad
+  renderPageLoad,
+  renderActivityData
 } from './domUpdates';
 
 import {
   promises,
   fetchUserData,
-  // postActivityData
 } from './apiCalls'
-import { generateRandomUser } from './data-model/user-data';
 
+
+import { generateRandomUser } from './data-model/user-data';
 
 
 var dailyStepsContainer = document.querySelector('.daily-steps-container')
@@ -34,13 +21,6 @@ var dailyMilesContainer = document.querySelector('.daily-miles-container')
 
 let dataModel = {}
 
-let testData = {
-  userID: 1,
-  date: '2023/07/02', 
-  flightsOfStairs: 1, 
-  minutesActive: 23, 
-  numSteps: 23
-}
 
 // Event listener:
 window.addEventListener('load', () => {
@@ -56,12 +36,9 @@ window.addEventListener('load', () => {
   })
   .then(data => {
     renderPageLoad(dataModel)
+    renderActivityData(dataModel)
   })
   .catch(error => console.log('ERROR', error))
-})
-
-activityButton.addEventListener('click', () => {
-  activityForm()
 })
 
 
@@ -76,7 +53,7 @@ document.addEventListener('click', (e) => {
     
     let newActivityData = {
       userID: dataModel.currentUser.id,
-      date: '3000/12/12',
+      date: '2023/07/02',
       flightsOfStairs: flightsOfStairs,
       minutesActive: minutesActive,
       numSteps: numSteps
@@ -96,7 +73,7 @@ document.addEventListener('click', (e) => {
 });
 
 const postActivityData = (newActivityData) => {
-  fetch(`http://localhost:3001/api/v1/activity`, {
+  return fetch(`http://localhost:3001/api/v1/activity`, {
       method: "POST",
       body: JSON.stringify(newActivityData),
       headers: {
@@ -108,8 +85,10 @@ const postActivityData = (newActivityData) => {
       fetchUserData('activity')
       .then(data => {
           dataModel.activity = data
+          renderActivityData(dataModel)
+
       })
   })
 }
 
-
+              
