@@ -14,7 +14,7 @@ body {
 img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
-  margin-right: 20px;
+  /* margin-right: 20px; */
 }
 
 input, button, textarea, select {
@@ -42,15 +42,19 @@ body, html {
   justify-content: space-around;
 }
 
+.logo-container {
+  display: flex;
+}
+
 h1 {
-  font-size: 100px;
+  font-size: 117px;
   font-family: 'bebas neue', oswald;
+  text-decoration: overline;
   color: white;
   height: 70%;
   width: 12%;
   display: flex;
-  justify-content: space-around;
-  margin-left: 20px;
+  margin-top: 20px;
 }
 
 .welcome-user {
@@ -127,7 +131,7 @@ h2 {
   border: solid 2px #044553;
   background: rgba(225, 225, 225, 0.462);
   border-radius: 20px;
-  box-shadow: 10px 5px 5px #044553;
+  box-shadow: 9px 5px 5px #044553;
 }
 
 .movement-info-container{
@@ -142,7 +146,7 @@ h2 {
   border: solid 2px #044553;
   background: rgba(225, 225, 225, 0.462);
   border-radius: 20px;
-  box-shadow: 10px 5px 5px #044553;
+  box-shadow: 9px 5px 5px #044553;
 }
 
 .friends-container{
@@ -157,7 +161,7 @@ h2 {
   border: solid 2px #044553;
   background: rgba(225, 225, 225, 0.462);
   border-radius: 20px;
-  box-shadow: 10px 5px 5px #044553;
+  box-shadow: 9px 5px 5px #044553;
 
 }
 
@@ -255,7 +259,7 @@ h2 {
 }
 
 .activity-container {
-  height: 85vh;
+  height: 88vh;
 }
 .health-stats-activity-sentences, .health-stats-sleep-stats-sentences {
   display: flex;
@@ -295,33 +299,81 @@ h2 {
   display: flex;
 }
 
+
+.activity-notes-display{
+  /* border: 3px solid red; */
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  height: 50%;
+  margin-top: 15px;
+}
+
+.form-container {
+  /* border: 3px solid blue; */
+  display: flex;
+  width: 35%;
+}
+
+.activity-type-container{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.notes-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.activity-type-label-container{
+  display: flex;
+  width: 150px;
+  /* border: 3px solid black; */
+}
+
+.activity-type-input-container{
+  display: flex;
+  /* border: 3px solid black; */
+
+}
+
+.activity-notes-label-container{
+  display: flex;
+  width: 150px;
+  /* border: 3px solid black; */
+}
+
+.activity-notes-input-container{
+  display: flex;
+  /* border: 3px solid black; */
+}
+
+
 .activity-form {
   display:flex;
   font-family: 'Abel', sans-serif;
   font-size: 20px;
-  opacity: .5;
+  opacity: .8;
   margin-top: 15px;
 }
 
-.activity-notes-display{
-  /* border: 1px solid red; */
-  display: flex;
-  justify-content: space-between;
-  width: 90%;
-  margin-top: 15px;
+.note-submit-button{
+margin-left: 150px;
+margin-top: 10px;
 }
 
-.activity-notes-container {
-  /* border: 1px solid blue; */
-  display: flex;
-  justify-content: center;
-  width: 35%;
+.submit-button{
+  display:flex;
 }
 
-.display-notes-container {
-  /* border: 1px solid green; */
-  display: flex;
-  width: 35%;
+.display-notes-container{
+  display:flex;
+  width: 60%;
+  height: 70%;
+  background: rgba(225, 225, 225, 0.462);
+  border: solid 3px #044553;
+
 }
 
 .daily-steps-self-input, .daily-active-mins-self-input, .daily-stairs-flights-self-input {
@@ -335,7 +387,7 @@ input, label {
   font-family: 'Abel', sans-serif;
 }
 
-button:hover, .submit-button:hover {
+button:hover {
   font-family: 'Abel', sans-serif;
   color:#044553;
   border: 3px solid #57b8bc;
