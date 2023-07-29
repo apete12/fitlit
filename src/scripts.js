@@ -1,5 +1,9 @@
 import './css/styles.css'
+import './images/a-step-in-the-right-direction.jpg'
+import './images/stretching-exercises.png'
+import './images/run.png'
 import './images/a-step-in-the-right-direction.png'
+
 
 import { 
   renderPageLoad,
@@ -20,7 +24,8 @@ var dailyStepsContainer = document.querySelector('.daily-steps-container')
 var dailyActiveMinContainer = document.querySelector('.daily-active-min-container')
 var dailyMilesContainer = document.querySelector('.daily-miles-container')
 var activityNotes = document.querySelector('.display-notes-container')
-var activityForm = document.getElementById('activity-notes-id')
+// var activityForm = document.getElementById('activity-notes-id')
+var activityNotesInputContainer = document.querySelector('.activity-notes-container')
 
 
 let dataModel = {}
@@ -119,9 +124,15 @@ activityNotesButton.addEventListener('click', () => {
   window.localStorage.setItem(dataModel.currentUser.id, JSON.stringify(notesObject))
   renderActivityNotes()
 
+  activityNotesInputContainer.innerHTML = ''
+  activityNotesInputContainer.innerHTML = `
+  <img class="replacement-form-image" src="images/run.png" alt="a step in the right direction logo">
+  <img class="replacement-form-image" src="images/run.png" alt="a step in the right direction logo">
+  <img class="replacement-form-image" src="images/run.png" alt="a step in the right direction logo">
+  `
   
 
-  activityForm.reset()
+  // activityForm.reset()
 })
 
 
