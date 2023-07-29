@@ -8,7 +8,8 @@ import './images/a-step-in-the-right-direction.png'
 import { 
   renderPageLoad,
   renderActivityData,
-  activityNotesButton
+  activityNotesButton,
+  renderActivityNotes
 } from './domUpdates';
 
 import {
@@ -16,16 +17,12 @@ import {
   fetchUserData,
 } from './apiCalls'
 
-
 import { generateRandomUser } from './data-model/user-data';
-
 
 var dailyStepsContainer = document.querySelector('.daily-steps-container')
 var dailyActiveMinContainer = document.querySelector('.daily-active-min-container')
 var dailyMilesContainer = document.querySelector('.daily-miles-container')
-var activityNotes = document.querySelector('.display-notes-container')
-// var activityForm = document.getElementById('activity-notes-id')
-var activityNotesInputContainer = document.querySelector('.activity-notes-container')
+var activityNotesInputContainer = document.querySelector('.form-container')
 
 
 let dataModel = {}
@@ -56,9 +53,9 @@ document.addEventListener('click', (e) => {
   const targetElement = e.target;
   if (targetElement.id === 'activity-details-submit') {
     
-    const flightsOfStairs = document.getElementById("input-stairs").value
-    const minutesActive = document.getElementById("input-minutes").value
-    const numSteps = document.getElementById("input-steps").value
+    const flightsOfStairs = document.getElementById("daily-stairs-flights-input").value
+    const minutesActive = document.getElementById("daily-active-mins-input").value
+    const numSteps = document.getElementById("daily-steps-input").value
     
     let newActivityData = {
       userID: dataModel.currentUser.id,
@@ -95,23 +92,13 @@ const postActivityData = (newActivityData) => {
       .then(data => {
           dataModel.activity = data
           renderActivityData(dataModel)
-
       })
   })
 }
 
 activityNotesButton.addEventListener('click', () => {
-  // console.log('HERE:  Hello')
-  
   let activityNotesType = document.getElementById('activity-notes-type-id').value
   let activityNotesDesc = document.getElementById('activity-notes-desc-id').value
-
-  // const notesObject = {
-  //   activityType: activityNotesType,
-  //   activityNotes: activityNotesDesc,
-  // }
-
-
 
   let notesObject = {
     activityType: [],
@@ -130,16 +117,7 @@ activityNotesButton.addEventListener('click', () => {
   <img class="replacement-form-image" src="images/run.png" alt="a step in the right direction logo">
   <img class="replacement-form-image" src="images/run.png" alt="a step in the right direction logo">
   `
-  
-
-  // activityForm.reset()
 })
 
 
-const renderActivityNotes = () => {
- 
-  // let keys = Object.keys(localStorage)
-  // console.log('keys: ', keys)
-  const user = JSON.parse(localStorage.getItem(`${dataModel.currentUser.id}`))
-  activityNotes.innerText = `Notes: \n ${user.activityType}: ${user.activityNotes}`
-}
+export { dataModel } 
