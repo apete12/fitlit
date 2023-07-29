@@ -53,6 +53,7 @@ var weeklySleepStats = document.querySelector('.weekly-sleep-stats')
 var sleepStatsByDay = document.querySelector('.today-sleep-stats')
 var avgAllTimeSleepStats = document.querySelector('.all-time-sleep-stats-container')
 var activityButton = document.querySelector('.new-activity-data')
+var activityNotesButton = document.getElementById('activity-notes-submit')
 
 // USER INFO
 const displayRandomUser = (currentUser) => {
@@ -300,5 +301,6 @@ export {
   displayWeeklyStepCountGoalReached,
   activityButton,
   renderPageLoad,
-  renderActivityData
+  renderActivityData,
+  activityNotesButton
 }
