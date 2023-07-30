@@ -369,11 +369,15 @@ margin-top: 10px;
 
 .display-notes-container{
   display:flex;
-  width: 60%;
-  height: 70%;
+  width: 45%;
+  height: 85%;
   background: rgba(225, 225, 225, 0.462);
   border: solid 3px #044553;
+  padding: 15px;
+}
 
+.replacement-form-image{
+  margin-bottom: 25px;
 }
 
 .daily-steps-self-input, .daily-active-mins-self-input, .daily-stairs-flights-self-input {

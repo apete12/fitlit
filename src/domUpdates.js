@@ -31,6 +31,10 @@ import {
   getWeeklySleepHoursStats,
 } from '../src/data-model/sleep-data';
 
+import {
+  dataModel
+}from '../src/scripts';
+
 var currentUser;
 
 // Query Selectors:
@@ -48,6 +52,8 @@ var dailyStepCount = document.querySelector('.daily-steps')
 var dailyActiveMinutes = document.querySelector('.daily-active-minutes')
 var weeklyStepCountGoal = document.querySelector('.weekly-step-count-goal')
 var milesWalkedByDay = document.querySelector('.todays-miles-walked')
+var activityNotes = document.querySelector('.display-notes-container')
+
 // sleep
 var weeklySleepStats = document.querySelector('.weekly-sleep-stats')
 var sleepStatsByDay = document.querySelector('.today-sleep-stats')
@@ -286,6 +292,11 @@ const renderActivityData = (dataModel) => {
   displayWeeklyStepCountGoalReached(dataModel)
 }
 
+const renderActivityNotes = () => {
+  const user = JSON.parse(localStorage.getItem(`${dataModel.currentUser.id}`))
+  activityNotes.innerText = `Notes: \n ${user.activityType}: ${user.activityNotes}`
+}
+
 export {
   displayRandomUser,
   displayAverageSteps,
@@ -302,5 +313,6 @@ export {
   activityButton,
   renderPageLoad,
   renderActivityData,
-  activityNotesButton
+  activityNotesButton, 
+  renderActivityNotes
 }
