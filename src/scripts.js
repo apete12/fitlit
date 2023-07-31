@@ -110,11 +110,18 @@ activityNotesButton.addEventListener('click', () => {
     activityNotes: []
   }
 
-  storedLocalStorageData.activityType.push(activityNotesType)  
-  storedLocalStorageData.activityNotes.push(activityNotesDesc)
-
-  window.localStorage.setItem(dataModel.currentUser.id, JSON.stringify(storedLocalStorageData))
-  renderActivityNotes()
+  if (storedLocalStorageData) {
+    storedLocalStorageData.activityType.push(activityNotesType)  
+    storedLocalStorageData.activityNotes.push(activityNotesDesc)
+    window.localStorage.setItem(dataModel.currentUser.id, JSON.stringify(storedLocalStorageData))
+    renderActivityNotes()
+  } else {
+    notesObject.activityType.push(activityNotesType)  
+    notesObject.activityNotes.push(activityNotesDesc)
+    console.log('notesObject: ', notesObject)
+    window.localStorage.setItem(dataModel.currentUser.id, JSON.stringify(notesObject))
+    renderActivityNotes()
+  }
 
   activityNotesInputContainer.innerHTML = ''
   activityNotesInputContainer.innerHTML = `
@@ -124,4 +131,4 @@ activityNotesButton.addEventListener('click', () => {
   `
 })
 
-export { dataModel }
+export { dataModel } 
