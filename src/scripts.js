@@ -24,9 +24,7 @@ var dailyActiveMinContainer = document.querySelector('.daily-active-min-containe
 var dailyMilesContainer = document.querySelector('.daily-miles-container')
 var activityNotesInputContainer = document.querySelector('.form-container')
 
-
-let dataModel = {}
-
+var dataModel = {}
 
 // Event listener:
 window.addEventListener('load', () => {
@@ -37,16 +35,21 @@ window.addEventListener('load', () => {
     dataModel.hydration = results[1]
     dataModel.sleep = results[2]
     dataModel.currentUser = generateRandomUser(dataModel.user)
-    console.log('dataModel', dataModel)
-    console.log('cu', dataModel.currentUser)
   })
   .then(data => {
     renderPageLoad(dataModel)
     renderActivityData(dataModel)
+    console.log('dataModel.currentUser.id: ', dataModel.currentUser.id)
+
+    let localStorageKeys = Object.keys(localStorage)
+    const currentUserNotesMatches = localStorageKeys.map((user) => {
+      if (dataModel.currentUser.id === parseInt(user)) {
+      renderActivityNotes()
+      } 
+    })
   })
   .catch(error => console.log('ERROR', error))
 })
-
 
 document.addEventListener('click', (e) => {
   e.preventDefault()
@@ -100,15 +103,17 @@ activityNotesButton.addEventListener('click', () => {
   let activityNotesType = document.getElementById('activity-notes-type-id').value
   let activityNotesDesc = document.getElementById('activity-notes-desc-id').value
 
+  const storedLocalStorageData = JSON.parse(localStorage.getItem(dataModel.currentUser.id))
+  
   let notesObject = {
     activityType: [],
     activityNotes: []
   }
 
-  notesObject.activityType.push(activityNotesType)  
-  notesObject.activityNotes.push(activityNotesDesc)
+  storedLocalStorageData.activityType.push(activityNotesType)  
+  storedLocalStorageData.activityNotes.push(activityNotesDesc)
 
-  window.localStorage.setItem(dataModel.currentUser.id, JSON.stringify(notesObject))
+  window.localStorage.setItem(dataModel.currentUser.id, JSON.stringify(storedLocalStorageData))
   renderActivityNotes()
 
   activityNotesInputContainer.innerHTML = ''
@@ -119,5 +124,4 @@ activityNotesButton.addEventListener('click', () => {
   `
 })
 
-
-export { dataModel } 
+export { dataModel }
