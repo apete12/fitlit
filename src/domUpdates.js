@@ -293,8 +293,12 @@ const renderActivityData = (dataModel) => {
 }
 
 const renderActivityNotes = () => {
+  activityNotes.innerText = ''
   const user = JSON.parse(localStorage.getItem(`${dataModel.currentUser.id}`))
-  activityNotes.innerText = `Notes: \n ${user.activityType}: ${user.activityNotes}`
+  const userKeys = ['activityType', 'activityNotes']
+  const activities = user.activityType.map((type, i) => {
+    activityNotes.innerText += `${type}: ${user.activityNotes[i]} \n`
+  })
 }
 
 export {
