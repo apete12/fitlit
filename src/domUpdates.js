@@ -1,27 +1,26 @@
-const dayjs = require('dayjs');
+const dayjs = require('dayjs')
 
 import { 
   getDailyMilesWalked, 
   checkIfStepGoalWasMade, 
   getDailySteps,
   getActiveMinutes,
-} from './data-model/activity-data';
+} from './data-model/activity-data'
 
 import {
   getTodaysDate,
   getStatsByWeek
-} from '../src/data-model/helper-functions';
+} from '../src/data-model/helper-functions'
 
 import {
   getUserData, 
   getAvgSteps, 
-  generateRandomUser,
-} from '../src/data-model/user-data';
+} from '../src/data-model/user-data'
 
 import {
   getOuncesByDay,
   getOuncesByWeek,
-} from '../src/data-model/hydration-data';
+} from '../src/data-model/hydration-data'
 
 import {
   getAvgHoursSlept,
@@ -29,18 +28,16 @@ import {
   getSleepAmountByDay,
   getWeeklySleepQualityStats,
   getWeeklySleepHoursStats,
-} from '../src/data-model/sleep-data';
+} from '../src/data-model/sleep-data'
 
 import {
   dataModel
-}from '../src/scripts';
-
-var currentUser;
+} from '../src/scripts'
 
 // Query Selectors:
 // users
-var userInfoContainer = document.querySelector('.user-info');
-var welcomeHeading = document.querySelector('.welcome-heading');
+var userInfoContainer = document.querySelector('.user-info')
+var welcomeHeading = document.querySelector('.welcome-heading')
 var friendList = document.querySelector('.friend-list')
 var gateInfo = document.querySelector('.gate-info')
 // hydration
@@ -53,13 +50,12 @@ var dailyActiveMinutes = document.querySelector('.daily-active-minutes')
 var weeklyStepCountGoal = document.querySelector('.weekly-step-count-goal')
 var milesWalkedByDay = document.querySelector('.todays-miles-walked')
 var activityNotes = document.querySelector('.display-notes-container')
-
+var activityButton = document.querySelector('.new-activity-data')
+var activityNotesButton = document.getElementById('activity-notes-submit')
 // sleep
 var weeklySleepStats = document.querySelector('.weekly-sleep-stats')
 var sleepStatsByDay = document.querySelector('.today-sleep-stats')
 var avgAllTimeSleepStats = document.querySelector('.all-time-sleep-stats-container')
-var activityButton = document.querySelector('.new-activity-data')
-var activityNotesButton = document.getElementById('activity-notes-submit')
 
 // USER INFO
 const displayRandomUser = (currentUser) => {
@@ -157,7 +153,7 @@ const displayAllTimeAvgSleepHoursAndQuality = (dataModel) => {
 }
 
 const displayWeeklySleepHoursAndQuality = (dataModel) => {
-  let todaysDate = getTodaysDate(dataModel.currentUser.id, dataModel.sleep);
+  let todaysDate = getTodaysDate(dataModel.currentUser.id, dataModel.sleep)
   let weeklySleepQualStats = getWeeklySleepQualityStats(dataModel.currentUser.id, dataModel.sleep, todaysDate.date)
   let weeklySleepHoursStats = getWeeklySleepHoursStats(dataModel.currentUser.id, dataModel.sleep, todaysDate.date)
   
@@ -196,7 +192,6 @@ const displayWeeklySleepHoursAndQuality = (dataModel) => {
 }
 
 // ACTIVITY INFO
-
 const displayAverageSteps = (array) => {
   let avgSteps = getAvgSteps(array)
 
@@ -238,8 +233,6 @@ const displayWeeklyStepCountGoalReached = (dataModel) => {
    v.goalReached = checkIfStepGoalWasMade(dataModel.currentUser.id, v.date, dataModel.user, dataModel.activity)
   })
 
-  console.log(weeklyUserDatathisone)
-
   let formattedDay = weeklyUserDatathisone.map((day) => {
     return dayjs(day.date).format('ddd D')
   })
@@ -275,13 +268,13 @@ const displayWeeklyStepCountGoalReached = (dataModel) => {
 }
 
 const renderPageLoad = (dataModel) => {
-displayRandomUser(dataModel.currentUser)
-displayFriendList(dataModel)
-displayDailyHydrationStats(dataModel)
-displayWeeklyHydrationStats(dataModel)
-displayTodaysSleepData(dataModel)
-displayAllTimeAvgSleepHoursAndQuality(dataModel)
-displayWeeklySleepHoursAndQuality(dataModel)
+  displayRandomUser(dataModel.currentUser)
+  displayFriendList(dataModel)
+  displayDailyHydrationStats(dataModel)
+  displayWeeklyHydrationStats(dataModel)
+  displayTodaysSleepData(dataModel)
+  displayAllTimeAvgSleepHoursAndQuality(dataModel)
+  displayWeeklySleepHoursAndQuality(dataModel)
 }
 
 const renderActivityData = (dataModel) => {

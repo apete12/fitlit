@@ -71,6 +71,9 @@
           <div class = "h3-container">
             <h3>Activity</h3>
           </div>
+          <div class="activty-input-header">
+            <h4>Log Today's Activity Stats Here:</h4>
+          </div>
           <form id='activity-form' class="activity-form">
             <div class="daily-steps-self-input">
               <label label="daily-steps-input" for="daily-steps-input">Steps</label>
@@ -106,6 +109,7 @@
             <section class="calendar-top">WEEKLY ACTIVITY STATS:</section>
             <section class="weekly-step-count-goal"></section>
           </div>
+          <h4>Log Today's Activity Stats Here:</h4>
           <div class="activity-notes-display">
             <div class="form-container">
               <form name="enter-activity-notes" class="activity-notes-form">
@@ -114,7 +118,7 @@
                     <label label="activity-type-input" for="activity-notes-type-id">Activity Type:</label>
                   </div>
                   <div class="activity-type-input-container">
-                    <input type="text" label="activity-type-input" id="activity-notes-type-id" name="activity-notes-input" placeholder="Activity">
+                    <input type="text" label="activity-type-input" id="activity-notes-type-id" name="activity-notes-input" placeholder="What'd you do?">
                   </div>
                 </div>
                 <div class="notes-container"> 
@@ -122,8 +126,7 @@
                     <label label="activity-notes-input" for="activity-notes-desc-id">Activity Notes:</label>
                   </div>
                   <div class="activity-notes-input-container">
-                    <textarea label="activity-notes-input" class="activity-description" id="activity-notes-desc-id" name="activity-description" 
-          placeholder="Enter Activity Notes" rows="2" cols="25"></textarea>
+                    <textarea label="activity-notes-input" class="activity-description" id="activity-notes-desc-id" name="activity-description" placeholder="How'd it go?" rows="2" cols="25"></textarea>
                   </div>
                 </div>
                 <input id="activity-notes-submit" class="note-submit-button" type="submit" value="Submit">
