@@ -18,7 +18,7 @@ FitLit revolutionizes the way you track your wellness journey! Behold the ultima
 - Run the command: `npm start`
 
 ## Preview of App
-![](https://media.giphy.com/media/jDkpjC6KrIeqh4Mpxi/giphy.gif)
+![](https://media.giphy.com/media/Ypk6kKKtxNcbAyNgo3/giphy.gif)
 
 ## Context
 We completed this project from week 2 to week 4 in Mod 2 of the Front End development program at Turing School of Software & Design. We are a 4 group of front-end developers who worked together remotely via zoom to complete this application. Approximately 80 hours was spent on this project between team members. 
