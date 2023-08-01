@@ -4,20 +4,19 @@ import './images/stretching-exercises.png'
 import './images/run.png'
 import './images/a-step-in-the-right-direction.png'
 
-
 import { 
   renderPageLoad,
   renderActivityData,
   activityNotesButton,
   renderActivityNotes
-} from './domUpdates';
+} from './domUpdates'
 
 import {
   promises,
   fetchUserData,
 } from './apiCalls'
 
-import { generateRandomUser } from './data-model/user-data';
+import { generateRandomUser } from './data-model/user-data'
 
 var dailyStepsContainer = document.querySelector('.daily-steps-container')
 var dailyActiveMinContainer = document.querySelector('.daily-active-min-container')
@@ -26,7 +25,7 @@ var activityNotesInputContainer = document.querySelector('.form-container')
 
 var dataModel = {}
 
-// Event listener:
+// Event listeners:
 window.addEventListener('load', () => {
   Promise.all(promises)
   .then(results => {
@@ -39,7 +38,6 @@ window.addEventListener('load', () => {
   .then(data => {
     renderPageLoad(dataModel)
     renderActivityData(dataModel)
-    console.log('dataModel.currentUser.id: ', dataModel.currentUser.id)
 
     let localStorageKeys = Object.keys(localStorage)
     const currentUserNotesMatches = localStorageKeys.map((user) => {
@@ -53,7 +51,7 @@ window.addEventListener('load', () => {
 
 document.addEventListener('click', (e) => {
   e.preventDefault()
-  const targetElement = e.target;
+  const targetElement = e.target
   if (targetElement.id === 'activity-details-submit') {
     
     const flightsOfStairs = document.getElementById("daily-stairs-flights-input").value
@@ -75,11 +73,9 @@ document.addEventListener('click', (e) => {
     dailyMilesContainer.classList.remove('hidden')
     submitform.classList.add('hidden')
 
-
     postActivityData(newActivityData)
-    console.log('udm', dataModel)
   }
-});
+})
 
 const postActivityData = (newActivityData) => {
   return fetch(`http://localhost:3001/api/v1/activity`, {
@@ -118,7 +114,6 @@ activityNotesButton.addEventListener('click', () => {
   } else {
     notesObject.activityType.push(activityNotesType)  
     notesObject.activityNotes.push(activityNotesDesc)
-    console.log('notesObject: ', notesObject)
     window.localStorage.setItem(dataModel.currentUser.id, JSON.stringify(notesObject))
     renderActivityNotes()
   }

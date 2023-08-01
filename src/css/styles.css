@@ -14,7 +14,6 @@ body {
 img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
-  /* margin-right: 20px; */
 }
 
 input, button, textarea, select {
@@ -86,6 +85,10 @@ h2 {
   align-content: flex-end;
   flex-wrap: wrap;
   margin-top: 20px;
+}
+
+h4 {
+  margin-top: 5px;
 }
 
 .h3-container {
@@ -259,8 +262,9 @@ h2 {
 }
 
 .activity-container {
-  height: 88vh;
+  height: 97vh;
 }
+
 .health-stats-activity-sentences, .health-stats-sleep-stats-sentences {
   display: flex;
   flex-direction: row;
@@ -299,9 +303,7 @@ h2 {
   display: flex;
 }
 
-
 .activity-notes-display{
-  /* border: 3px solid red; */
   display: flex;
   justify-content: space-between;
   width: 95%;
@@ -310,7 +312,6 @@ h2 {
 }
 
 .form-container {
-  /* border: 3px solid blue; */
   display: flex;
   width: 35%;
 }
@@ -329,26 +330,20 @@ h2 {
 .activity-type-label-container{
   display: flex;
   width: 150px;
-  /* border: 3px solid black; */
 }
 
 .activity-type-input-container{
   display: flex;
-  /* border: 3px solid black; */
-
 }
 
 .activity-notes-label-container{
   display: flex;
   width: 150px;
-  /* border: 3px solid black; */
 }
 
 .activity-notes-input-container{
   display: flex;
-  /* border: 3px solid black; */
 }
-
 
 .activity-form {
   display:flex;

@@ -1,11 +1,11 @@
 import {
-    getRandomIndex,
-} from '../data-model/helper-functions';
+  getRandomIndex,
+} from '../data-model/helper-functions'
 
-let currentUser;
+let currentUser
 
 const getUserData = ((userId, dataList) => {
-  let filteredById = dataList.users.find(user => user.id === userId);
+  let filteredById = dataList.users.find(user => user.id === userId)
   
   if (!filteredById) {
     return 'Invalid User'
