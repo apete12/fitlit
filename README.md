@@ -3,11 +3,19 @@
 ## Abstract
 FitLit revolutionizes the way you track your wellness journey! Behold the ultimate visual activity tracker, where style and sophistication meet data logging. With a captivating interface and seamless user experience, this remarkable app empowers you on your path to unparalleled health and vitality. Brace yourself for a mind-blowing summary of your activities, hydration, and sleep data that sparks inspiration and fuels your desire for a healthier, happier you. Here at FitLit, every step is a step in the right direction.
 
-## Installation Instructions
-- git clone this repo to your local machine
-- cd into that directory
-- run npm install
-- run npm start in your terminal to view the app in your browser
+## Server Setup
+- Fork [this](https://github.com/turingschool-examples/fitlit-starter-kit.git) repository. 
+- Clone it to your local machine using the command: `git clone git@github.com:turingschool-examples/fitlit-starter-kit.git`.
+- Run the command: `cd fitlit-api`
+- Run the command: `npm install`
+- Run the command: `npm start`
+
+
+## Client App Setup
+- Clone it to your local machine using the command: `git clone git@github.com:apete12/fitlit.git`
+- Run the command: `cd fitlit`
+- Run the command: `npm install`
+- Run the command: `npm start`
 
 ## Preview of App
 ![](https://media.giphy.com/media/jDkpjC6KrIeqh4Mpxi/giphy.gif)
