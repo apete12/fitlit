@@ -34,10 +34,13 @@ We wrote our HTML with the smallest skeleton possible. CSS rules are written in 
 - [Adrian Zabolitzki](https://github.com/ganuza) - 2305 FE Mod 2 student at Turing School for Software and Design
 
 ## Learning Goals
+- Use object and array prototype methods to perform data manipulation
 - Understand the use of Webpack
-- Implement fetch API for accessing the data
-- Write tests for data model functions
+- Implement fetch API
+- Use Mocha framework with Chai library for TDD
 - Create a project that is easily readable with separate files that store functions for DOM manipulation, data model, helper, api calls and scripts
+- Collaborate productively and professionaly as a team
+- Utlizie localStorage to save user data outside of page refresh
 
 ## Wins + Challenges
 - A challenge that we encountered immediately upon starting the project was navigating where to put each different type of code, specifically in terms of importing/exporting variables and functions. This project ended with about 13 files across 3 different directories, and learning how to import/export data from each file was a challenge. We also had difficulty with separating all DOM functions and variables from our data model functions, which consistently produced a document error in the terminal. After research and seeking out mentor support, we learned how and why DOM and data model functions should exist across different files to avoid errors. 
@@ -49,6 +52,10 @@ We wrote our HTML with the smallest skeleton possible. CSS rules are written in 
 - User will see if their step count, hydration consumption, activity or sleep is below average
 - User can choose a different color gradient for the app
 - User will be able to input and store log entries
+- Sort, delete, extend notes by date and activity
+- Add user login functionality
+- Add progress charts
+- Allow for user to input all types of data - sleep, hydration, etc.
 
 ## Resources
 Josh Comeau's custom [CSS Reset](https://www.joshwcomeau.com/css/custom-css-reset/) is being used to ensure that the app is more clean and will lead to a better user experience.     
